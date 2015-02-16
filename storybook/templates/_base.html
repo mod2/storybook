@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% if title %}{{ title }} — {% endif %}Storybook</title>
+
+	<meta charset="utf-8">
+
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,600italic' rel='stylesheet' type='text/css'>
+	<link href="{% static 'style.css' %}" type="text/css" rel="stylesheet">
+
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}?v=1">
+	<link rel="shortcut icon" href="{% static 'favicon.png' %}?v=1">
+
+	<script src="{% static 'jquery-2.1.1.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'jquery.autosize.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'jquery-ui.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'storybook.js' %}" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<header>
+		<div class="left">
+			<a href="{% url 'home' %}">Storybook</a>
+			{% if pagetitle %}{{ pagetitle }}{% endif %}
+		</div>
+	</header>
+
+	<section id="main">
+		{% block main %}{% endblock main %}
+	</section>
+
+    <div class="hidden" id="user-id">{{ request.user.id }}</div>
+
+	<!-- Modal -->
+	<div class="modal-background"></div>
+	<div class="modal">
+		{% block modal %}{% endblock modal %}
+	</div>
+</body>
+</html>

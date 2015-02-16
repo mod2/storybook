@@ -1,0 +1,185 @@
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: Source Sans Pro, Helvetica, Arial;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body > header {
+	background: #111;
+	color: #fff;
+	height: 41px;
+	padding-top: 10px;
+}
+
+body > header a {
+	color: #fff;
+	display: inline-block;
+	padding: 3px 15px;
+	text-decoration: none;
+}
+
+
+/* Main */
+
+#main {
+	-webkit-flex-direction: row;
+	bottom: 0;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	top: 41px;
+	width: 100%;
+}
+
+#main .panel {
+	-webkit-flex: 1;
+	background: #eee;
+	color: #444;
+	flex: 1;
+	height: 100%;
+}
+
+#main .panel > div + div {
+	border-top: solid 1px #bbb;
+}
+
+#main #middle-panel {
+	-webkit-flex: 2;
+	background: #fff;
+	box-shadow: 0 0px 15px #ddd;
+	flex: 2;
+	z-index: 50;
+}
+
+/* Panel heading */
+
+#main .panel h1 {
+	color: #888;
+	font-size: .8em;
+	letter-spacing: 0.05em;
+	margin: 15px;
+	margin-bottom: 8px;
+	text-transform: uppercase;
+}
+
+#main .panel h1 a {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	color: #999;
+	cursor: pointer;
+	font-size: .7em;
+	margin-left: 10px;
+	user-select: none;
+}
+
+#main .panel h1 a:hover {
+	color: #444;
+}
+
+
+/* Writing area */
+
+#main textarea#text {
+	border: none;
+	font-size: 1.2em;
+	height: 100%;
+	line-height: 1.4em;
+	padding: 25px;
+	resize: none;
+	width: 100%;	
+}
+
+#main textarea#text:focus {
+	outline: none;
+}
+
+
+/* Outline panel */
+
+#outline-panel .scene {
+	cursor: pointer;
+	padding: 12px 15px;
+}
+
+#outline-panel .scene.selected {
+	background: #ffffe4;
+}
+
+#outline-panel .scene.selected:hover {
+	background: #ffffe4;
+}
+
+#outline-panel .scene:hover {
+	background: #ddd;
+}
+
+#outline-panel .scene h2 {
+	color: #567ea0;
+	font-size: .7em;
+	font-weight: normal;
+	letter-spacing: 0.05em;
+	line-height: 1.2em;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+#outline-panel .scene h3 {
+	font-size: 1em;
+	line-height: 1.1em;
+	margin: 3px 0 0;
+}
+
+#outline-panel .scene .synopsis {
+	color: #777;
+	display: none;
+	font-size: .7em;
+	font-style: italic;
+	line-height: 1.2em;
+	margin-top: 3px;
+}
+
+#outline-panel.show-synopses .scene .synopsis {
+	display: block;
+}
+
+
+/* Scene panel */
+
+#scene-panel .group {
+	padding: 5px 15px;
+}
+
+#scene-panel h2 {
+	color: #999;
+	font-size: .7em;
+	margin: 0;
+	margin-bottom: 2px;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+#scene-panel textarea {
+	background: none;
+	border: none;
+	font-size: .8em;
+	height: 1.1em;
+	line-height: 1.2em;
+	padding: 0;
+	resize: none;
+	width: 100%;
+}
+
+#scene-panel textarea:focus {
+	outline: none;
+}
+
+#scene-panel textarea[name=scene-title] {
+	font-size: 1em;
+	line-height: 1.2em;
+}

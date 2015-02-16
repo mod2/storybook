@@ -1,0 +1,54 @@
+{% extends '_base.html' %}
+
+{% block main %}
+<section id="left-panel" class="panel">
+	<div id="outline-panel">
+		<h1>Outline <a class="toggle-synopses">Toggle Synopses</a></h1>
+
+		<div class="scene selected">
+			<h2>Scene 1</h2>
+			<h3>Charlotte in the tree</h3>
+			<div class="synopsis">Synopsis goes here...</div>
+		</div>
+		<div class="scene">
+			<h2>Scene 2</h2>
+			<h3>Charlotte at the market</h3>
+			<div class="synopsis">Synopsis goes here...</div>
+		</div>
+		<div class="scene">
+			<h2>Scene 3</h2>
+			<h3>Prince discovers political prisoner in cesspool</h3>
+			<div class="synopsis">Synopsis goes here...</div>
+		</div>
+		<div class="scene">
+			<h2>Scene 4</h2>
+			<h3>Prince goes before king</h3>
+			<div class="synopsis">Synopsis goes here...</div>
+		</div>
+	</div>
+</section>
+
+<section id="middle-panel" class="panel">
+	<textarea id="text"></textarea>
+</section>
+
+<section id="right-panel" class="panel">
+	<div id="scene-panel">
+		<h1>Scene <a class="delete-scene">Delete</a></h1>
+
+		<div class="group">
+			<h2>Title</h2>
+			<textarea name="scene-title">Charlotte in the tree</textarea>
+		</div>
+
+		<div class="group">
+			<h2>Synopsis</h2>
+			<textarea name="synopsis">Synopsis goes here...</textarea>
+		</div>
+	</div>
+	<div id="history-panel">
+		<h1>History</h1>
+	</div>
+</section>
+
+{% endblock main %}
