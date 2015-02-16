@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import timezone
+from autoslug import AutoSlugField
 
 class Story(models.Model):
     STATUSES = (
@@ -11,6 +12,7 @@ class Story(models.Model):
     )
 
     title = models.TextField()
+    slug = AutoSlugField(populate_from='title')
     status = models.CharField(max_length=10, choices=STATUSES)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True, default=timezone.now())
@@ -54,7 +56,10 @@ class Scene(models.Model):
 
 
     def latest_revision(self):
-        return self.revisions.order_by('created').first()
+        if len(self.revisions.all()) > 0:
+            return self.revisions.order_by('-created').first()
+        else:
+            return None
 
 class Revision(models.Model):
     text = models.TextField(null=True, blank=True)
@@ -63,6 +68,9 @@ class Revision(models.Model):
 
     def __unicode__(self):
         return "{}".format(self.created)
+
+    class Meta:
+        ordering = ['-created']
 
 
 class HistoryEntry(models.Model):

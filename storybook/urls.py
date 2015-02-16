@@ -8,6 +8,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^story/(.+?)/(.+?)/revision/(.+?)/$', 'storybook.views.story', name='story'),
+    url(r'^story/(.+?)/(.+?)/$', 'storybook.views.story', name='story'),
     url(r'^story/(.+?)/$', 'storybook.views.story', name='story'),
     url(r'^$', 'storybook.views.home', name='home'),
 )

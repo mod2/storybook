@@ -4,7 +4,7 @@ from .models import Story, Scene, Revision, HistoryEntry
 
 @admin.register(Story)
 class StoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'order', 'created', 'last_modified', 'word_count')
+    list_display = ('title', 'slug', 'status', 'order', 'created', 'last_modified', 'word_count')
     pass
 
 

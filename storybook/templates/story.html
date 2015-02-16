@@ -5,31 +5,20 @@
 	<div id="outline-panel">
 		<h1>Outline <a class="toggle-synopses">Toggle Synopses</a></h1>
 
-		<div class="scene selected">
-			<h2>Scene 1</h2>
-			<h3>Charlotte in the tree</h3>
-			<div class="synopsis">Synopsis goes here...</div>
-		</div>
-		<div class="scene">
-			<h2>Scene 2</h2>
-			<h3>Charlotte at the market</h3>
-			<div class="synopsis">Synopsis goes here...</div>
-		</div>
-		<div class="scene">
-			<h2>Scene 3</h2>
-			<h3>Prince discovers political prisoner in cesspool</h3>
-			<div class="synopsis">Synopsis goes here...</div>
-		</div>
-		<div class="scene">
-			<h2>Scene 4</h2>
-			<h3>Prince goes before king</h3>
-			<div class="synopsis">Synopsis goes here...</div>
-		</div>
+		{% for scene in scenes %}
+		<a href="{% url 'story' story.slug scene.id %}" class="scene {% if scene == selected_scene %}selected{% endif %}" data-id="{{ scene.id }}">
+			<h2>Scene {{ scene.order }}</h2>
+			<h3>{{ scene.title }}</h3>
+			{% if scene.synopsis %}
+			<div class="synopsis">{{ scene.synopsis }}</div>
+			{% endif %}
+		</a>
+		{% endfor %} 
 	</div>
 </section>
 
 <section id="middle-panel" class="panel">
-	<textarea id="text"></textarea>
+	<textarea id="text">{% if revision %}{{ revision.text }}{% endif %}</textarea>
 </section>
 
 <section id="right-panel" class="panel">
@@ -38,16 +27,23 @@
 
 		<div class="group">
 			<h2>Title</h2>
-			<textarea name="scene-title">Charlotte in the tree</textarea>
+			<textarea name="scene-title">{{ selected_scene.title }}</textarea>
 		</div>
 
 		<div class="group">
 			<h2>Synopsis</h2>
-			<textarea name="synopsis">Synopsis goes here...</textarea>
+			<textarea name="synopsis">{{ selected_scene.synopsis }}</textarea>
 		</div>
 	</div>
 	<div id="history-panel">
 		<h1>History</h1>
+
+		<div class="list">
+		<a href="{% url 'story' story.slug selected_scene.id %}">Latest revision</a>
+		{% for rev in selected_scene.revisions.all %}
+		<a href="{% url 'story' story.slug selected_scene.id rev.id %}">{{ rev.created }}</a>
+		{% endfor %}
+		</div>
 	</div>
 </section>
 
