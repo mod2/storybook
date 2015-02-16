@@ -14,11 +14,15 @@ class Story(models.Model):
     status = models.CharField(max_length=10, choices=STATUSES)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True, default=timezone.now())
-    order = models.PositiveSmallIntegerField(default=50000)
+    order = models.PositiveSmallIntegerField()
     word_count = models.PositiveSmallIntegerField(default=0)
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural = "stories"
+
 
 
 class Scene(models.Model):
@@ -29,9 +33,9 @@ class Scene(models.Model):
     )
 
     title = models.TextField(null=True, blank=True)
-    status = models.CharField(max_length=10, choices=STATUSES)
+    status = models.CharField(max_length=10, choices=STATUSES, default='active')
     synopsis = models.TextField(null=True, blank=True)
-    order = models.PositiveSmallIntegerField()
+    order = models.PositiveSmallIntegerField(default=1)
 
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True, default=timezone.now())
@@ -68,3 +72,6 @@ class HistoryEntry(models.Model):
 
     def __unicode__(self):
         return "History entry on {} of length {}".format(self.created, len(self.json))
+
+    class Meta:
+        verbose_name_plural = "history entries"
