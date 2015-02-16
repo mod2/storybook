@@ -5,15 +5,17 @@
 	<div id="outline-panel">
 		<h1>Outline <a class="toggle-synopses">Toggle Synopses</a></h1>
 
-		{% for scene in scenes %}
-		<a href="{% url 'story' story.slug scene.id %}" class="scene {% if scene == selected_scene %}selected{% endif %}" data-id="{{ scene.id }}">
-			<h2>Scene {{ scene.order }}</h2>
-			<h3>{{ scene.title }}</h3>
-			{% if scene.synopsis %}
-			<div class="synopsis">{{ scene.synopsis }}</div>
-			{% endif %}
-		</a>
-		{% endfor %} 
+		<div id="scene-list">
+			{% for scene in scenes %}
+			<a href="{% url 'story' story.slug scene.id %}" class="scene {% if scene == selected_scene %}selected{% endif %}" data-id="{{ scene.id }}">
+				<h2>Scene <span class="num">{{ scene.order }}</span></h2>
+				<h3>{{ scene.title }}</h3>
+				{% if scene.synopsis %}
+				<div class="synopsis">{{ scene.synopsis }}</div>
+				{% endif %}
+			</a>
+			{% endfor %} 
+		</div>
 	</div>
 </section>
 
@@ -39,10 +41,14 @@
 		<h1>History</h1>
 
 		<div class="list">
-		<a href="{% url 'story' story.slug selected_scene.id %}">Latest revision</a>
-		{% for rev in selected_scene.revisions.all %}
-		<a href="{% url 'story' story.slug selected_scene.id rev.id %}">{{ rev.created }}</a>
-		{% endfor %}
+			{% if selected_scene.revisions.all|length > 0 %}
+			<a href="{% url 'story' story.slug selected_scene.id %}">Latest revision</a>
+			{% for rev in selected_scene.revisions.all %}
+			<a href="{% url 'story' story.slug selected_scene.id rev.id %}">{{ rev.created }}</a>
+			{% endfor %}
+			{% else %}
+			<span>No revisions yet</span>
+			{% endif %}
 		</div>
 	</div>
 </section>
