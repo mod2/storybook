@@ -18,6 +18,12 @@ $(document).ready(function() {
 	});
 
 
+	// History panel overflow
+	/*
+	$("#history-panel").css("height", Math.floor($("#history-panel").height() / 2));
+	*/
+
+
 	// Reordering scenes in the outline
 	$("#scene-list").sortable({
 		placeholder: "scene placeholder",

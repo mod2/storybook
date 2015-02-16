@@ -60,6 +60,13 @@ body > header a {
 	z-index: 50;
 }
 
+#main #right-panel {
+	-webkit-flex-direction: column;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+}
+
 /* Panel heading */
 
 #main .panel h1 {
@@ -104,6 +111,11 @@ body > header a {
 
 
 /* Outline panel */
+
+#outline-panel {
+	height: 100%;
+	overflow-y: auto;
+}
 
 #outline-panel .scene {
 	color: #444;
@@ -192,6 +204,12 @@ body > header a {
 
 
 /* History panel */
+
+#history-panel {
+	-webkit-flex: 1;
+	flex: 1;
+	overflow-y: auto;
+}
 
 #history-panel .list {
 	font-size: .9em;
