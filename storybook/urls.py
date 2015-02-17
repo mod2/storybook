@@ -11,5 +11,9 @@ urlpatterns = patterns('',
     url(r'^story/(.+?)/(.+?)/revision/(.+?)/$', 'storybook.views.story', name='story'),
     url(r'^story/(.+?)/(.+?)/$', 'storybook.views.story', name='story'),
     url(r'^story/(.+?)/$', 'storybook.views.story', name='story'),
+
+    # Web services
+    url(r'^api/story/(.+?)/reorder-scenes/$', 'storybook.views.ws_reorder_scenes', name='reorder_scenes'),
+
     url(r'^$', 'storybook.views.home', name='home'),
 )

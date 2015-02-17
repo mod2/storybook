@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-#from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render_to_response #, get_object_or_404, redirect
 import json
 
@@ -37,3 +37,16 @@ def story(request, story_slug, scene_id=None, revision_id=None):
                                              'selected_scene': selected_scene,
                                              'revision': revision,
                                             })
+
+def ws_reorder_scenes(request, story_slug):
+    """ Reorder scenes in a story (called by AJAX) """
+
+    if request.is_ajax() and request.method == 'POST':
+        order = json.loads(request.body)['order']
+
+        scenes = Scene.objects.filter(pk__in=order.keys())
+        for scene in scenes:
+            scene.order = order[unicode(scene.pk)]
+            scene.save()
+
+        return JsonResponse(json.dumps({ "status": "success" }), safe=False)

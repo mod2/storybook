@@ -25,7 +25,7 @@
 		</div>
 	</header>
 
-	<section id="main">
+	<section id="main" {% if story %}data-story-slug="{{ story.slug }}"{% endif %}>
 		{% block main %}{% endblock main %}
 	</section>
 
