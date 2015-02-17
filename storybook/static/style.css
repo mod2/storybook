@@ -409,18 +409,22 @@ form.login input.button:hover {
 /* Dashboard */
 
 #dashboard {
-	max-width: 600px;
-	width: 100%;
-	margin: 30px auto;
+	margin: 30px 50px;
+}
+
+#main #dashboard h1 {
+	margin: 0 0 1em 0;
 }
 
 #dashboard .story {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 #dashboard .story a {
+	background: #fff;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	display: block;
-	padding: 10px 12px;
+	padding: 8px 12px 11px;
 	text-decoration: none;
 }
 
@@ -429,7 +433,7 @@ form.login input.button:hover {
 }
 
 #dashboard .story a h2 {
-	color: #333;
+	color: #4b91bd;
 	font-size: 1.2em;
 	margin: 0;
 }
@@ -437,14 +441,15 @@ form.login input.button:hover {
 #dashboard .story a .info {
 	color: #888;
 	font-size: .9em;
-	margin-top: 3px;
+	font-style: italic;
+	margin-top: 2px;
 }
 
 #dashboard .story + .story {
 	margin-top: 1.5em;
 }
 
-/* Dashboard */
+/* Full draft */
 
 #middle-panel #full-draft {
 	overflow: auto;

@@ -1,16 +1,25 @@
 {% extends '_base.html' %}
 
 {% block main %}
-<div id="dashboard">
-	<h1>Stories</h1>
+<section id="left-panel" class="panel">
+</section>
 
-	{% for story in stories %}
-	<div class="story">
-		<a href="{% url 'story' story.slug %}">
-			<h2>{{ story.title }}</h2>
-			<div class="info">{{ story.active_scenes|length }} scenes, {{ story.word_count }} words</div>
-		</a>
+<section id="middle-panel" class="panel">
+	<div id="dashboard">
+		<h1>Stories</h1>
+
+		{% for story in stories %}
+		<div class="story">
+			<a href="{% url 'story' story.slug %}">
+				<h2>{{ story.title }}</h2>
+				<div class="info">{{ story.active_scenes|length }} scenes, {{ story.word_count }} words</div>
+			</a>
+		</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
-</div>
+</section>
+
+<section id="right-panel" class="panel">
+</section>
+
 {% endblock main %}
