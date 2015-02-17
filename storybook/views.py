@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import render_to_response #, get_object_or_404, redirect
 import json
 
-from .models import Story, Scene
+from .models import Story, Scene, Revision
 
 #@login_required
 def home(request):
@@ -50,3 +50,44 @@ def ws_reorder_scenes(request, story_slug):
             scene.save()
 
         return JsonResponse(json.dumps({ "status": "success" }), safe=False)
+
+def ws_add_revision(request, story_slug, scene_id):
+    """ Add revision to a scene """
+
+    if request.is_ajax() and request.method == 'POST':
+        text = json.loads(request.body)['text']
+
+        if text.strip() == '':
+            return ''
+
+        # Get the scene
+        scene = Scene.objects.get(id=scene_id)
+
+        # Create the revision
+        revision = Revision()
+        revision.scene = scene
+        revision.text = text.strip()
+        revision.save()
+
+        return JsonResponse(json.dumps({ "status": "success", "id": revision.id }), safe=False)
+
+def ws_update_revision(request, story_slug, scene_id, revision_id):
+    """ Update revision for a scene """
+
+    if request.is_ajax() and request.method == 'POST':
+        text = json.loads(request.body)['text']
+
+        if text.strip() == '':
+            return ''
+
+        # Get the scene
+        scene = Scene.objects.get(id=scene_id)
+
+        # Get the revision
+        revision = Revision.objects.get(id=revision_id)
+
+        # Update the revision
+        revision.text = text.strip()
+        revision.save()
+
+        return JsonResponse(json.dumps({ "status": "success", "id": revision.id }), safe=False)

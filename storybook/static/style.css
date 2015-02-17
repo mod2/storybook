@@ -96,11 +96,14 @@ body > header a {
 /* Writing area */
 
 #main textarea#text {
+	-webkit-transition: border-top-color .25s ease-in-out;
 	border: none;
+	border-top: solid 5px #fff;
 	font-size: 1.2em;
 	height: 100%;
 	line-height: 1.4em;
 	padding: 25px;
+	padding-top: 20px;
 	resize: none;
 	width: 100%;	
 }
@@ -109,6 +112,17 @@ body > header a {
 	outline: none;
 }
 
+#main textarea#text.dirty {
+	border-top-color: #63b0e8;
+}
+
+#main textarea#text.saving {
+	border-top-color: #e3b068;
+}
+
+#main textarea#text.error {
+	border-top-color: #f00;
+}
 
 /* Outline panel */
 

@@ -1,3 +1,5 @@
+var sceneText = '';
+
 $(document).ready(function() {
 	// From https://gist.github.com/alanhamlett/6316427
 	$.ajaxSetup({
@@ -7,6 +9,9 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+	// Preload scene text if it's there
+	sceneText = $("textarea#text").val();
 
 	// Toggle synopses
 	$("a.toggle-synopses").on("click", function() {
@@ -59,6 +64,83 @@ $(document).ready(function() {
 				},
 			});
 		},
+	});
+
+
+	// Autosave function
+	function autoSave() {
+		var currentText = $("textarea#text").val().trim();
+
+		if (currentText != sceneText) {
+			var storySlug = $("#main").attr("data-story-slug");
+			var sceneId = $("#scene-list .scene.selected").attr("data-id");
+
+			// The text has changed, so autosave it
+			$("textarea#text").addClass("saving");
+
+			// Get an initial revision if it's not there
+			if (!$("textarea#text").attr("data-revision-id")) {
+				// New transcript for this session
+				var url = "/api/story/" + storySlug + "/" + sceneId + "/add-revision/";
+
+				var data = {
+					text: currentText,
+				};
+			} else {
+				// Update transcript for this session
+				var revisionId = $("textarea#text").attr("data-revision-id");
+				var url = "/api/story/" + storySlug + "/" + sceneId + "/update-revision/" + revisionId + "/";
+
+				var data = {
+					text: currentText,
+				};
+			}
+
+			// Post it
+			$.ajax({
+				url: url,
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function(data) {
+					data = JSON.parse(data);
+					$("textarea#text").removeClass("dirty").removeClass("saving");
+
+					$("textarea#text").attr("data-revision-id", data.id);
+
+					// Update current cache
+					sceneText = currentText;
+				},
+				error: function(data) {
+					$("textarea#text").addClass("error");
+
+					console.log("error", data);
+				},
+			});
+		} else {
+			$("textarea#text").removeClass("dirty");
+		}
+	}
+
+	// Autosaving (only on writing pages)
+	if ($("textarea#text").length > 0) {
+		// On typing into the textarea, remove the saving notice
+		$("textarea#text").on("keypress", function() {
+			$("textarea#text").addClass("dirty");
+		});
+
+		// Autosave every 5 seconds
+		var intervalId = window.setInterval(autoSave, 5000);
+	}
+
+	// Save before closing tab
+	$(window).unload(function() {
+		// See if there's unsaved text and autosave if there is
+		var currentText = $("textarea#text").val().trim();
+
+		if (currentText != sceneText) {
+			autoSave();
+		}
 	});
 });
 
