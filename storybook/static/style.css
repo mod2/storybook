@@ -406,9 +406,49 @@ form.login input.button:hover {
 }
 
 
+/* Search on dashboard */
+
+#middle-panel #search {
+	-webkit-flex-direction: row;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+	margin-top: -5px;
+}
+
+#middle-panel #search input[type=text] {
+	background: #222;
+	border: none;
+	color: #fff;
+	flex: 1;
+	font-size: 1em;
+	padding: 6px 13px 8px;
+}
+
+#middle-panel #search input[type=text]:focus {
+	outline: none;
+}
+
+#middle-panel #search input[type=submit] {
+	background: #111;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-size: .8em;
+	letter-spacing: 0.1em;
+	padding: 6px 13px 8px;
+	text-transform: uppercase;
+}
+
+#middle-panel #search input[type=submit]:hover {
+	background: #397dca;
+}
+
+
 /* Dashboard */
 
-#dashboard {
+#main #dashboard {
+	border-top: none;
 	margin: 30px 50px;
 }
 
