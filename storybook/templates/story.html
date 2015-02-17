@@ -30,15 +30,14 @@
 
 <section id="right-panel" class="panel">
 	<div id="scene-panel">
-		<h1>Scene <a class="delete-scene">Delete</a></h1>
+		<h1>Synopsis <a class="delete-scene">Delete Scene</a></h1>
 
 		<div class="group">
-			<h2>Synopsis</h2>
 			<textarea name="scene-synopsis">{{ selected_scene.synopsis }}</textarea>
 		</div>
 	</div>
 	<div id="history-panel">
-		<h1>History</h1>
+		<h1>Scene History</h1>
 
 		<div class="list">
 			{% if selected_scene.revisions.all|length > 0 %}
