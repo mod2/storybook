@@ -109,6 +109,15 @@ def ws_update_scene(request, story_slug, scene_id):
         scene.save()
 
         return JsonResponse(json.dumps({ "status": "success" }), safe=False)
+    elif request.is_ajax() and request.method == 'DELETE':
+        # Get the scene
+        scene = Scene.objects.get(id=scene_id)
+
+        # Remove it
+        scene.status = "deleted"
+        scene.save()
+
+        return JsonResponse(json.dumps({ "status": "success" }), safe=False)
 
 def ws_add_scene(request, story_slug):
     """ Add a new scene """

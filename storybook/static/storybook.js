@@ -201,6 +201,31 @@ $(document).ready(function() {
 			},
 		});
 	});
+
+
+	// Delete selected scene
+	$("a.delete-scene").on("click", function() {
+		var storySlug = $("#main").attr("data-story-slug");
+		var sceneId = $("#scene-list .scene.selected").attr("data-id");
+		var url = "/api/story/" + storySlug + "/" + sceneId + "/";
+
+		if (confirm("Are you sure you want to delete this scene?")) {
+			$.ajax({
+				url: url,
+				method: 'DELETE',
+				contentType: 'application/json',
+				success: function(data) {
+					data = JSON.parse(data);
+
+					// Redirect to story page
+					window.location.href = "/story/" + storySlug + "/";
+				},
+				error: function(data) {
+					console.log("error", data);
+				},
+			});
+		}
+	});
 });
 
 // From https://gist.github.com/alanhamlett/6316427
