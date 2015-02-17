@@ -130,7 +130,8 @@ def ws_add_scene(request, story_slug):
         scene = Scene()
         scene.story = story
         scene.title = "Untitled"
-        scene.order = len(story.scenes.all()) + 1
+        scene.synopsis = ""
+        scene.order = len(story.scenes.filter(status='active')) + 1
         scene.save()
 
         return JsonResponse(json.dumps({ "status": "success", "id": scene.id }), safe=False)
