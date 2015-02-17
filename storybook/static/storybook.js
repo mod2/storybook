@@ -10,14 +10,17 @@ $(document).ready(function() {
 		}
 	});
 
+
 	// Preload scene text if it's there
 	sceneText = $("textarea#text").val();
+
 
 	// Toggle synopses
 	$("a.toggle-synopses").on("click", function() {
 		$("#outline-panel").toggleClass("show-synopses");
 		return false;
 	});
+
 
 	// Autosize
 	$('#scene-panel textarea').autosize();
@@ -133,6 +136,7 @@ $(document).ready(function() {
 		var intervalId = window.setInterval(autoSave, 5000);
 	}
 
+
 	// Save before closing tab
 	$(window).unload(function() {
 		// See if there's unsaved text and autosave if there is
@@ -141,6 +145,37 @@ $(document).ready(function() {
 		if (currentText != sceneText) {
 			autoSave();
 		}
+	});
+
+
+	// Update scene title/synopsis
+	$("[name=scene-title], [name=scene-synopsis]").on("keyup", function() {
+		var storySlug = $("#main").attr("data-story-slug");
+		var sceneId = $("#scene-list .scene.selected").attr("data-id");
+
+		var payload = {
+			'title': $("[name=scene-title]").val().trim(),
+			'synopsis': $("[name=scene-synopsis]").val().trim(),
+		};
+
+		var url = "/api/story/" + storySlug + "/" + sceneId + "/";
+
+		$.ajax({
+			url: url,
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(payload),
+			success: function(data) {
+				data = JSON.parse(data);
+
+				// Update scene title/synopsis in scene list
+				$("#scene-list .scene.selected h3").html(payload['title']);
+				$("#scene-list .scene.selected .synopsis").html(payload['synopsis']);
+			},
+			error: function(data) {
+				console.log("error", data);
+			},
+		});
 	});
 });
 

@@ -91,3 +91,21 @@ def ws_update_revision(request, story_slug, scene_id, revision_id):
         revision.save()
 
         return JsonResponse(json.dumps({ "status": "success", "id": revision.id }), safe=False)
+
+def ws_update_scene(request, story_slug, scene_id):
+    """ Update scene metadata """
+
+    if request.is_ajax() and request.method == 'POST':
+        data = json.loads(request.body)
+        title = data['title'].strip()
+        synopsis = data['synopsis'].strip()
+
+        # Get the scene
+        scene = Scene.objects.get(id=scene_id)
+
+        # Update title/synopsis
+        scene.title = title
+        scene.synopsis = synopsis
+        scene.save()
+
+        return JsonResponse(json.dumps({ "status": "success" }), safe=False)
