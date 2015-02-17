@@ -109,3 +109,19 @@ def ws_update_scene(request, story_slug, scene_id):
         scene.save()
 
         return JsonResponse(json.dumps({ "status": "success" }), safe=False)
+
+def ws_add_scene(request, story_slug):
+    """ Add a new scene """
+
+    if request.is_ajax() and request.method == 'POST':
+        # Get the story
+        story = Story.objects.get(slug=story_slug)
+        
+        # Get the scene
+        scene = Scene()
+        scene.story = story
+        scene.title = "Untitled"
+        scene.order = len(story.scenes.all()) + 1
+        scene.save()
+
+        return JsonResponse(json.dumps({ "status": "success", "id": scene.id }), safe=False)

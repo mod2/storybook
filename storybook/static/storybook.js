@@ -177,6 +177,30 @@ $(document).ready(function() {
 			},
 		});
 	});
+
+
+	// Add a new scene
+	$("a.add-scene").on("click", function() {
+		var storySlug = $("#main").attr("data-story-slug");
+		var url = "/api/story/" + storySlug + "/add-scene/";
+
+		$.ajax({
+			url: url,
+			method: 'POST',
+			contentType: 'application/json',
+			success: function(data) {
+				data = JSON.parse(data);
+
+				// Redirect to new scene
+				if (data.id) {
+					window.location.href = "/story/" + storySlug + "/" + data.id + "/";
+				}
+			},
+			error: function(data) {
+				console.log("error", data);
+			},
+		});
+	});
 });
 
 // From https://gist.github.com/alanhamlett/6316427
