@@ -23,6 +23,7 @@ $(document).ready(function() {
 
 
 	// Autosize
+	$('#middle-panel textarea[name=scene-title]').autosize();
 	$('#scene-panel textarea').autosize();
 
 
@@ -79,7 +80,7 @@ $(document).ready(function() {
 			var sceneId = $("#scene-list .scene.selected").attr("data-id");
 
 			// The text has changed, so autosave it
-			$("textarea#text").addClass("saving");
+			$("#middle-panel").addClass("saving");
 
 			// Get an initial revision if it's not there
 			if (!$("textarea#text").attr("data-revision-id")) {
@@ -107,7 +108,7 @@ $(document).ready(function() {
 				data: JSON.stringify(data),
 				success: function(data) {
 					data = JSON.parse(data);
-					$("textarea#text").removeClass("dirty").removeClass("saving");
+					$("#middle-panel").removeClass("dirty").removeClass("saving");
 
 					$("textarea#text").attr("data-revision-id", data.id);
 
@@ -115,13 +116,13 @@ $(document).ready(function() {
 					sceneText = currentText;
 				},
 				error: function(data) {
-					$("textarea#text").addClass("error");
+					$("#middle-panel").addClass("error");
 
 					console.log("error", data);
 				},
 			});
 		} else {
-			$("textarea#text").removeClass("dirty");
+			$("#middle-panel").removeClass("dirty");
 		}
 	}
 
@@ -129,7 +130,7 @@ $(document).ready(function() {
 	if ($("textarea#text").length > 0) {
 		// On typing into the textarea, remove the saving notice
 		$("textarea#text").on("keypress", function() {
-			$("textarea#text").addClass("dirty");
+			$("#middle-panel").addClass("dirty");
 		});
 
 		// Autosave every 5 seconds

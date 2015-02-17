@@ -20,9 +20,17 @@
 </head>
 <body>
 	<header>
+		<h1><a href="{% url 'home' %}">Storybook</a></h1>
 		<div class="left">
-			<a href="{% url 'home' %}">Storybook</a>
-			{% if pagetitle %}{{ pagetitle }}{% endif %}
+			{% if story %}
+			<a class="story-title" href="{% url 'story' story.slug %}">{{ story.title }}</a>
+			<a href="">Notebook</a>
+			<a href="">Full Draft</a>
+			{% endif %}
+		</div>
+		<div class="right">
+			<a href="">Account</a>
+			<a href="">Logout</a>
 		</div>
 	</header>
 

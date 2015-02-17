@@ -24,16 +24,13 @@
 </section>
 
 <section id="middle-panel" class="panel">
+	<textarea name="scene-title">{{ selected_scene.title }}</textarea>
 	<textarea id="text">{% if revision %}{{ revision.text }}{% endif %}</textarea>
 </section>
 
 <section id="right-panel" class="panel">
 	<div id="scene-panel">
 		<h1>Scene <a class="delete-scene">Delete</a></h1>
-
-		<div class="group">
-			<textarea name="scene-title">{{ selected_scene.title }}</textarea>
-		</div>
 
 		<div class="group">
 			<h2>Synopsis</h2>

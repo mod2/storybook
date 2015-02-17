@@ -10,11 +10,30 @@ body {
 }
 
 body > header {
-	background: #111;
+	background: #4d3e32;
 	color: #fff;
-	height: 41px;
+	height: 49px;
 	padding-top: 10px;
+	position: relative;
 	z-index: 100;
+}
+
+body > header h1 {
+	background: #201c17;
+	border-radius: 0 0 3px 3px;
+	display: inline-block;
+	float: left;
+	font-size: .8em;
+	letter-spacing: 0.1em;
+	margin: 0 5px 0 15px;
+	margin-top: -10px;
+	text-transform: uppercase;
+}
+
+body > header h1 a {
+	color: #81644d;
+	display: inline-block;
+	padding: 16px 9px 6px 9px;
 }
 
 body > header a {
@@ -22,6 +41,23 @@ body > header a {
 	display: inline-block;
 	padding: 3px 15px;
 	text-decoration: none;
+}
+
+body > header a:hover {
+	color: #fff8ad;
+}
+
+body > header .left {
+	float: left;
+}
+
+body > header .right {
+	float: right;
+}
+
+body > header a.story-title {
+	font-size: 1.2em;
+	line-height: 1.1em;
 }
 
 
@@ -34,7 +70,7 @@ body > header a {
 	display: flex;
 	flex-direction: row;
 	position: absolute;
-	top: 41px;
+	top: 49px;
 	width: 100%;
 	-webkit-transition: background .25s ease-in-out;
 }
@@ -42,23 +78,37 @@ body > header a {
 #main .panel {
 	-webkit-flex: 1;
 	-webkit-transition: opacity .25s ease-in-out;
-	background: #ced9e0;
+	background: #e8e5df;
 	color: #444;
 	flex: 1;
 	height: 100%;
 }
 
 #main .panel > div + div {
-	border-top: solid 1px #a3b8c7;
+	border-top: solid 1px #d8c7b6;
 }
 
 #main #middle-panel {
 	-webkit-flex: 2;
 	background: #fff;
+	border-top: solid 5px #fff;
 	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 	flex: 2;
 	z-index: 50;
 }
+
+#main #middle-panel.dirty {
+	border-top-color: #63b0e8;
+}
+
+#main #middle-panel.saving {
+	border-top-color: #e3b068;
+}
+
+#main #middle-panel.error {
+	border-top-color: #f00;
+}
+
 
 #main #right-panel {
 	-webkit-flex-direction: column;
@@ -75,7 +125,7 @@ body > header a {
 /* Panel heading */
 
 #main .panel h1 {
-	color: #6c8cab;
+	color: #ab866c;
 	font-size: .8em;
 	letter-spacing: 0.05em;
 	margin: 15px;
@@ -86,7 +136,7 @@ body > header a {
 #main .panel h1 a {
 	-moz-user-select: none;
 	-webkit-user-select: none;
-	color: #6095b5;
+	color: #bb9c86;
 	cursor: pointer;
 	font-size: .7em;
 	margin-left: 10px;
@@ -103,13 +153,12 @@ body > header a {
 #main textarea#text {
 	-webkit-transition: border-top-color .25s ease-in-out;
 	border: none;
-	border-top: solid 5px #fff;
 	font-family: Inconsolata, Monaco, Courier, monospace, Source Sans Pro;
 	font-size: 1.2em;
 	height: 100%;
 	line-height: 1.4em;
-	padding: 25px;
-	padding-top: 20px;
+	padding: 35px;
+	padding-top: 10px;
 	resize: none;
 	width: 100%;	
 }
@@ -118,17 +167,26 @@ body > header a {
 	outline: none;
 }
 
-#main textarea#text.dirty {
-	border-top-color: #63b0e8;
+#middle-panel textarea[name=scene-title] {
+	background: none;
+	border: none;
+	color: #555;
+	font-size: 1.2em;
+	font-style: normal;
+	font-weight: 600;
+	height: 1.1em;
+	line-height: 1.2em;
+	margin: 30px auto 10px;
+	padding: 0 35px;
+	resize: none;
+	text-align: center;
+	width: 100%;
 }
 
-#main textarea#text.saving {
-	border-top-color: #e3b068;
+#middle-panel textarea[name=scene-title]:focus {
+	outline: none;
 }
 
-#main textarea#text.error {
-	border-top-color: #f00;
-}
 
 /* Outline panel */
 
@@ -154,11 +212,11 @@ body > header a {
 }
 
 #outline-panel .scene:hover {
-	background: #97cafc;
+	background: #fff;
 }
 
 #outline-panel .scene h2 {
-	color: #567ea0;
+	color: #ad9884;
 	font-size: .7em;
 	font-weight: normal;
 	letter-spacing: 0.05em;
@@ -187,29 +245,28 @@ body > header a {
 }
 
 #outline-panel a.add-scene {
-	background: #afc6d3;
+	background: #f7f4ee;
 	border-radius: 3px;
-	color: #5d7e9e;
+	color: #c0ac96;
 	cursor: pointer;
 	display: block;
 	font-size: .8em;
 	letter-spacing: 0.05em;
 	margin-top: .5em;
-	padding: 8px 10px;
+	padding: 7px 10px 9px;
 	text-align: center;
 	text-transform: uppercase;
 	width: 100%;
 }
 
 #outline-panel a.add-scene:hover {
-	background: #444;
-	color: #fff;
+	background: #fff;
 }
 
 /* Scene panel */
 
 #scene-panel h2 {
-	color: #8498ad;
+	color: #ad9884;
 	font-size: .7em;
 	margin: 0;
 	margin-bottom: 2px;
@@ -233,12 +290,6 @@ body > header a {
 	outline: none;
 }
 
-#scene-panel textarea[name=scene-title] {
-	font-size: 1.1em;
-	font-style: normal;
-	line-height: 1.2em;
-}
-
 
 /* History panel */
 
@@ -254,7 +305,7 @@ body > header a {
 }
 
 #history-panel .list a {
-	color: #2c5e88;
+	color: #947e5b;
 	display: block;
 	font-size: .85em;
 	line-height: 1.2em;
@@ -296,12 +347,15 @@ body.dimmer #right-panel {
 @media screen and (min-width: 1000px) {
 	#main textarea#text {
 		padding: 50px;
-		padding-top: 45px;
+		padding-top: 10px;
 	}
 
-	body > header a {
-		padding-left: 25px;
-		padding-right: 25px;
+	body > header h1 {
+		margin-left: 25px;
+	}
+
+	body > header .right {
+		padding-right: 10px;
 	}
 
 	#main .panel .group {
@@ -315,6 +369,10 @@ body.dimmer #right-panel {
 		margin-right: 25px;
 	}
 
+	#middle-panel textarea[name=scene-title] {
+		padding: 0 35px;
+	}
+
 	#outline-panel .scene {
 		padding-left: 25px;
 		padding-right: 25px;
@@ -323,5 +381,82 @@ body.dimmer #right-panel {
 	#history-panel .list {
 		padding-left: 25px;
 		padding-right: 25px;
+	}
+}
+
+@media screen and (min-width: 1300px) {
+	#main textarea[name=scene-title] {
+		font-size: 1.3em;
+		line-height: 1.3em;
+	}
+
+	#main textarea#text {
+		font-size: 1.25em;
+		line-height: 1.4em;
+		padding: 70px;
+		padding-top: 10px;
+	}
+}
+
+@media screen and (min-width: 1500px) {
+	#main textarea#text {
+		padding: 100px;
+		padding-top: 10px;
+	}
+}
+
+@media screen and (min-width: 1700px) {
+	#main textarea#text {
+		padding: 130px;
+		padding-top: 10px;
+	}
+}
+
+@media screen and (min-width: 1800px) {
+	#main textarea#text {
+		padding: 150px;
+		padding-top: 10px;
+	}
+}
+
+@media screen and (min-width: 1900px) {
+	#main textarea[name=scene-title] {
+		font-size: 1.4em;
+		line-height: 1.3em;
+	}
+
+	#main textarea#text {
+		font-size: 1.4em;
+		line-height: 1.4em;
+		padding: 180px;
+		padding-top: 10px;
+	}
+}
+
+@media screen and (min-width: 2000px) {
+	#main textarea[name=scene-title] {
+		font-size: 1.5em;
+		line-height: 1.3em;
+	}
+
+	#main textarea#text {
+		font-size: 1.5em;
+		line-height: 1.4em;
+		padding: 200px;
+		padding-top: 10px;
+	}
+}
+
+@media screen and (min-width: 2300px) {
+	#main textarea[name=scene-title] {
+		font-size: 1.6em;
+		line-height: 1.3em;
+	}
+
+	#main textarea#text {
+		font-size: 1.6em;
+		line-height: 1.4em;
+		padding: 230px;
+		padding-top: 10px;
 	}
 }
