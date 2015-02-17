@@ -17,10 +17,20 @@ class Story(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True, default=timezone.now())
     order = models.PositiveSmallIntegerField()
-    word_count = models.PositiveSmallIntegerField(default=0)
 
     def __unicode__(self):
         return self.title
+
+    def active_scenes(self):
+        return self.scenes.filter(status='active')
+
+    def word_count(self):
+        word_count = 0
+
+        for scene in self.active_scenes():
+            word_count += scene.word_count()
+
+        return word_count
 
     class Meta:
         verbose_name_plural = "stories"
@@ -60,6 +70,14 @@ class Scene(models.Model):
             return self.revisions.order_by('-created').first()
         else:
             return None
+
+    def word_count(self):
+        latest_revision = self.latest_revision()
+        if latest_revision:
+            # TODO: this doesn't actually work (newlines, etc.)
+            return len(latest_revision.text.split(' '))
+        else:
+            return 0
 
 class Revision(models.Model):
     text = models.TextField(null=True, blank=True)

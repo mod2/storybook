@@ -263,6 +263,12 @@ body > header a.story-title {
 	background: #fff;
 }
 
+#outline-panel .scene.placeholder {
+	background: #f7f4ee;
+	border-radius: 3px;
+	height: 3.5em;
+}
+
 /* Scene panel */
 
 #scene-panel h2 {
@@ -340,6 +346,94 @@ body.dimmer #left-panel {
 
 body.dimmer #right-panel {
 	opacity: 0.5;
+}
+
+
+/* Dialog */
+
+#dialog {
+	max-width: 500px;
+	margin: 30px auto;
+}
+
+
+/* Login page */
+
+form.login {
+	margin-top: 1em;
+}
+
+form.login .group label {
+	color: #888;
+	display: block;
+	margin-bottom: .2em;
+}
+
+form.login .group section {
+	margin-bottom: 1em;
+}
+
+form.login .group section input[type=text] {
+	font-size: 1.3em;
+	padding: 3px 5px;
+}
+
+form.login .group section input[type=password] {
+	font-size: 1.3em;
+	padding: 3px 5px;
+}
+
+form.login input.button {
+	background: #c86363;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	font-size: 1em;
+	padding: 4px 10px 6px;
+}
+
+form.login input.button:hover {
+	background: #444;
+}
+
+
+/* Dashboard */
+
+#dashboard {
+	max-width: 600px;
+	width: 100%;
+	margin: 30px auto;
+}
+
+#dashboard .story {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#dashboard .story a {
+	display: block;
+	padding: 10px 12px;
+	text-decoration: none;
+}
+
+#dashboard .story a:hover {
+	background: #eee;
+}
+
+#dashboard .story a h2 {
+	color: #333;
+	font-size: 1.2em;
+	margin: 0;
+}
+
+#dashboard .story a .info {
+	color: #888;
+	font-size: .9em;
+	margin-top: 3px;
+}
+
+#dashboard .story + .story {
+	margin-top: 1.5em;
 }
 
 

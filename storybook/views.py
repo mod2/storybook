@@ -10,11 +10,14 @@ import json
 
 from .models import Story, Scene, Revision
 
-#@login_required
+@login_required
 def home(request):
-    return render_to_response('home.html', { })
+    stories = Story.objects.filter(status='active')
 
-#@login_required
+    return render_to_response('home.html', {'stories': stories,
+                                            'request': request })
+
+@login_required
 def story(request, story_slug, scene_id=None, revision_id=None):
     story_obj = Story.objects.get(slug=story_slug)
 
@@ -25,17 +28,20 @@ def story(request, story_slug, scene_id=None, revision_id=None):
     else:
         selected_scene = scenes.first()
 
-    # Get the appropriate revision
-    if revision_id is not None:
-        revision = selected_scene.revisions.filter(id=revision_id).first()
-    else:
-        revision = selected_scene.latest_revision()
+    revision = None
+    if selected_scene is not None:
+        # Get the appropriate revision
+        if revision_id is not None:
+            revision = selected_scene.revisions.filter(id=revision_id).first()
+        else:
+            revision = selected_scene.latest_revision()
 
     return render_to_response('story.html', {'pagetitle': story_obj.title,
                                              'story': story_obj,
                                              'scenes': scenes,
                                              'selected_scene': selected_scene,
                                              'revision': revision,
+                                             'request': request,
                                             })
 
 def ws_reorder_scenes(request, story_slug):

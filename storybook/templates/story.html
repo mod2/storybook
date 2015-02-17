@@ -40,7 +40,7 @@
 		<h1>Scene History</h1>
 
 		<div class="list">
-			{% if selected_scene.revisions.all|length > 0 %}
+			{% if selected_scene and selected_scene.revisions.all|length > 0 %}
 			<a href="{% url 'story' story.slug selected_scene.id %}">Latest revision</a>
 			{% for rev in selected_scene.revisions.all %}
 			<a href="{% url 'story' story.slug selected_scene.id rev.id %}">{{ rev.created }}</a>
