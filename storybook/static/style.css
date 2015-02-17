@@ -447,6 +447,7 @@ form.login input.button:hover {
 /* Dashboard */
 
 #middle-panel #full-draft {
+	overflow: auto;
 	padding: 25px 45px;
 }
 
@@ -465,7 +466,21 @@ form.login input.button:hover {
 	font-style: italic;
 	font-weight: normal;
 	line-height: 1.3em;
-	margin-top: 3em;
+	margin: 3em 0;
+}
+
+#middle-panel #full-draft h2 div {
+	font-size: .8em;
+	margin-top: 5px;
+}
+
+#middle-panel #full-draft h5 {
+	color: #ab866c;
+	font-size: .9em;
+	letter-spacing: 0.05em;
+	margin: 4em 0 7em;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 #full-draft p {

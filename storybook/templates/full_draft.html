@@ -10,9 +10,15 @@
 
 		{% for scene in scenes %}
 		<div class="scene">
-		{{ scene.html|safe }}
+			{% if scene.html != '' %}
+			{{ scene.html|safe }}
+			{% else %}
+			<h2>&hellip; Scene {{ scene.order }}: {{ scene.title }} &hellip;{% if scene.synopsis %}<div class="synopsis">{{ scene.synopsis }}</div>{% endif %}</h2>
+			{% endif %}
 		</div>
 		{% endfor %}
+
+		<h5>The End.</h5>
 	</div>
 </section>
 
