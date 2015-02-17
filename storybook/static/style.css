@@ -150,6 +150,13 @@ body > header a.story-title {
 
 /* Writing area */
 
+#middle-panel {
+	-webkit-flex-direction: column;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+}
+
 #main textarea#text {
 	-webkit-transition: border-top-color .25s ease-in-out;
 	border: none;
