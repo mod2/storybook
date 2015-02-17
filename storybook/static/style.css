@@ -42,14 +42,14 @@ body > header a {
 #main .panel {
 	-webkit-flex: 1;
 	-webkit-transition: opacity .25s ease-in-out;
-	background: #eee;
+	background: #ced9e0;
 	color: #444;
 	flex: 1;
 	height: 100%;
 }
 
 #main .panel > div + div {
-	border-top: solid 1px #bbb;
+	border-top: solid 1px #a3b8c7;
 }
 
 #main #middle-panel {
@@ -75,7 +75,7 @@ body > header a {
 /* Panel heading */
 
 #main .panel h1 {
-	color: #888;
+	color: #6c8cab;
 	font-size: .8em;
 	letter-spacing: 0.05em;
 	margin: 15px;
@@ -86,7 +86,7 @@ body > header a {
 #main .panel h1 a {
 	-moz-user-select: none;
 	-webkit-user-select: none;
-	color: #999;
+	color: #6095b5;
 	cursor: pointer;
 	font-size: .7em;
 	margin-left: 10px;
@@ -104,6 +104,7 @@ body > header a {
 	-webkit-transition: border-top-color .25s ease-in-out;
 	border: none;
 	border-top: solid 5px #fff;
+	font-family: Inconsolata, Monaco, Courier, monospace, Source Sans Pro;
 	font-size: 1.2em;
 	height: 100%;
 	line-height: 1.4em;
@@ -153,7 +154,7 @@ body > header a {
 }
 
 #outline-panel .scene:hover {
-	background: #ddd;
+	background: #97cafc;
 }
 
 #outline-panel .scene h2 {
@@ -186,9 +187,9 @@ body > header a {
 }
 
 #outline-panel a.add-scene {
-	background: #ddd;
+	background: #afc6d3;
 	border-radius: 3px;
-	color: #888;
+	color: #5d7e9e;
 	cursor: pointer;
 	display: block;
 	font-size: .8em;
@@ -208,7 +209,7 @@ body > header a {
 /* Scene panel */
 
 #scene-panel h2 {
-	color: #999;
+	color: #8498ad;
 	font-size: .7em;
 	margin: 0;
 	margin-bottom: 2px;
@@ -220,8 +221,9 @@ body > header a {
 	background: none;
 	border: none;
 	font-size: .8em;
+	font-style: italic;
 	height: 1.1em;
-	line-height: 1.2em;
+	line-height: 1.3em;
 	padding: 0;
 	resize: none;
 	width: 100%;
@@ -232,7 +234,8 @@ body > header a {
 }
 
 #scene-panel textarea[name=scene-title] {
-	font-size: 1em;
+	font-size: 1.1em;
+	font-style: normal;
 	line-height: 1.2em;
 }
 
@@ -253,7 +256,7 @@ body > header a {
 #history-panel .list a {
 	color: #2c5e88;
 	display: block;
-	font-size: .8em;
+	font-size: .85em;
 	line-height: 1.2em;
 	text-decoration: none;
 }
@@ -263,7 +266,7 @@ body > header a {
 }
 
 #history-panel .list a + a {
-	margin-top: 2px;
+	margin-top: 3px;
 }
 
 #history-panel .list span {
@@ -277,7 +280,7 @@ body > header a {
 /* Dimmer */
 
 body.dimmer #main {
-	background: #999;
+	background: #587d90;
 }
 
 body.dimmer #left-panel {
