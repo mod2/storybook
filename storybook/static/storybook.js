@@ -28,6 +28,7 @@ $(document).ready(function() {
 
 
 	// Textarea focus
+	/*
 	$("textarea#text").on("focus", function() {
 		$("body").addClass("dimmer");
 	});
@@ -35,6 +36,7 @@ $(document).ready(function() {
 	$("textarea#text").on("blur", function() {
 		$("body").removeClass("dimmer");
 	});
+	*/
 
 
 	// Reordering scenes in the outline
