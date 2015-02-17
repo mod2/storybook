@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block main %}
+<section id="left-panel" class="panel">
+</section>
+
+<section id="middle-panel" class="panel">
+	<div id="full-draft">
+		<h1>{{ story.title }}</h1>
+
+		{% for scene in scenes %}
+		<div class="scene">
+		{{ scene.html|safe }}
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+<section id="right-panel" class="panel">
+</section>
+
+{% endblock main %}

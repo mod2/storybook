@@ -290,6 +290,7 @@ body > header a.story-title {
 #scene-panel textarea {
 	background: none;
 	border: none;
+	color: #6b685f;
 	font-size: .8em;
 	font-style: italic;
 	height: 1.1em;
@@ -443,12 +444,54 @@ form.login input.button:hover {
 	margin-top: 1.5em;
 }
 
+/* Dashboard */
+
+#middle-panel #full-draft {
+	padding: 25px 45px;
+}
+
+#middle-panel #full-draft h1, #full-draft h2 {
+	text-align: center;
+}
+
+#middle-panel #full-draft h1 {
+	font-size: 1.3em;
+	margin-bottom: 1.5em;
+}
+
+#middle-panel #full-draft h2 {
+	color: #bbb;
+	font-size: .9em;
+	font-style: italic;
+	font-weight: normal;
+	line-height: 1.3em;
+	margin-top: 3em;
+}
+
+#full-draft p {
+	font-size: 1.2em;
+	line-height: 1.4em;
+	margin: 0;
+}
+
+#full-draft p + p {
+	text-indent: 1.25em;
+}
+
+#full-draft .scene + .scene {
+	margin-top: 2em;
+}
+
 
 /* Media queries */
 @media screen and (min-width: 1000px) {
 	#main textarea#text {
 		padding: 50px;
 		padding-top: 10px;
+	}
+
+	#middle-panel #full-draft {
+		padding: 25px 60px;
 	}
 
 	body > header h1 {
@@ -497,12 +540,22 @@ form.login input.button:hover {
 		padding: 70px;
 		padding-top: 10px;
 	}
+
+	#middle-panel #full-draft {
+		padding: 25px 80px;
+	}
 }
 
 @media screen and (min-width: 1500px) {
 	#main textarea#text {
 		padding: 100px;
 		padding-top: 10px;
+	}
+
+	#middle-panel #full-draft {
+		padding: 25px 100px;
+		font-size: 1.1em;
+		line-height: 1.4em;
 	}
 }
 
@@ -511,12 +564,22 @@ form.login input.button:hover {
 		padding: 130px;
 		padding-top: 10px;
 	}
+
+	#middle-panel #full-draft {
+		padding: 25px 130px;
+	}
 }
 
 @media screen and (min-width: 1800px) {
 	#main textarea#text {
 		padding: 150px;
 		padding-top: 10px;
+	}
+
+	#middle-panel #full-draft {
+		font-size: 1.2em;
+		line-height: 1.4em;
+		padding: 25px 150px;
 	}
 }
 
@@ -532,6 +595,10 @@ form.login input.button:hover {
 		padding: 180px;
 		padding-top: 10px;
 	}
+
+	#middle-panel #full-draft {
+		padding: 25px 150px;
+	}
 }
 
 @media screen and (min-width: 2000px) {
@@ -546,6 +613,10 @@ form.login input.button:hover {
 		padding: 200px;
 		padding-top: 10px;
 	}
+
+	#middle-panel #full-draft {
+		padding: 25px 200px;
+	}
 }
 
 @media screen and (min-width: 2300px) {
@@ -559,5 +630,9 @@ form.login input.button:hover {
 		line-height: 1.4em;
 		padding: 230px;
 		padding-top: 10px;
+	}
+
+	#middle-panel #full-draft {
+		padding: 25px 250px;
 	}
 }

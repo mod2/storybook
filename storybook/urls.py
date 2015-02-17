@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^login/', 'django.contrib.auth.views.login', { 'template_name': 'login.html' }, name='login'),
     url(r'^logout/', 'django.contrib.auth.views.logout', { 'template_name': 'logout.html', 'next_page': '/login/' }, name='logout'),
 
+    url(r'^story/(.+?)/full/$', 'storybook.views.full_draft', name='full_draft'),
     url(r'^story/(.+?)/(.+?)/revision/(.+?)/$', 'storybook.views.story', name='story'),
     url(r'^story/(.+?)/(.+?)/$', 'storybook.views.story', name='story'),
     url(r'^story/(.+?)/$', 'storybook.views.story', name='story'),

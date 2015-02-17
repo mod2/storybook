@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from autoslug import AutoSlugField
 
+import mistune
+
 class Story(models.Model):
     STATUSES = (
         ('active', 'Active'),
@@ -78,6 +80,17 @@ class Scene(models.Model):
             return len(latest_revision.text.split(' '))
         else:
             return 0
+
+    def text(self):
+        latest_revision = self.latest_revision()
+
+        if latest_revision:
+            return latest_revision.text
+        else:
+            return ''
+
+    def html(self):
+        return mistune.markdown(self.text())
 
 class Revision(models.Model):
     text = models.TextField(null=True, blank=True)
