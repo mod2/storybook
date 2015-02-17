@@ -74,9 +74,6 @@ def ws_add_revision(request, story_slug, scene_id):
     if request.is_ajax() and request.method == 'POST':
         text = json.loads(request.body)['text']
 
-        if text.strip() == '':
-            return ''
-
         # Get the scene
         scene = Scene.objects.get(id=scene_id)
 
