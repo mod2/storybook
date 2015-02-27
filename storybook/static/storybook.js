@@ -141,12 +141,16 @@ $(document).ready(function() {
 
 
 	// Save before closing tab
-	$(window).unload(function() {
+	$(window).bind('beforeunload', function() {
 		// See if there's unsaved text and autosave if there is
 		var currentText = $("textarea#text").val().trim();
 
 		if (currentText != sceneText) {
 			autoSave();
+
+			confirm("Not done yet");
+			// Delay a bit to let the autosave do its thing
+			delay(500);
 		}
 	});
 
