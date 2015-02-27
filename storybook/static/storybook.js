@@ -131,7 +131,7 @@ $(document).ready(function() {
 	// Autosaving (only on writing pages)
 	if ($("textarea#text").length > 0) {
 		// On typing into the textarea, remove the saving notice
-		$("textarea#text").on("keypress", function() {
+		$("textarea#text").on("input", function() {
 			$("#middle-panel").addClass("dirty");
 		});
 
