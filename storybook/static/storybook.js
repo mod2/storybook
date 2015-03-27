@@ -15,13 +15,6 @@ $(document).ready(function() {
 	sceneText = $("textarea#text").val();
 
 
-	// Toggle synopses
-	$("a.toggle-synopses").on("click", function() {
-		$("#outline-panel").toggleClass("show-synopses");
-		return false;
-	});
-
-
 	// Autosize
 	$('#middle-panel textarea[name=scene-title]').autosize();
 	$('#scene-panel textarea').autosize();

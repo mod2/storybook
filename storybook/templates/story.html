@@ -3,16 +3,13 @@
 {% block main %}
 <section id="left-panel" class="panel">
 	<div id="outline-panel">
-		<h1>Outline <a class="toggle-synopses">Toggle Synopses</a></h1>
+		<h1>Outline</h1>
 
 		<div id="scene-list">
 			{% for scene in scenes %}
 			<a href="{% url 'story' story.slug scene.id %}" class="scene {% if scene == selected_scene %}selected{% endif %}" data-id="{{ scene.id }}">
 				<h2>Scene <span class="num">{{ scene.order }}</span></h2>
 				<h3>{{ scene.title }}</h3>
-				{% if scene.synopsis %}
-				<div class="synopsis">{{ scene.synopsis }}</div>
-				{% endif %}
 			</a>
 			{% endfor %} 
 		</div>
