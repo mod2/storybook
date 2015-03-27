@@ -496,20 +496,15 @@ form.login input.button:hover {
 	margin: 0 0 1em 0;
 }
 
-#dashboard .story {
-}
-
 #dashboard .story a {
 	background: #fff;
-	border-radius: 3px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	display: block;
-	padding: 8px 12px 11px;
+	padding: 1em 0;
 	text-decoration: none;
 }
 
-#dashboard .story a:hover {
-	background: #eee;
+#dashboard .story a:hover h2 {
+	color: #444;
 }
 
 #dashboard .story a h2 {
@@ -526,8 +521,9 @@ form.login input.button:hover {
 }
 
 #dashboard .story + .story {
-	margin-top: 1.5em;
+	border-top: solid 1px #ddd;
 }
+
 
 /* Full draft */
 
