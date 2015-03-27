@@ -10,6 +10,7 @@
 			<a href="{% url 'story' story.slug scene.id %}" class="scene {% if scene == selected_scene %}selected{% endif %}" data-id="{{ scene.id }}">
 				<h2>Scene <span class="num">{{ scene.order }}</span></h2>
 				<h3>{{ scene.title }}</h3>
+				<div class="wordcount"><span>{{ scene.word_count }}</span> words</div>
 			</a>
 			{% endfor %} 
 		</div>

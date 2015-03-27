@@ -278,17 +278,12 @@ body > header a.story-title {
 	margin: 3px 0 0;
 }
 
-#outline-panel .scene .synopsis {
+#outline-panel .scene .wordcount {
 	color: #777;
-	display: none;
 	font-size: .7em;
 	font-style: italic;
 	line-height: 1.2em;
 	margin-top: 3px;
-}
-
-#outline-panel.show-synopses .scene .synopsis {
-	display: block;
 }
 
 #outline-panel a.add-scene {
