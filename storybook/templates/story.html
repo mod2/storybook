@@ -5,6 +5,10 @@
 	<div id="outline-panel">
 		<h1>Outline</h1>
 
+		<div class="group">
+			<a class="add-scene">Add Scene</a>
+		</div>
+
 		<div id="scene-list">
 			{% for scene in scenes %}
 			<a href="{% url 'story' story.slug scene.id %}" class="scene {% if scene == selected_scene %}selected{% endif %}" data-id="{{ scene.id }}">
@@ -13,10 +17,6 @@
 				<div class="wordcount"><span>{{ scene.word_count }}</span> word{% if scene.word_count != 1 %}s{% endif %}</div>
 			</a>
 			{% endfor %} 
-		</div>
-
-		<div class="group">
-			<a class="add-scene">Add Scene</a>
 		</div>
 	</div>
 </section>

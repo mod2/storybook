@@ -294,7 +294,7 @@ body > header a.story-title {
 	display: block;
 	font-size: .8em;
 	letter-spacing: 0.05em;
-	margin-top: .5em;
+	margin: .25em 0 .75em;
 	padding: 7px 10px 9px;
 	text-align: center;
 	text-transform: uppercase;
