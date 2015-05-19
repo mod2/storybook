@@ -1,6 +1,6 @@
 ## Storybook
 
-Web app (Django) for writing fiction.
+Web app (Django) for writing fiction. Uses Python 2.x.
 
 ### Installation
 
