@@ -404,6 +404,7 @@ body.dimmer #right-panel {
 
 form.login {
 	margin-top: 1em;
+	padding-bottom: 1.5em;
 }
 
 form.login .group label {
@@ -427,6 +428,7 @@ form.login .group section input[type=password] {
 }
 
 form.login input.button {
+	-webkit-appearance: none;
 	background: #c86363;
 	border: none;
 	border-radius: 5px;
