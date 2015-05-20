@@ -59,7 +59,7 @@ def ws_reorder_scenes(request, story_slug):
     """ Reorder scenes in a story (called by AJAX) """
 
     if request.is_ajax() and request.method == 'POST':
-        order = json.loads(request.body)['order']
+        order = json.loads(request.body.decode())['order']
 
         scenes = Scene.objects.filter(pk__in=order.keys())
         for scene in scenes:
@@ -72,7 +72,7 @@ def ws_add_revision(request, story_slug, scene_id):
     """ Add revision to a scene """
 
     if request.is_ajax() and request.method == 'POST':
-        text = json.loads(request.body)['text']
+        text = json.loads(request.body.decode())['text']
 
         # Get the scene
         scene = Scene.objects.get(id=scene_id)
@@ -89,7 +89,7 @@ def ws_update_revision(request, story_slug, scene_id, revision_id):
     """ Update revision for a scene """
 
     if request.is_ajax() and request.method == 'POST':
-        text = json.loads(request.body)['text']
+        text = json.loads(request.body.decode())['text']
 
         if text.strip() == '':
             return ''
@@ -110,7 +110,7 @@ def ws_update_scene(request, story_slug, scene_id):
     """ Update scene metadata """
 
     if request.is_ajax() and request.method == 'POST':
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode())
         title = data['title'].strip()
         synopsis = data['synopsis'].strip()
 
