@@ -139,7 +139,7 @@ def ws_add_scene(request, story_slug):
     if request.is_ajax() and request.method == 'POST':
         # Get the story
         story = Story.objects.get(slug=story_slug)
-        
+
         # Get the scene
         scene = Scene()
         scene.story = story
@@ -149,3 +149,16 @@ def ws_add_scene(request, story_slug):
         scene.save()
 
         return JsonResponse(json.dumps({ "status": "success", "id": scene.id }), safe=False)
+
+
+def ws_add_story(request):
+    """ Add a new story. """
+
+    if request.is_ajax() and request.method == 'POST':
+        data = json.loads(request.body.decode())
+        title = data['title'].strip()
+        title = title if title else 'Untitled'
+        story = Story.objects.create(title=title)
+        return JsonResponse(json.dumps({'status': 'success', 'id': story.id}), safe=False)
+    else:
+        return JsonResponse(json.dumps({'status': 'error', 'error': "Couldn't create a new story."}), safe=False)
