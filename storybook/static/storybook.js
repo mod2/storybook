@@ -203,6 +203,27 @@ $(document).ready(function() {
 	});
 
 
+	$("#add-story-submit").on("click", function() {
+		var url = "/api/story/";
+		var payload = {
+			'title': $("#new-story-title").val().trim(),
+		};
+
+		$.ajax({
+			url: url,
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(payload),
+			success: function(data) {
+				window.location.href = "/";
+			},
+			error: function(data) {
+				console.log("error", data);
+			},
+		});
+	});
+
+
 	// Delete selected scene
 	$("a.delete-scene").on("click", function() {
 		var storySlug = $("#main").attr("data-story-slug");

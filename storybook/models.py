@@ -6,6 +6,7 @@ from autoslug import AutoSlugField
 
 import mistune
 
+
 class Story(models.Model):
     STATUSES = (
         ('active', 'Active'),
@@ -15,10 +16,11 @@ class Story(models.Model):
 
     title = models.TextField()
     slug = AutoSlugField(populate_from='title')
-    status = models.CharField(max_length=10, choices=STATUSES)
+    status = models.CharField(max_length=10, choices=STATUSES,
+                              default=STATUSES[0][0])
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True, default=timezone.now())
-    order = models.PositiveSmallIntegerField()
+    order = models.PositiveSmallIntegerField(default=50)
 
     def __unicode__(self):
         return self.title
