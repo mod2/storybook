@@ -3,6 +3,9 @@
 $green: hsl(111, 33%, 73%);
 $darkgreen: darken($green, 20%);
 $grayhover: #444;
+$brown: #b68f76;
+$menublue: hsl(195, 100%, 40%);
+$blue: hsl(195, 100%, 40%);
 
 
 * {
@@ -13,6 +16,7 @@ $grayhover: #444;
 body {
 	margin: 0;
 	padding: 0;
+	padding-bottom: 100px;
 }
 
 .container {
@@ -54,10 +58,33 @@ nav[role=menu] {
 	.group {
 		text-align: right;
 
+		&.scene {
+			border-bottom: solid 1px #ddd;
+			padding-bottom: 1.5em;
+
+			.revision {
+				font-size: .8em;
+				line-height: 1.5em;
+			}
+		}
+
+		&.story {
+			border-bottom: solid 1px #ddd;
+			padding-bottom: 1.5em;
+		}
+
 		&.stories {
 			font-size: 1.1em;
 			font-style: italic;
 			line-height: 1.8em;
+
+			a {
+				color: #111;
+
+				&:hover {
+					color: $darkgreen;
+				}
+			}
 		}
 	}
 
@@ -66,7 +93,7 @@ nav[role=menu] {
 	}
 
 	a {
-		color: $darkgreen;
+		color: $menublue;
 		display: block;
 		font-size: 1.1em;
 		line-height: 1.7em;
@@ -149,13 +176,29 @@ header[role=banner] {
 			}
 		}
 	}
+
+	& > h1.container {
+		margin-bottom: .7em;
+		margin-top: 0;
+		font-weight: 400;
+
+		a {
+			color: #111;
+			font-size: 1em;
+			padding: 0;
+
+			&:hover {
+				color: $green;
+			}
+		}
+	}
 }
 
 
 /* Dashboard */
 /* -------------------------------------------------- */
 
-#dashboard {
+.dashboard {
 	.story {
 		border-bottom: solid 1px #ddd;
 
@@ -188,7 +231,7 @@ header[role=banner] {
 		h3 {
 			color: #888;
 			font-size: .9em;
-			font-weight: 300;
+			font-weight: 400;
 			margin-bottom: .2em;
 			margin-top: 0;
 		}
@@ -196,6 +239,106 @@ header[role=banner] {
 		.story {
 			border-bottom: none;
 			font-size: .7em;
+		}
+	}
+}
+
+
+/* Story detail */
+/* -------------------------------------------------- */
+
+.story-detail {
+	.scenes {
+		margin-top: 1em;
+
+		.scene {
+			& > a {
+				-webkit-display: flex;
+				color: #111;
+				display: flex;
+				padding: .5em 0;
+				text-decoration: none;
+			}
+
+			.num {
+				color: $brown;
+				font-size: 1.1em;
+				width: 2em;
+			}
+
+			.info {
+				flex: 1;
+
+				h3 {
+					font-weight: 400;
+					margin: 0;
+				}
+
+				.meta {
+					color: #888;
+					font-size: .9em;
+					font-style: italic;
+					margin-top: 3px;
+				}
+			}
+		}
+	}
+}
+
+
+/* Scene detail */
+/* -------------------------------------------------- */
+
+.scene-detail {
+	.summary {
+		border-bottom: solid 1px #ddd;
+		color: #444;
+		font-style: italic;
+		line-height: 1.4em;
+		padding: 1em 0 1.5em;
+
+		.num {
+			color: $brown;
+			font-style: normal;
+			margin-bottom: 5px;
+		}
+
+		.title {
+			color: #111;
+			font-size: 1.2em;
+			font-style: normal;
+			line-height: 1.3em;
+			margin-bottom: 1em;
+		}
+
+		.edit {
+			background: $blue;
+			border-radius: 1em;
+			color: #fff;
+			float: right;
+			font-style: normal;
+			margin-bottom: 15px;
+			margin-left: 15px;
+			padding: 3px 15px 5px;
+			text-decoration: none;
+
+			&:hover {
+				background: $grayhover;
+			}
+		}
+	}
+
+	.text {
+		font-size: 1.2em;
+		line-height: 1.45em;
+		padding: 1.4em 0;
+		
+		p {
+			margin: 0;
+		}
+
+		p + p {
+			text-indent: 1.25em;
 		}
 	}
 }

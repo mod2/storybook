@@ -36,6 +36,8 @@ $.ajaxSetup({
 
 $(document).ready(function() {
 	// Menu code
+	// --------------------------------------------------
+
 	function _toggleMenu() {
 		$("body").toggleClass("active-nav");
 	}
@@ -57,4 +59,10 @@ $(document).ready(function() {
 		_hideMenu();
 		return false;
 	});
+
+
+	// Hotkeys
+	// --------------------------------------------------
+
+	Mousetrap.bind('g m', _toggleMenu);
 });

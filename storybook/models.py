@@ -44,13 +44,13 @@ class Story(models.Model):
 
 class Scene(models.Model):
     STATUSES = (
-        ('active', 'Active'),
-        ('complete', 'Complete'),
-        ('deleted', 'Deleted'),
+        ('drafting', 'Drafting'),
+        ('finished', 'Finished'),
+        ('discarded', 'Discarded'),
     )
 
     title = models.TextField(null=True, blank=True)
-    status = models.CharField(max_length=10, choices=STATUSES, default='active')
+    status = models.CharField(max_length=10, choices=STATUSES, default='drafting')
     synopsis = models.TextField(null=True, blank=True)
     order = models.PositiveSmallIntegerField(default=1)
 

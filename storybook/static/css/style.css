@@ -30,7 +30,8 @@
 
 body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  padding-bottom: 100px; }
 
 .container {
   margin: 0px auto;
@@ -63,14 +64,27 @@ nav[role=menu] {
   z-index: 0; }
   nav[role=menu] .group {
     text-align: right; }
+    nav[role=menu] .group.scene {
+      border-bottom: solid 1px #ddd;
+      padding-bottom: 1.5em; }
+      nav[role=menu] .group.scene .revision {
+        font-size: .8em;
+        line-height: 1.5em; }
+    nav[role=menu] .group.story {
+      border-bottom: solid 1px #ddd;
+      padding-bottom: 1.5em; }
     nav[role=menu] .group.stories {
       font-size: 1.1em;
       font-style: italic;
       line-height: 1.8em; }
+      nav[role=menu] .group.stories a {
+        color: #111; }
+        nav[role=menu] .group.stories a:hover {
+          color: #6baf60; }
   nav[role=menu] .group + .group {
     margin-top: 1.5em; }
   nav[role=menu] a {
-    color: #6baf60;
+    color: #0099cc;
     display: block;
     font-size: 1.1em;
     line-height: 1.7em;
@@ -126,35 +140,109 @@ header[role=banner] {
       margin: 0; }
       header[role=banner] > .container h1 a {
         color: #6baf60; }
+  header[role=banner] > h1.container {
+    margin-bottom: .7em;
+    margin-top: 0;
+    font-weight: 400; }
+    header[role=banner] > h1.container a {
+      color: #111;
+      font-size: 1em;
+      padding: 0; }
+      header[role=banner] > h1.container a:hover {
+        color: #aad1a3; }
 
 /* Dashboard */
 /* -------------------------------------------------- */
-#dashboard .story {
+.dashboard .story {
   border-bottom: solid 1px #ddd; }
-  #dashboard .story a {
+  .dashboard .story a {
     color: #111;
     display: block;
     padding: .8em 0 1em;
     text-decoration: none; }
-    #dashboard .story a:hover {
+    .dashboard .story a:hover {
       color: #6baf60; }
-    #dashboard .story a h2 {
+    .dashboard .story a h2 {
       font-weight: normal;
       margin: 0; }
-    #dashboard .story a .info {
+    .dashboard .story a .info {
       color: #888;
       font-style: italic;
       margin-top: 2px; }
-#dashboard .inactive {
+.dashboard .inactive {
   margin-top: 3em; }
-  #dashboard .inactive h3 {
+  .dashboard .inactive h3 {
     color: #888;
     font-size: .9em;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: .2em;
     margin-top: 0; }
-  #dashboard .inactive .story {
+  .dashboard .inactive .story {
     border-bottom: none;
     font-size: .7em; }
+
+/* Story detail */
+/* -------------------------------------------------- */
+.story-detail .scenes {
+  margin-top: 1em; }
+  .story-detail .scenes .scene > a {
+    -webkit-display: flex;
+    color: #111;
+    display: flex;
+    padding: .5em 0;
+    text-decoration: none; }
+  .story-detail .scenes .scene .num {
+    color: #b68f76;
+    font-size: 1.1em;
+    width: 2em; }
+  .story-detail .scenes .scene .info {
+    flex: 1; }
+    .story-detail .scenes .scene .info h3 {
+      font-weight: 400;
+      margin: 0; }
+    .story-detail .scenes .scene .info .meta {
+      color: #888;
+      font-size: .9em;
+      font-style: italic;
+      margin-top: 3px; }
+
+/* Scene detail */
+/* -------------------------------------------------- */
+.scene-detail .summary {
+  border-bottom: solid 1px #ddd;
+  color: #444;
+  font-style: italic;
+  line-height: 1.4em;
+  padding: 1em 0 1.5em; }
+  .scene-detail .summary .num {
+    color: #b68f76;
+    font-style: normal;
+    margin-bottom: 5px; }
+  .scene-detail .summary .title {
+    color: #111;
+    font-size: 1.2em;
+    font-style: normal;
+    line-height: 1.3em;
+    margin-bottom: 1em; }
+  .scene-detail .summary .edit {
+    background: #0099cc;
+    border-radius: 1em;
+    color: #fff;
+    float: right;
+    font-style: normal;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    padding: 3px 15px 5px;
+    text-decoration: none; }
+    .scene-detail .summary .edit:hover {
+      background: #444; }
+.scene-detail .text {
+  font-size: 1.2em;
+  line-height: 1.45em;
+  padding: 1.4em 0; }
+  .scene-detail .text p {
+    margin: 0; }
+  .scene-detail .text p + p {
+    text-indent: 1.25em; }
 
 /*# sourceMappingURL=style.css.map */

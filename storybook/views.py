@@ -21,28 +21,36 @@ def home(request):
 
 @login_required
 def story(request, story_slug, scene_id=None, revision_id=None):
-    story_obj = Story.objects.get(slug=story_slug)
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
 
-    scenes = story_obj.scenes.filter(status='active').order_by('order')
+    # Get story
+    s = Story.objects.get(slug=story_slug)
 
-    if scene_id is not None:
-        selected_scene = story_obj.scenes.filter(id=scene_id).first()
-    else:
-        selected_scene = scenes.first()
+    scenes = s.scenes.exclude(status='discarded').order_by('order')
 
-    revision = None
-    if selected_scene is not None:
-        # Get the appropriate revision
-        if revision_id is not None:
-            revision = selected_scene.revisions.filter(id=revision_id).first()
-        else:
-            revision = selected_scene.latest_revision()
-
-    return render_to_response('story.html', {'pagetitle': story_obj.title,
-                                             'story': story_obj,
+    return render_to_response('story.html', {'title': s.title,
+                                             'story': s,
                                              'scenes': scenes,
-                                             'selected_scene': selected_scene,
-                                             'revision': revision,
+                                             'stories': stories,
+                                             'request': request,
+                                            })
+
+@login_required
+def scene(request, story_slug, scene_id=None, revision_id=None):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story
+    s = Story.objects.get(slug=story_slug)
+
+    # Get scene
+    scene = Scene.objects.get(id=scene_id, story__slug=story_slug)
+
+    return render_to_response('scene.html', {'title': 'Scene {} — {}'.format(scene.order, s.title),
+                                             'scene': scene,
+                                             'story': s,
+                                             'stories': stories,
                                              'request': request,
                                             })
 

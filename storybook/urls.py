@@ -9,9 +9,12 @@ urlpatterns = [
     url(r'^login/', auth_views.login, { 'template_name': 'login.html' }, name='login'),
     url(r'^logout/', auth_views.logout, { 'template_name': 'logout.html', 'next_page': '/login/' }, name='logout'),
 
+    # Scenes/revisions
+    url(r'^story/(.+?)/(.+?)/revision/(.+?)/$', sb_views.scene, name='scene'),
+    url(r'^story/(.+?)/(.+?)/$', sb_views.scene, name='scene'),
+
+    # Story
     url(r'^story/(.+?)/full/$', sb_views.full_draft, name='full_draft'),
-    url(r'^story/(.+?)/(.+?)/revision/(.+?)/$', sb_views.story, name='story'),
-    url(r'^story/(.+?)/(.+?)/$', sb_views.story, name='story'),
     url(r'^story/(.+?)/$', sb_views.story, name='story'),
 
     # Web services

@@ -1,53 +1,29 @@
 {% extends '_base.html' %}
 
-{% block main %}
-<section id="left-panel" class="panel">
-	<div id="outline-panel">
-		<h1>Outline</h1>
+{% block pageheader %}
+<h1 class="container">{{ story.title }}</h1>
+{% endblock pageheader %}
 
-		<div class="group">
-			<a class="add-scene">Add Scene</a>
-		</div>
+{% block content %}
+<section class="story-detail">
+	{% if story.description %}
+	<div class="summary">
+		{{ story.description }}
+	</div>
+	{% endif %}
 
-		<div id="scene-list">
-			{% for scene in scenes %}
-			<a href="{% url 'story' story.slug scene.id %}" class="scene {% if scene == selected_scene %}selected{% endif %}" data-id="{{ scene.id }}">
-				<h2>Scene <span class="num">{{ scene.order }}</span></h2>
-				<h3>{{ scene.title }}</h3>
-				<div class="wordcount"><span>{{ scene.word_count }}</span> word{% if scene.word_count != 1 %}s{% endif %}</div>
+	<div class="scenes">
+		{% for scene in scenes %}
+		<div class="scene" data-id="{{ scene.id }}">
+			<a href="{% url 'scene' story.slug scene.id %}" class="container">
+				<span class="num">{{ scene.order }}</span>
+				<div class="info">
+					<h3>{{ scene.title }}</h3>
+					<div class="meta"><span>{{ scene.word_count }}</span> word{% if scene.word_count != 1 %}s{% endif %} &mdash; {{ scene.status }}</div>
+				</div>
 			</a>
-			{% endfor %} 
 		</div>
+		{% endfor %} 
 	</div>
 </section>
-
-<section id="middle-panel" class="panel">
-	<textarea name="scene-title">{{ selected_scene.title }}</textarea>
-	<textarea id="text">{% if revision %}{{ revision.text }}{% endif %}</textarea>
-</section>
-
-<section id="right-panel" class="panel">
-	<div id="scene-panel">
-		<h1>Synopsis <a class="delete-scene">Delete Scene</a></h1>
-
-		<div class="group">
-			<textarea name="scene-synopsis">{{ selected_scene.synopsis }}</textarea>
-		</div>
-	</div>
-	<div id="history-panel">
-		<h1>Scene History</h1>
-
-		<div class="list">
-			{% if selected_scene and selected_scene.revisions.all|length > 0 %}
-			<a href="{% url 'story' story.slug selected_scene.id %}">Latest revision</a>
-			{% for rev in selected_scene.revisions.all %}
-			<a href="{% url 'story' story.slug selected_scene.id rev.id %}">{{ rev.created }}</a>
-			{% endfor %}
-			{% else %}
-			<span>No revisions yet</span>
-			{% endif %}
-		</div>
-	</div>
-</section>
-
-{% endblock main %}
+{% endblock content %}

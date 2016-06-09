@@ -2,8 +2,20 @@
 {% load humanize %}
 
 {% block content %}
-	<div id="dashboard">
-		{% for story in stories %}
+<section class="dashboard">
+	{% for story in stories %}
+	<div class="story">
+		<a href="{% url 'story' story.slug %}" class="container">
+			<h2>{{ story.title }}</h2>
+			<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes|length }} scenes</div>
+		</a>
+	</div>
+	{% endfor %}
+
+	<section class="inactive">
+		<h3 class="container">Inactive Stories</h3>
+
+		{% for story in inactive_stories %}
 		<div class="story">
 			<a href="{% url 'story' story.slug %}" class="container">
 				<h2>{{ story.title }}</h2>
@@ -11,18 +23,6 @@
 			</a>
 		</div>
 		{% endfor %}
-
-		<section class="inactive">
-			<h3 class="container">Inactive Stories</h3>
-
-			{% for story in inactive_stories %}
-			<div class="story">
-				<a href="{% url 'story' story.slug %}" class="container">
-					<h2>{{ story.title }}</h2>
-					<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes|length }} scenes</div>
-				</a>
-			</div>
-			{% endfor %}
-		</section>
-	</div>
+	</section>
+</section>
 {% endblock content %}

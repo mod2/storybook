@@ -15,20 +15,31 @@
 	<script src="{% static 'js/lib/jquery-2.1.1.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/jquery.autosize.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/jquery-ui.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/lib/mousetrap.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/lib/mousetrap-global-bind.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/storybook.js' %}" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 	<div class="wrapper">
 		{% block menu %}
 		<nav role="menu">
+			{% if scene %}
+				<div class="group scene">
+				{# On a scene page, show revisions list #}
+				<a href="{% url 'scene' story.slug scene.id %}">Latest revision</a>
+				{% for rev in scene.revisions.all %}
+				<a class="revision" href="{% url 'scene' story.slug scene.id rev.id %}">{{ rev.created|date:"P Y-m-d" }}</a>
+				{% endfor %}
+				</div>
+			{% endif %}
+
 			{% if story %}
 				{# We're on a story, so show story-specific stuff first #}
-				<div class="group">
-					<a class="story-title" href="{% url 'story' story.slug %}">{{ story.title }}</a>
-					<a href="">Notebook</a>
+				<div class="group story">
+					<a href="">Characters</a>
 					<a href="{% url 'full_draft' story.slug %}">Full Draft</a>
 					<a href="">Inbox</a>
-					<a href="">Characters</a>
+					<a href="">Notebook</a>
 				</div>
 			{% endif %}
 

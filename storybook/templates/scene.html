@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block pageheader %}
+<h1 class="container"><a href="{% url 'story' story.slug %}">{{ story.title }}</a></h1>
+{% endblock pageheader %}
+
+{% block content %}
+<section class="scene-detail">
+	<div class="summary">
+		<div class="container">
+			<a class="edit" href="">Edit</a>
+
+			<div class="num">Scene {{ scene.order }}</div>
+			<div class="title">{{ scene.title }}</div>
+
+			{% if scene.synopsis %}
+			<div class="synopsis">{{ scene.synopsis|safe }}</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="text">
+		<div class="container">
+			{{ scene.html|safe }}
+		</div>
+	</div>
+</section>
+{% endblock content %}
