@@ -8,7 +8,7 @@
 <section class="scene-detail">
 	<div class="summary">
 		<div class="container">
-			<a class="edit" href="">Edit</a>
+			<a class="edit button" href="{% url 'scene_edit' story.slug scene.id %}">Edit</a>
 
 			<div class="num">Scene {{ scene.order }}</div>
 			<div class="title">{{ scene.title }}</div>

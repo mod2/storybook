@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block htmlclass %} class='edit'{% endblock htmlclass %}
+
+{% block page %}
+<section class="scene-edit">
+	<div class="text">
+		<textarea>{{ scene.text }}</textarea>
+	</div>
+
+	<footer>
+		<div class="controls">
+			<a class="cancel" href="{% url 'scene' story.slug scene.id %}">Cancel</a>
+			<a class="button save" href="">Save</a>
+		</div>
+	</footer>
+</section>
+{% endblock page %}

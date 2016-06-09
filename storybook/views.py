@@ -20,7 +20,7 @@ def home(request):
                                             'request': request })
 
 @login_required
-def story(request, story_slug, scene_id=None, revision_id=None):
+def story(request, story_slug):
     # Boilerplate
     stories = Story.objects.filter(status='active')
 
@@ -37,7 +37,7 @@ def story(request, story_slug, scene_id=None, revision_id=None):
                                             })
 
 @login_required
-def scene(request, story_slug, scene_id=None, revision_id=None):
+def scene(request, story_slug, scene_id, revision_id=None):
     # Boilerplate
     stories = Story.objects.filter(status='active')
 
@@ -48,6 +48,24 @@ def scene(request, story_slug, scene_id=None, revision_id=None):
     scene = Scene.objects.get(id=scene_id, story__slug=story_slug)
 
     return render_to_response('scene.html', {'title': 'Scene {} — {}'.format(scene.order, s.title),
+                                             'scene': scene,
+                                             'story': s,
+                                             'stories': stories,
+                                             'request': request,
+                                            })
+
+@login_required
+def scene_edit(request, story_slug, scene_id):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story
+    s = Story.objects.get(slug=story_slug)
+
+    # Get scene
+    scene = Scene.objects.get(id=scene_id, story__slug=story_slug)
+
+    return render_to_response('editscene.html', {'title': 'Edit Scene {} — {}'.format(scene.order, s.title),
                                              'scene': scene,
                                              'story': s,
                                              'stories': stories,

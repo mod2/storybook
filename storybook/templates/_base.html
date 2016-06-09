@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html {% block htmlclass %}{% endblock htmlclass %}>
 <head>
 	<title>{% if title %}{{ title }} — {% endif %}Storybook</title>
 
@@ -60,35 +60,30 @@
 		<section id="page">
 			<div class="mask"></div>
 
-			{% block header %}
-			<header role="banner">
-				<div class="container">
-					<section class="left">
-						<h1><a class="menu" href="">Storybook</a></h1>
-					</section>
-					<section class="right">
-						<a class="add" href="">+</a></h1>
-					</section>
-				</div>
-				{% block pageheader %}{% endblock pageheader %}
-			</header>
-			{% endblock header %}
+			{% block page %}
+				{% block header %}
+				<header role="banner">
+					<div class="container">
+						<section class="left">
+							<h1><a class="menu" href="">Storybook</a></h1>
+						</section>
+						<section class="right">
+							<a class="add" href="">+</a></h1>
+						</section>
+					</div>
+					{% block pageheader %}{% endblock pageheader %}
+				</header>
+				{% endblock header %}
 
-			<section id="error">
-				<div class="container"></div>
-			</section>
+				<section id="error">
+					<div class="container"></div>
+				</section>
 
-			<main id="content">
-				{% block content %}{% endblock content %}
-			</main>
-
+				<main id="content">
+					{% block content %}{% endblock content %}
+				</main>
+			{% endblock page %}
 		</section>
-	</div>
-
-	<!-- Modal -->
-	<div class="modal-background"></div>
-	<div class="modal">
-		{% block modal %}{% endblock modal %}
 	</div>
 </body>
 </html>

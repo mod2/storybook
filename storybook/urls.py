@@ -11,6 +11,7 @@ urlpatterns = [
 
     # Scenes/revisions
     url(r'^story/(.+?)/(.+?)/revision/(.+?)/$', sb_views.scene, name='scene'),
+    url(r'^story/(.+?)/(.+?)/edit/$', sb_views.scene_edit, name='scene_edit'),
     url(r'^story/(.+?)/(.+?)/$', sb_views.scene, name='scene'),
 
     # Story
