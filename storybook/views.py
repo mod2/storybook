@@ -13,8 +13,10 @@ from .models import Story, Scene, Revision
 @login_required
 def home(request):
     stories = Story.objects.filter(status='active')
+    inactive_stories = Story.objects.filter(status='inactive')
 
     return render_to_response('home.html', {'stories': stories,
+                                            'inactive_stories': inactive_stories,
                                             'request': request })
 
 @login_required
@@ -149,7 +151,6 @@ def ws_add_scene(request, story_slug):
         scene.save()
 
         return JsonResponse(json.dumps({ "status": "success", "id": scene.id }), safe=False)
-
 
 def ws_add_story(request):
     """ Add a new story. """

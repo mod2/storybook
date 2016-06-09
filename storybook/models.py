@@ -10,12 +10,14 @@ import mistune
 class Story(models.Model):
     STATUSES = (
         ('active', 'Active'),
-        ('finished', 'Finished'),
         ('inactive', 'Inactive'),
+        ('abandoned', 'Abandoned'),
+        ('finished', 'Finished'),
     )
 
     title = models.TextField()
     slug = AutoSlugField(populate_from='title')
+    description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUSES,
                               default=STATUSES[0][0])
     created = models.DateTimeField(default=timezone.now())
