@@ -1,3 +1,4 @@
 Django>=1.9
 django-autoslug>=1.7.2
 mistune>=0.5
+smartypants

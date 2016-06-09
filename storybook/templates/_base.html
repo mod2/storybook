@@ -36,8 +36,9 @@
 			{% if story %}
 				{# We're on a story, so show story-specific stuff first #}
 				<div class="group story">
+					<a href="{% url 'story' story.slug %}">Story Home</a>
 					<a href="">Characters</a>
-					<a href="{% url 'full_draft' story.slug %}">Full Draft</a>
+					<a href="{% url 'story_full' story.slug %}">Full Draft</a>
 					<a href="">Inbox</a>
 					<a href="">Notebook</a>
 				</div>

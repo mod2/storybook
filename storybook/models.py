@@ -5,6 +5,7 @@ from django.utils import timezone
 from autoslug import AutoSlugField
 
 import mistune
+import smartypants
 
 
 class Story(models.Model):
@@ -28,7 +29,7 @@ class Story(models.Model):
         return self.title
 
     def active_scenes(self):
-        return self.scenes.filter(status='active')
+        return self.scenes.exclude(status='discarded')
 
     def word_count(self):
         word_count = 0
@@ -37,6 +38,9 @@ class Story(models.Model):
             word_count += scene.word_count()
 
         return word_count
+
+    def description_rendered(self):
+        return smartypants.smartypants(self.description)
 
     class Meta:
         verbose_name_plural = "stories"
@@ -71,7 +75,7 @@ class Scene(models.Model):
 
 
     def latest_revision(self):
-        if len(self.revisions.all()) > 0:
+        if self.revisions.all().count() > 0:
             return self.revisions.order_by('-created').first()
         else:
             return None
@@ -84,6 +88,12 @@ class Scene(models.Model):
         else:
             return 0
 
+    def title_rendered(self):
+        return smartypants.smartypants(self.title)
+
+    def synopsis_rendered(self):
+        return smartypants.smartypants(self.synopsis)
+
     def text(self):
         latest_revision = self.latest_revision()
 
@@ -93,7 +103,7 @@ class Scene(models.Model):
             return ''
 
     def html(self):
-        return mistune.markdown(self.text())
+        return mistune.markdown(smartypants.smartypants(self.text()))
 
 
 class Revision(models.Model):

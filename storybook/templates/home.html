@@ -7,7 +7,7 @@
 	<div class="story">
 		<a href="{% url 'story' story.slug %}" class="container">
 			<h2>{{ story.title }}</h2>
-			<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes|length }} scenes</div>
+			<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes.count }} scenes</div>
 		</a>
 	</div>
 	{% endfor %}
@@ -19,7 +19,7 @@
 		<div class="story">
 			<a href="{% url 'story' story.slug %}" class="container">
 				<h2>{{ story.title }}</h2>
-				<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes|length }} scenes</div>
+				<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes.count }} scenes</div>
 			</a>
 		</div>
 		{% endfor %}

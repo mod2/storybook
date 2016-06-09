@@ -9,14 +9,14 @@ urlpatterns = [
     url(r'^login/', auth_views.login, { 'template_name': 'login.html' }, name='login'),
     url(r'^logout/', auth_views.logout, { 'template_name': 'logout.html', 'next_page': '/login/' }, name='logout'),
 
-    # Scenes/revisions
-    url(r'^story/(.+?)/(.+?)/revision/(.+?)/$', sb_views.scene, name='scene'),
-    url(r'^story/(.+?)/(.+?)/edit/$', sb_views.scene_edit, name='scene_edit'),
-    url(r'^story/(.+?)/(.+?)/$', sb_views.scene, name='scene'),
-
     # Story
-    url(r'^story/(.+?)/full/$', sb_views.full_draft, name='full_draft'),
-    url(r'^story/(.+?)/$', sb_views.story, name='story'),
+    url(r'^story/(?P<story_slug>[^\/]+)/full/$', sb_views.story_full, name='story_full'),
+    url(r'^story/(?P<story_slug>[^\/]+)/$', sb_views.story, name='story'),
+
+    # Scenes/revisions
+    url(r'^story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/revision/(?P<revision_id>[^\/]+)/$', sb_views.scene, name='scene'),
+    url(r'^story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/edit/$', sb_views.scene_edit, name='scene_edit'),
+    url(r'^story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/$', sb_views.scene, name='scene'),
 
     # Web services
     url(r'^api/story/$', sb_views.ws_add_story, name='ws_add_story'),

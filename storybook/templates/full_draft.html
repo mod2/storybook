@@ -1,28 +1,21 @@
 {% extends '_base.html' %}
 
-{% block main %}
-<section id="left-panel" class="panel">
-</section>
+{% block pageheader %}
+<h1 class="container"><a href="{% url 'story' story.slug %}">{{ story.title }}</a> &nbsp;(full)</h1>
+{% endblock pageheader %}
 
-<section id="middle-panel" class="panel">
-	<div id="full-draft">
-		<h1>{{ story.title }}</h1>
-
-		{% for scene in scenes %}
-		<div class="scene">
-			{% if scene.html != '' %}
-			{{ scene.html|safe }}
-			{% else %}
-			<h2>&hellip; Scene {{ scene.order }}: {{ scene.title }} &hellip;{% if scene.synopsis %}<div class="synopsis">{{ scene.synopsis }}</div>{% endif %}</h2>
-			{% endif %}
-		</div>
-		{% endfor %}
-
-		<h5>The End.</h5>
+{% block content %}
+<section class="full-draft">
+	{% for scene in scenes %}
+	<div class="scene container">
+		{% if scene.html != '' %}
+		{{ scene.html|safe }}
+		{% else %}
+		<div class="placeholder">&hellip; Scene {{ scene.order }}: {{ scene.title }} &hellip;{% if scene.synopsis %}<div class="synopsis">{{ scene.synopsis }}</div>{% endif %}</div>
+		{% endif %}
 	</div>
-</section>
+	{% endfor %} 
 
-<section id="right-panel" class="panel">
+	<h5 class="end container">The End.</h5>
 </section>
-
-{% endblock main %}
+{% endblock content %}

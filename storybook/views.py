@@ -73,15 +73,20 @@ def scene_edit(request, story_slug, scene_id):
                                             })
 
 @login_required
-def full_draft(request, story_slug):
-    story_obj = Story.objects.get(slug=story_slug)
-    scenes = story_obj.scenes.filter(status='active').order_by('order')
+def story_full(request, story_slug):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story and scenes
+    s = Story.objects.get(slug=story_slug)
+    scenes = s.active_scenes().order_by('order')
 
     return render_to_response('full_draft.html', {
-                                             'story': story_obj,
-                                             'scenes': scenes,
-                                             'request': request,
-                                            })
+                              'story': s,
+                              'scenes': scenes,
+                              'stories': stories,
+                              'request': request,
+                             })
 
 def ws_reorder_scenes(request, story_slug):
     """ Reorder scenes in a story (called by AJAX) """

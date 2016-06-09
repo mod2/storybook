@@ -21,7 +21,7 @@ body {
 
 .container {
 	margin: 0px auto;
-	max-width: 600px;
+	max-width: 625px;
 	width: 85%;
 }
 
@@ -60,7 +60,6 @@ nav[role=menu] {
 	float: left;
 	left: 0;
 	overflow-y: auto;
-	overflow: hidden;
 	padding: 1.5em 2em;
 	position: fixed;
 	top: 0;
@@ -201,7 +200,7 @@ header[role=banner] {
 			padding: 0;
 
 			&:hover {
-				color: $green;
+				color: $darkgreen;
 			}
 		}
 	}
@@ -261,16 +260,28 @@ header[role=banner] {
 /* -------------------------------------------------- */
 
 .story-detail {
+	.summary {
+		border-bottom: solid 1px #ddd;
+		color: #444;
+		font-style: italic;
+		line-height: 1.4em;
+		padding: 1em 0 1.5em;
+	}
+
 	.scenes {
-		margin-top: 1em;
+		margin-top: .5em;
 
 		.scene {
 			& > a {
 				-webkit-display: flex;
 				color: #111;
 				display: flex;
-				padding: .5em 0;
+				padding: 1em 0;
 				text-decoration: none;
+
+				&:hover {
+					color: $darkgreen;
+				}
 			}
 
 			.num {
@@ -293,6 +304,10 @@ header[role=banner] {
 					font-style: italic;
 					margin-top: 3px;
 				}
+			}
+
+			& + .scene > a {
+				border-top: solid 1px #ddd;
 			}
 		}
 	}
@@ -380,7 +395,7 @@ header[role=banner] {
 			border: none;
 			flex: 1;
 			font-size: 1.2em;
-			line-height: 1.4em;
+			line-height: 1.45em;
 			padding: 1em 25px 4em;
 			resize: none;
 			
@@ -419,14 +434,30 @@ header[role=banner] {
 @media screen and (min-width: 600px) {
 	.scene-edit {
 		.text textarea {
+			font-size: 1.3em;
+			line-height: 1.45em;
 			margin: 0px auto;
 			max-width: 600px;
-			padding: 50px 0px 100px;
+			padding: 50px 50px 100px;
 		}
 
 		footer .controls {
 			margin: 0px auto;
 			max-width: 600px;
+			padding-left: 50px;
+			padding-right: 50px;
+		}
+	}
+}
+
+@media screen and (min-width: 650px) {
+	.scene-edit {
+		.text textarea {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		footer .controls {
 			padding-left: 0;
 			padding-right: 0;
 		}
@@ -437,7 +468,7 @@ header[role=banner] {
 	.scene-edit {
 		.text textarea {
 			font-size: 1.4em;
-			line-height: 1.4em;
+			line-height: 1.45em;
 		}
 	}
 }
@@ -456,5 +487,53 @@ html.edit {
 
 	#page {
 		height: 100%;
+	}
+}
+
+
+/* Full draft */
+/* -------------------------------------------------- */
+
+.full-draft {
+	font-size: 1.2em;
+	line-height: 1.45em;
+	padding: 1.4em 0;
+	
+	p {
+		margin: 0;
+	}
+
+	p + p {
+		text-indent: 1.25em;
+	}
+
+	.scene + .scene {
+		margin-top: 3em;
+	}
+
+	.placeholder {
+		color: #666;
+		font-style: italic;
+
+		.synopsis {
+			font-size: .9em;
+			line-height: 1.4em;
+		}
+	}
+
+	h5.end {
+		font-size: 1em;
+		font-style: italic;
+		font-weight: normal;
+		margin-bottom: 0;
+		margin-top: 5em;
+		text-align: right;
+	}
+}
+
+@media screen and (min-width: 650px) {
+	.full-draft {
+		font-size: 1.3em;
+		line-height: 1.45em;
 	}
 }
