@@ -1,35 +1,28 @@
 {% extends '_base.html' %}
+{% load humanize %}
 
-{% block main %}
-<section id="left-panel" class="panel">
-</section>
-
-<section id="middle-panel" class="panel">
-	<div id="search">
-		<input type="text" />
-		<input type="submit" value="Search" />
-	</div>
-
+{% block content %}
 	<div id="dashboard">
-		<h1>Stories</h1>
-
 		{% for story in stories %}
 		<div class="story">
-			<a href="{% url 'story' story.slug %}">
+			<a href="{% url 'story' story.slug %}" class="container">
 				<h2>{{ story.title }}</h2>
-				<div class="info">{{ story.active_scenes|length }} scenes, {{ story.word_count }} words</div>
+				<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes|length }} scenes</div>
 			</a>
 		</div>
 		{% endfor %}
-		<div id='add-story'>
-			<label>Add Story:</label>
-			<input type='text' name='title', id='new-story-title' />
-			<input type='submit' id='add-story-submit' value='Add'/>
-		</div>
+
+		<section class="inactive">
+			<h3 class="container">Inactive Stories</h3>
+
+			{% for story in inactive_stories %}
+			<div class="story">
+				<a href="{% url 'story' story.slug %}" class="container">
+					<h2>{{ story.title }}</h2>
+					<div class="info">{{ story.word_count|intcomma }} words &mdash; {{ story.active_scenes|length }} scenes</div>
+				</a>
+			</div>
+			{% endfor %}
+		</section>
 	</div>
-</section>
-
-<section id="right-panel" class="panel">
-</section>
-
-{% endblock main %}
+{% endblock content %}

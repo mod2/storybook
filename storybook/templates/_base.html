@@ -5,39 +5,74 @@
 	<title>{% if title %}{{ title }} — {% endif %}Storybook</title>
 
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,600italic' rel='stylesheet' type='text/css'>
-	<link href="{% static 'style.css' %}" type="text/css" rel="stylesheet">
+	<link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
 
 	<link rel="shortcut icon" href="{% static 'favicon.ico' %}?v=1">
 	<link rel="shortcut icon" href="{% static 'favicon.png' %}?v=1">
 
-	<script src="{% static 'jquery-2.1.1.min.js' %}" type="text/javascript" charset="utf-8"></script>
-	<script src="{% static 'jquery.autosize.min.js' %}" type="text/javascript" charset="utf-8"></script>
-	<script src="{% static 'jquery-ui.min.js' %}" type="text/javascript" charset="utf-8"></script>
-	<script src="{% static 'storybook.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/lib/jquery-2.1.1.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/lib/jquery.autosize.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/lib/jquery-ui.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/storybook.js' %}" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-	<header>
-		<h1><a href="{% url 'home' %}">Storybook</a></h1>
-		<div class="left">
+	<div class="wrapper">
+		{% block menu %}
+		<nav role="menu">
 			{% if story %}
-			<a class="story-title" href="{% url 'story' story.slug %}">{{ story.title }}</a>
-			<a href="">Notebook</a>
-			<a href="{% url 'full_draft' story.slug %}">Full Draft</a>
+				{# We're on a story, so show story-specific stuff first #}
+				<div class="group">
+					<a class="story-title" href="{% url 'story' story.slug %}">{{ story.title }}</a>
+					<a href="">Notebook</a>
+					<a href="{% url 'full_draft' story.slug %}">Full Draft</a>
+					<a href="">Inbox</a>
+					<a href="">Characters</a>
+				</div>
 			{% endif %}
-		</div>
-		<div class="right">
-			{% if request.user %}
-			<a href="">Account</a>
-			<a href="{% url 'logout' %}">Logout</a>
-			{% endif %}
-		</div>
-	</header>
 
-	<section id="main" {% if story %}data-story-slug="{{ story.slug }}"{% endif %}>
-		{% block main %}{% endblock main %}
-	</section>
+			<div class="group stories">
+				{% for story in stories %}
+				<a href="{% url 'story' story.slug %}">{{ story.title }}</a></li>
+				{% endfor %}
+			</div>
+
+			<div class="group">
+				<a href="{% url 'home' %}">Home</a></li>
+				<a href="">Organize</a></li>
+				<a href="{% url 'logout' %}">Logout</a>
+			</div>
+		</nav>
+		{% endblock menu %}
+
+		<section id="page">
+			<div class="mask"></div>
+
+			{% block header %}
+			<header role="banner">
+				<div class="container">
+					<section class="left">
+						<h1><a class="menu" href="">Storybook</a></h1>
+					</section>
+					<section class="right">
+						<a class="add" href="">+</a></h1>
+					</section>
+				</div>
+				{% block pageheader %}{% endblock pageheader %}
+			</header>
+			{% endblock header %}
+
+			<section id="error">
+				<div class="container"></div>
+			</section>
+
+			<main id="content">
+				{% block content %}{% endblock content %}
+			</main>
+
+		</section>
+	</div>
 
 	<!-- Modal -->
 	<div class="modal-background"></div>

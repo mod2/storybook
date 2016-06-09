@@ -15,7 +15,7 @@ class Story(models.Model):
         ('finished', 'Finished'),
     )
 
-    title = models.TextField()
+    title = models.CharField(max_length=300)
     slug = AutoSlugField(populate_from='title')
     description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUSES,
