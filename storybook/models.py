@@ -18,8 +18,8 @@ class Story(models.Model):
     slug = AutoSlugField(populate_from='title')
     status = models.CharField(max_length=10, choices=STATUSES,
                               default=STATUSES[0][0])
-    created = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True, default=timezone.now())
+    created = models.DateTimeField(default=timezone.now())
+    last_modified = models.DateTimeField(default=timezone.now())
     order = models.PositiveSmallIntegerField(default=50)
 
     def __unicode__(self):
@@ -40,7 +40,6 @@ class Story(models.Model):
         verbose_name_plural = "stories"
 
 
-
 class Scene(models.Model):
     STATUSES = (
         ('active', 'Active'),
@@ -53,8 +52,8 @@ class Scene(models.Model):
     synopsis = models.TextField(null=True, blank=True)
     order = models.PositiveSmallIntegerField(default=1)
 
-    created = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True, default=timezone.now())
+    created = models.DateTimeField(default=timezone.now())
+    last_modified = models.DateTimeField(default=timezone.now())
 
     story = models.ForeignKey(Story, related_name='scenes')
 
@@ -93,6 +92,7 @@ class Scene(models.Model):
 
     def html(self):
         return mistune.markdown(self.text())
+
 
 class Revision(models.Model):
     text = models.TextField(null=True, blank=True)

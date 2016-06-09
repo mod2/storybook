@@ -39,6 +39,23 @@ ROOT_URLCONF = 'storybook.urls'
 
 WSGI_APPLICATION = 'storybook.wsgi.application'
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'debug': False,
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
