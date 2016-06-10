@@ -119,6 +119,8 @@ $(document).ready(function() {
 	// Focus on page load
 	if ($(".scene-edit").length) {
 		$(".scene-edit .text textarea").focus();
+
+		moveCaretToEnd($(".scene-edit .text textarea")[0]);
 	}
 
 	function _cancelSceneEdit() {
@@ -165,7 +167,38 @@ $(document).ready(function() {
 	// Scene detail
 	// --------------------------------------------------
 
-	Mousetrap.bind('e', function() {
-		window.location.href = $(".scene-detail .edit.button").attr("href");
-	});
+	if ($(".story-detail").length) {
+		Mousetrap.bind('e', function() {
+			window.location.href = $(".story-detail").data("edit-uri");
+		});
+
+		Mousetrap.bind('g h', function() {
+			window.location.href = $(".story-detail").data("parent-uri");
+		});
+	}
+
+
+	// Scene detail
+	// --------------------------------------------------
+
+	if ($(".scene-detail").length) {
+		Mousetrap.bind('e', function() {
+			window.location.href = $(".scene-detail").data("edit-uri");
+		});
+
+		Mousetrap.bind('g h', function() {
+			window.location.href = $(".scene-detail").data("parent-uri");
+		});
+	}
 });
+
+function moveCaretToEnd(el) {
+	if (typeof el.selectionStart == "number") {
+		el.selectionStart = el.selectionEnd = el.value.length;
+	} else if (typeof el.createTextRange != "undefined") {
+		el.focus();
+		var range = el.createTextRange();
+		range.collapse(false);
+		range.select();
+	}
+}

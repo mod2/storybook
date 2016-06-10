@@ -5,7 +5,7 @@
 {% endblock pageheader %}
 
 {% block content %}
-<section class="scene-detail">
+<section class="scene-detail" data-edit-uri="{% url 'scene_edit' story.slug scene.id %}" data-parent-uri="{% url 'story' story.slug %}">
 	<div class="summary">
 		<div class="container">
 			<a class="edit button" href="{% url 'scene_edit' story.slug scene.id %}">Edit</a>
