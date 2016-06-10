@@ -161,13 +161,41 @@ class Revision(models.Model):
         ordering = ['-created']
 
 
-class HistoryEntry(models.Model):
-    story = models.ForeignKey(Story, related_name='history_entries')
+class Draft(models.Model):
+    story = models.ForeignKey(Story, related_name='drafts')
     json = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=timezone.now())
 
     def __unicode__(self):
-        return "History entry on {} of length {}".format(self.created, len(self.json))
+        return "Draft on {}".format(self.created, len(self.json))
+
+
+class Fragment(models.Model):
+    text = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(default=timezone.now())
+    story = models.ForeignKey(Story, related_name='fragments')
+
+    def __unicode__(self):
+        return "{}".format(self.created)
+
+    def __str__(self):
+        return self.__unicode__()
 
     class Meta:
-        verbose_name_plural = "history entries"
+        ordering = ['created']
+
+
+class Character(models.Model):
+    name = models.CharField(max_length=300)
+    color = models.CharField(max_length=50)
+    story = models.ForeignKey(Story, related_name='characters')
+    scenes = models.ManyToManyField(Scene, related_name='characters')
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.__unicode__()
+
+    class Meta:
+        ordering = ['name']

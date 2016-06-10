@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Story, Scene, Revision, HistoryEntry
+from .models import Story, Scene, Revision, Draft, Fragment, Character
 
 
 @admin.register(Story)
@@ -20,7 +20,17 @@ class RevisionAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(HistoryEntry)
-class HistoryEntryAdmin(admin.ModelAdmin):
+@admin.register(Draft)
+class DraftAdmin(admin.ModelAdmin):
     list_display = ('story', 'created')
+    pass
+
+@admin.register(Fragment)
+class FragmentAdmin(admin.ModelAdmin):
+    list_display = ('story', 'created')
+    pass
+
+@admin.register(Character)
+class CharacterAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color', 'story')
     pass
