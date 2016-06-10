@@ -5,7 +5,7 @@
 {% endblock pageheader %}
 
 {% block content %}
-<section class="scene-detail" data-edit-uri="{% url 'scene_edit' story.slug scene.id %}" data-parent-uri="{% url 'story' story.slug %}" {% if nav.next %}data-next-uri="{% url 'scene' story.slug nav.next.id %}"{% endif %} {% if nav.prev %}data-prev-uri="{% url 'scene' story.slug nav.prev.id %}"{% endif %}>
+<section class="scene-detail" data-edit-uri="{% url 'scene_edit' story.slug scene.id %}" {% if nav.next %}data-next-uri="{% url 'scene' story.slug nav.next.id %}"{% endif %} {% if nav.prev %}data-prev-uri="{% url 'scene' story.slug nav.prev.id %}"{% endif %}>
 	<div class="summary">
 		<div class="container">
 			<a class="edit button" href="{% url 'scene_edit' story.slug scene.id %}">Edit</a>

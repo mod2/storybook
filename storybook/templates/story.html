@@ -5,7 +5,7 @@
 {% endblock pageheader %}
 
 {% block content %}
-<section class="story-detail" data-edit-uri="{% url 'story_organize' story.slug %}" data-parent-uri="{% url 'home' %}">
+<section class="story-detail" data-edit-uri="{% url 'story_organize' story.slug %}">
 	{% if story.description %}
 	<div class="summary">
 		<div class="container">

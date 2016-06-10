@@ -173,7 +173,11 @@ $(document).ready(function() {
 		});
 
 		Mousetrap.bind('g h', function() {
-			window.location.href = $(".story-detail").data("parent-uri");
+			window.location.href = $("nav[role=menu] .home").attr("href");
+		});
+
+		Mousetrap.bind('g f', function() {
+			window.location.href = $("nav[role=menu] .full-story").attr("href");
 		});
 	}
 
@@ -186,8 +190,12 @@ $(document).ready(function() {
 			window.location.href = $(".scene-detail").data("edit-uri");
 		});
 
+		Mousetrap.bind('g f', function() {
+			window.location.href = $("nav[role=menu] .full-story").attr("href");
+		});
+
 		Mousetrap.bind('g h', function() {
-			window.location.href = $(".scene-detail").data("parent-uri");
+			window.location.href = $("nav[role=menu] .story-home").attr("href");
 		});
 
 		Mousetrap.bind('g n', function() {
@@ -202,6 +210,16 @@ $(document).ready(function() {
 			if (uri) {
 				window.location.href = uri;
 			}
+		});
+	}
+
+
+	// Full draft
+	// --------------------------------------------------
+
+	if ($(".full-draft").length) {
+		Mousetrap.bind('g h', function() {
+			window.location.href = $("nav[role=menu] .story-home").attr("href");
 		});
 	}
 });
