@@ -109,7 +109,14 @@ class Scene(models.Model):
             return ''
 
     def html(self):
-        return mistune.markdown(smartypants.smartypants(self.text()))
+        text = self.text()
+        text = text.replace('---', '%%%HR%%%')
+
+        text = mistune.markdown(smartypants.smartypants(text))
+
+        text = text.replace('%%%HR%%%', '<hr/>')
+
+        return text
 
     def get_neighbor(self, side):
         objects = Scene.objects.filter(story=self.story).exclude(pk=self.pk)
