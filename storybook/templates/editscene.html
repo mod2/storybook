@@ -3,7 +3,7 @@
 {% block htmlclass %} class='edit'{% endblock htmlclass %}
 
 {% block page %}
-<section class="scene-edit">
+<section class="scene-edit" data-uri="{% url 'api_save_scene' story.slug scene.id %}" data-scene-uri="{% url 'scene' story.slug scene.id %}">
 	<div class="text">
 		<textarea>{{ scene.text }}</textarea>
 	</div>

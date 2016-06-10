@@ -102,6 +102,7 @@ def scene_edit(request, story_slug, scene_id):
 
     return render_to_response('editscene.html', {'title': 'Edit Scene {} — {}'.format(scene.order, s.title),
                                              'scene': scene,
+                                             'key': settings.SECRET_KEY,
                                              'story': s,
                                              'stories': stories,
                                              'request': request,

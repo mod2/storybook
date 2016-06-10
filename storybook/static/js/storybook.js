@@ -111,4 +111,61 @@ $(document).ready(function() {
 			},
 		});
 	}
+
+
+	// Scene save text
+	// --------------------------------------------------
+
+	// Focus on page load
+	if ($(".scene-edit").length) {
+		$(".scene-edit .text textarea").focus();
+	}
+
+	function _cancelSceneEdit() {
+		var url = $(".scene-edit").data("scene-uri");
+		window.location.href = url;
+	}
+
+	function _saveSceneEdit() {
+		var url = $(".scene-edit").data("uri");
+
+		var text = $(".scene-edit .text textarea").val().trim();
+
+		var data = {
+			text: text,
+			key: config.apiKey,
+		};
+
+		$.ajax({
+			url: url,
+			method: 'POST',
+			data: data,
+			success: function(data) {
+				var url = $(".scene-edit").data("scene-uri");
+				window.location.href = url;
+			},
+			error: function(data) {
+				console.log("Error! :(", data);
+			},
+		});
+
+		return false;
+	}
+
+	$(".scene-edit .save.button").on("click", function() {
+		_saveSceneEdit();
+		return false;
+	});
+
+	var field = document.querySelector('.scene-edit .text textarea');
+	Mousetrap(field).bind('esc', _cancelSceneEdit);
+	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveSceneEdit);
+
+
+	// Scene detail
+	// --------------------------------------------------
+
+	Mousetrap.bind('e', function() {
+		window.location.href = $(".scene-detail .edit.button").attr("href");
+	});
 });

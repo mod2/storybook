@@ -11,23 +11,6 @@ import json
 from .models import Story, Scene, Revision
 from .utils import process_payload
 
-def api_save_scene(request, story_slug, scene_id):
-    """ Add revision to a scene """
-
-    if request.is_ajax() and request.method == 'POST':
-        text = json.loads(request.body.decode())['text']
-
-        # Get the scene
-        scene = Scene.objects.get(id=scene_id)
-
-        # Create the revision
-        revision = Revision()
-        revision.scene = scene
-        revision.text = text.strip()
-        revision.save()
-
-        return JsonResponse(json.dumps({ "status": "success", "id": revision.id }), safe=False)
-
 def api_update_revision(request, story_slug, scene_id, revision_id):
     """ Update revision for a scene """
 
@@ -160,3 +143,26 @@ def api_reorder_scenes(request, story_slug):
         scene.save()
 
     return JsonResponse(json.dumps({ "status": "success" }), safe=False)
+
+def api_save_scene(request, story_slug, scene_id):
+    """ Add revision to a scene. """
+
+    if request.method == 'POST':
+        key = request.POST.get('key', '')
+
+    # Make sure we have the secret key
+    if key != settings.SECRET_KEY:
+        return JsonResponse({})
+
+    text = request.POST.get('text', '')
+
+    # Get the scene
+    scene = Scene.objects.get(id=scene_id)
+
+    # Create the revision
+    revision = Revision()
+    revision.scene = scene
+    revision.text = text.strip()
+    revision.save()
+
+    return JsonResponse(json.dumps({ "status": "success", "id": revision.id }), safe=False)

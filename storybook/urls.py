@@ -23,6 +23,7 @@ urlpatterns = [
     # Web services
     url(r'^api/payload/$', sb_apis.api_process_payload, name='api_process_payload'),
     url(r'^api/story/(?P<story_slug>[^\/]+)/reorder-scenes/$', sb_apis.api_reorder_scenes, name='api_reorder_scenes'),
+    url(r'^api/story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/$', sb_apis.api_save_scene, name='api_save_scene'),
 
     # Home
     url(r'^$', sb_views.home, name='home'),
