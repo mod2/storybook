@@ -11,7 +11,9 @@ urlpatterns = [
     url(r'^logout/', auth_views.logout, { 'template_name': 'logout.html', 'next_page': '/login/' }, name='logout'),
 
     # Story
+    url(r'^story/(?P<story_slug>[^\/]+)/characters/$', sb_views.story_characters, name='story_characters'),
     url(r'^story/(?P<story_slug>[^\/]+)/full/$', sb_views.story_full, name='story_full'),
+    url(r'^story/(?P<story_slug>[^\/]+)/fragments/$', sb_views.story_fragments, name='story_fragments'),
     url(r'^story/(?P<story_slug>[^\/]+)/organize/$', sb_views.story_organize, name='story_organize'),
     url(r'^story/(?P<story_slug>[^\/]+)/$', sb_views.story, name='story'),
 

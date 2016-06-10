@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block pageheader %}
+<h1 class="container"><a href="{% url 'story' story.slug %}">{{ story.title }}</a>&nbsp;(characters)</h1>
+{% endblock pageheader %}
+
+{% block content %}
+<section class="characters">
+	<div class="text container">
+		{% for char in characters %}
+		<div class="character" data-id="{{ char.id }}">
+			<h2>{{ char.name }}</h2>
+
+			<ul class="scenes">
+				{% for scene in char.scenes.all %}
+				<li><a href="{% url 'scene' story.slug scene.id %}">Scene {{ scene.order }}: {{ scene.title }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endfor %} 
+	</div>
+</section>
+{% endblock content %}

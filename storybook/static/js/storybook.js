@@ -80,6 +80,11 @@ $(document).ready(function() {
 	Mousetrap(field).bind('esc', _hideTray);
 	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _submitTray);
 
+	$("#tray .controls .save.button").on("click", function() {
+		_submitTray();
+		return false;
+	});
+
 	function _showTray() {
 		// Display and focus on the tray
 		$("#tray textarea").val('');

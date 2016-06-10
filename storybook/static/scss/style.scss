@@ -445,6 +445,12 @@ header[role=banner] {
 			text-indent: 0;
 		}
 	}
+
+	.fragment + .fragment {
+		border-top: solid 1px #ddd;
+		margin-top: 2em;
+		padding-top: 2em;
+	}
 }
 
 @media screen and (min-width: 650px) {
@@ -617,5 +623,35 @@ html.edit {
 	.full-draft {
 		font-size: 1.3em;
 		line-height: 1.45em;
+	}
+}
+
+
+/* Full draft */
+/* -------------------------------------------------- */
+
+.characters {
+	margin-top: 1em;
+
+	.character {
+		h2 {
+			font-size: 1.4em;
+			font-weight: normal;
+			margin: 0;
+		}
+
+		a {
+			color: $darkgreen;
+		}
+
+		ul.scenes {
+			margin: 0;
+		}
+
+		& + .character {
+			border-top: solid 1px #ddd;
+			margin-top: 1.5em;
+			padding-top: 1.5em;
+		}
 	}
 }

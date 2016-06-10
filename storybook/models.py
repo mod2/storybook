@@ -178,16 +178,22 @@ class Fragment(models.Model):
     def __unicode__(self):
         return "{}".format(self.created)
 
-    def __str__(self):
-        return self.__unicode__()
+    def html(self):
+        text = self.text
+        text = text.replace('---', '%%%HR%%%')
 
+        text = mistune.markdown(smartypants.smartypants(text))
+
+        text = text.replace('<p>%%%HR%%%</p>', '<hr/>')
+
+        return text
     class Meta:
         ordering = ['created']
 
 
 class Character(models.Model):
     name = models.CharField(max_length=300)
-    color = models.CharField(max_length=50)
+    color = models.CharField(max_length=50, default='#000')
     story = models.ForeignKey(Story, related_name='characters')
     scenes = models.ManyToManyField(Scene, related_name='characters')
 

@@ -75,6 +75,40 @@ def story_organize(request, story_slug):
                              })
 
 @login_required
+def story_fragments(request, story_slug):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story and scenes
+    s = Story.objects.get(slug=story_slug)
+
+    return render_to_response('fragments.html', {
+                              'title': "Fragments — {}".format(s.title),
+                              'story': s,
+                              'key': settings.SECRET_KEY,
+                              'fragments': s.fragments.all(),
+                              'stories': stories,
+                              'request': request,
+                             })
+@login_required
+def story_characters(request, story_slug):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story and scenes
+    s = Story.objects.get(slug=story_slug)
+
+    characters = s.characters.all()
+
+    return render_to_response('characters.html', {
+                              'title': "Characters — {}".format(s.title),
+                              'story': s,
+                              'key': settings.SECRET_KEY,
+                              'characters': characters,
+                              'stories': stories,
+                              'request': request,
+                             })
+@login_required
 def scene(request, story_slug, scene_id, revision_id=None):
     # Boilerplate
     stories = Story.objects.filter(status='active')

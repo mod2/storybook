@@ -2,7 +2,7 @@ from django.conf import settings
 
 import json
 
-from .models import Story, Scene, Revision
+from .models import Story, Scene, Revision, Fragment, Character
 
 
 def get_or_create_story(story_slug):
@@ -96,7 +96,6 @@ def process_payload(payload):
     message = ''
 
     response = process_scenes(payload)
-    print(json.dumps(response, sort_keys=True, indent=4))
 
     if len(response) == 0:
         status = 'error'
@@ -113,10 +112,10 @@ def process_payload(payload):
     
     # If we haven't specified a scene, we've just got a fragment
     if 'fragments' in response:
-        fragment = '\n'.join(response['fragments']).strip()
-
-        # TODO
-        # add fragment to inbox for story
+        f = Fragment()
+        f.story = story
+        f.text = '\n'.join(response['fragments']).strip()
+        f.save()
 
     # Now go through any scenes
     for index, scene in enumerate(scenes):
@@ -129,6 +128,15 @@ def process_payload(payload):
                 s.synopsis = scene['synopsis']
             s.order = 500 + index
             s.save()
+
+            if 'characters' in scene:
+                for name in scene['characters']:
+                    c = Character()
+                    c.name = name
+                    c.story = story
+                    c.save()
+                    c.scenes.add(s)
+                    c.save()
 
             # Create the revision
             r = Revision()
