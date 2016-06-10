@@ -216,6 +216,39 @@ header[role=banner] {
 }
 
 
+/* Tray */
+/* -------------------------------------------------- */
+
+#tray {
+	border-bottom: solid 2px $green;
+	display: none;
+
+	textarea {
+		border: none;
+		font-size: 1.4em;
+		height: 250px;
+		line-height: 1.35em;
+		padding: 1em 0;
+		resize: none;
+		width: 100%;
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.controls {
+		overflow: hidden;
+		padding: 0 0 1em;
+		text-align: right;
+
+		.button {
+			display: inline-block;
+		}
+	}
+}
+
+
 /* Dashboard */
 /* -------------------------------------------------- */
 
@@ -406,6 +439,10 @@ header[role=banner] {
 
 		p + p {
 			text-indent: 1.25em;
+		}
+
+		hr + p {
+			text-indent: 0;
 		}
 	}
 }

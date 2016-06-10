@@ -92,6 +92,14 @@
 				</header>
 				{% endblock header %}
 
+				<section id="tray" data-uri="{% url 'api_process_payload' %}" {% if story %}data-story-slug="{{ story.slug }}"{% endif %}>
+					<div class="container">
+						<textarea></textarea>
+
+						<div class="controls"><a class="save button" href="">Save</a></div>
+					</div>
+				</section>
+
 				<section id="error">
 					<div class="container"></div>
 				</section>

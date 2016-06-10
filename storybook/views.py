@@ -16,6 +16,7 @@ def home(request):
     inactive_stories = Story.objects.filter(status='inactive')
 
     return render_to_response('home.html', {'stories': stories,
+                                            'key': settings.SECRET_KEY,
                                             'inactive_stories': inactive_stories,
                                             'request': request })
 
@@ -31,6 +32,7 @@ def story(request, story_slug):
 
     return render_to_response('story.html', {'title': s.title,
                                              'story': s,
+                                             'key': settings.SECRET_KEY,
                                              'scenes': scenes,
                                              'stories': stories,
                                              'request': request,
@@ -47,6 +49,7 @@ def story_full(request, story_slug):
 
     return render_to_response('full_draft.html', {
                               'title': "Full Draft — {}".format(s.title),
+                              'key': settings.SECRET_KEY,
                               'story': s,
                               'scenes': scenes,
                               'stories': stories,
@@ -89,6 +92,7 @@ def scene(request, story_slug, scene_id, revision_id=None):
     return render_to_response('scene.html', {'title': 'Scene {} — {}'.format(scene.order, s.title),
                                              'scene': scene,
                                              'story': s,
+                                             'key': settings.SECRET_KEY,
                                              'stories': stories,
                                              'nav': nav,
                                              'request': request,

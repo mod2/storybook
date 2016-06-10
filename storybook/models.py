@@ -5,6 +5,7 @@ from django.utils import timezone
 from autoslug import AutoSlugField
 
 import mistune
+import re
 import smartypants
 
 
@@ -88,9 +89,17 @@ class Scene(models.Model):
 
     def word_count(self):
         latest_revision = self.latest_revision()
+
         if latest_revision:
-            # TODO: this doesn't actually work (newlines, etc.)
-            return len(latest_revision.text.split(' '))
+            text = latest_revision.text.strip()
+            text = text.replace("\n", " ").replace("  ", " ").strip()
+
+            words = re.split(r"\s+", text)
+
+            if len(words) == 1 and words[0] == '':
+                return 0
+            else:
+                return len(words)
         else:
             return 0
 
@@ -114,7 +123,7 @@ class Scene(models.Model):
 
         text = mistune.markdown(smartypants.smartypants(text))
 
-        text = text.replace('%%%HR%%%', '<hr/>')
+        text = text.replace('<p>%%%HR%%%</p>', '<hr/>')
 
         return text
 
@@ -135,6 +144,7 @@ class Scene(models.Model):
 
     def get_prev(self):
         return self.get_neighbor('prev')
+
 
 class Revision(models.Model):
     text = models.TextField(null=True, blank=True)

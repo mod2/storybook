@@ -61,10 +61,89 @@ $(document).ready(function() {
 	});
 
 
-	// Hotkeys
+	// Global hotkeys
 	// --------------------------------------------------
 
 	Mousetrap.bind('g m', _toggleMenu);
+
+
+	// Tray
+	// --------------------------------------------------
+	
+	Mousetrap.bind('a', _showTray);
+
+	var field = document.querySelector('#tray textarea');
+	Mousetrap(field).bind('esc', _hideTray);
+	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _submitTray);
+
+	function _showTray() {
+		// Display and focus on the tray
+		$("#tray textarea").val('');
+
+		$("#tray").slideDown(75, function() {
+			$("#tray textarea").focus();
+		});
+
+		return false;
+	}
+
+	function _hideTray() {
+		// Hide the tray
+		$("#tray").slideUp(75, function() {
+			$("#tray textarea").val('').blur();
+		});
+
+		return false;
+	}
+
+	function _toggleTray() {
+		if ($("#tray:visible").length > 0) {
+			_hideTray();
+		} else {
+			_showTray();
+		}
+
+		return false;
+	}
+
+	function _submitTray() {
+		// Get value of textarea
+		var text = $("#tray textarea").val().trim();
+
+		// Make sure it's not blank
+		if (text == '') return;
+
+		// URL/key for web service
+		var url = $("#tray").data("uri");
+
+		// Payload
+		var data = {
+			'payload': text,
+			'key': config.apiKey,
+		};
+
+		if ($("#tray").data("story-slug")) {
+			data['payload'] = "::story " + $("#tray").data("story-slug") + "\n\n" + data['payload'];
+		}
+
+		$.ajax({
+			url: url,
+			method: 'POST',
+			data: data,
+			success: function(data) {
+				// Hide the tray
+				_hideTray();
+
+				// Reload the page
+				window.location.reload();
+			},
+			error: function(data) {
+				console.log("error :(", data);
+			},
+		});
+
+		return false;
+	}
 
 
 	// Sorting scenes (organize page)
