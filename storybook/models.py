@@ -111,6 +111,23 @@ class Scene(models.Model):
     def html(self):
         return mistune.markdown(smartypants.smartypants(self.text()))
 
+    def get_neighbor(self, side):
+        objects = Scene.objects.filter(story=self.story).exclude(pk=self.pk)
+        if side == 'next':
+            neighbors = objects.filter(order__gte=self.order).order_by('order')
+        else:
+            neighbors = objects.filter(order__lte=self.order).order_by('-order')
+
+        if len(neighbors):
+            return neighbors[0]
+        else:
+            return None
+
+    def get_next(self):
+        return self.get_neighbor('next')
+
+    def get_prev(self):
+        return self.get_neighbor('prev')
 
 class Revision(models.Model):
     text = models.TextField(null=True, blank=True)

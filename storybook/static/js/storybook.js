@@ -164,7 +164,7 @@ $(document).ready(function() {
 	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveSceneEdit);
 
 
-	// Scene detail
+	// Story detail
 	// --------------------------------------------------
 
 	if ($(".story-detail").length) {
@@ -188,6 +188,20 @@ $(document).ready(function() {
 
 		Mousetrap.bind('g h', function() {
 			window.location.href = $(".scene-detail").data("parent-uri");
+		});
+
+		Mousetrap.bind('g n', function() {
+			var uri = $(".scene-detail").data("next-uri");
+			if (uri) {
+				window.location.href = uri;
+			}
+		});
+
+		Mousetrap.bind('g p', function() {
+			var uri = $(".scene-detail").data("prev-uri");
+			if (uri) {
+				window.location.href = uri;
+			}
 		});
 	}
 });

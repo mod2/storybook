@@ -82,10 +82,15 @@ def scene(request, story_slug, scene_id, revision_id=None):
     # Get scene
     scene = Scene.objects.get(id=scene_id, story__slug=story_slug)
 
+    nav = {}
+    nav['next'] = scene.get_next()
+    nav['prev'] = scene.get_prev()
+
     return render_to_response('scene.html', {'title': 'Scene {} — {}'.format(scene.order, s.title),
                                              'scene': scene,
                                              'story': s,
                                              'stories': stories,
+                                             'nav': nav,
                                              'request': request,
                                             })
 
