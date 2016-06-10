@@ -25,6 +25,9 @@ class Story(models.Model):
     last_modified = models.DateTimeField(default=timezone.now())
     order = models.PositiveSmallIntegerField(default=50)
 
+    def __str__(self):
+        return self.title
+
     def __unicode__(self):
         return self.title
 
@@ -44,6 +47,7 @@ class Story(models.Model):
 
     class Meta:
         verbose_name_plural = "stories"
+        ordering = ['order']
 
 
 class Scene(models.Model):
@@ -73,6 +77,8 @@ class Scene(models.Model):
 
         return title
 
+    def __str__(self):
+        return self.__unicode__()
 
     def latest_revision(self):
         if self.revisions.all().count() > 0:
@@ -113,6 +119,9 @@ class Revision(models.Model):
 
     def __unicode__(self):
         return "{}".format(self.created)
+
+    def __str__(self):
+        return self.__unicode__()
 
     class Meta:
         ordering = ['-created']

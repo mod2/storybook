@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+from storybook import apis as sb_apis
 from storybook import views as sb_views
 
 urlpatterns = [
@@ -19,12 +20,9 @@ urlpatterns = [
     url(r'^story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/$', sb_views.scene, name='scene'),
 
     # Web services
-    url(r'^api/story/$', sb_views.ws_add_story, name='ws_add_story'),
-    url(r'^api/story/(.+?)/reorder-scenes/$', sb_views.ws_reorder_scenes, name='ws_reorder_scenes'),
-    url(r'^api/story/(.+?)/(.+?)/add-revision/$', sb_views.ws_add_revision, name='ws_add_revision'),
-    url(r'^api/story/(.+?)/(.+?)/update-revision/(.+?)/$', sb_views.ws_update_revision, name='ws_update_revision'),
-    url(r'^api/story/(.+?)/add-scene/$', sb_views.ws_add_scene, name='ws_add_scene'),
-    url(r'^api/story/(.+?)/(.+?)/$', sb_views.ws_update_scene, name='ws_update_scene'),
+    url(r'^api/payload/$', sb_apis.api_process_payload, name='api_process_payload'),
+    url(r'^api/story/(?P<story_slug>[^\/]+)/reorder-scenes/$', sb_apis.api_reorder_scenes, name='api_reorder_scenes'),
 
+    # Home
     url(r'^$', sb_views.home, name='home'),
 ]

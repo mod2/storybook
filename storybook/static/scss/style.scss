@@ -313,6 +313,19 @@ header[role=banner] {
 	}
 }
 
+@media screen and (min-width: 600px) {
+	.story-detail {
+		.summary {
+			font-size: 1.1em;
+		}
+
+		.scene {
+			font-size: 1.1em;
+			line-height: 1.45em;
+		}
+	}
+}
+
 
 /* Scene detail */
 /* -------------------------------------------------- */
