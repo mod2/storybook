@@ -202,6 +202,8 @@ header[role=banner] {
   margin-top: .5em; }
   .story-detail .scenes .scene > a {
     -webkit-display: flex;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
     color: #111;
     display: flex;
     padding: 1em 0;
@@ -211,6 +213,7 @@ header[role=banner] {
   .story-detail .scenes .scene .num {
     color: #b68f76;
     font-size: 1.1em;
+    line-height: 1.4em;
     width: 2em; }
   .story-detail .scenes .scene .info {
     flex: 1; }
@@ -224,6 +227,20 @@ header[role=banner] {
       margin-top: 3px; }
   .story-detail .scenes .scene + .scene > a {
     border-top: solid 1px #ddd; }
+.story-detail .scenes.sortable .handle {
+  -webkit-align-items: center;
+  -webkit-display: flex;
+  align-items: center;
+  background: #eee;
+  border-radius: 3px;
+  color: #aaa;
+  cursor: pointer;
+  display: flex;
+  padding: 2px 15px 11px;
+  text-align: center; }
+  .story-detail .scenes.sortable .handle:hover {
+    background: #444;
+    color: #fff; }
 
 @media screen and (min-width: 600px) {
   .story-detail .summary {

@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block pageheader %}
+<h1 class="container"><a href="{% url 'story' story.slug %}">{{ story.title }}</a></h1>
+{% endblock pageheader %}
+
+{% block content %}
+<section class="story-detail">
+	<div class="scenes sortable" data-sort-uri="{% url 'api_reorder_scenes' story.slug %}">
+		{% for scene in scenes %}
+		<div class="scene" data-id="{{ scene.id }}">
+			<a href="{% url 'scene' story.slug scene.id %}" class="container">
+				<span class="num">{{ scene.order }}</span>
+				<div class="info">
+					<h3>{{ scene.title_rendered|safe }}</h3>
+					{% if scene.synopsis %}<div class="meta">{{ scene.synopsis_rendered|safe }}</div>{% endif %}
+				</div>
+				<span class="handle">&hellip;</span>
+			</a>
+		</div>
+		{% endfor %} 
+	</div>
+</section>
+{% endblock content %}

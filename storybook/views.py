@@ -37,6 +37,41 @@ def story(request, story_slug):
                                             })
 
 @login_required
+def story_full(request, story_slug):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story and scenes
+    s = Story.objects.get(slug=story_slug)
+    scenes = s.active_scenes().order_by('order')
+
+    return render_to_response('full_draft.html', {
+                              'title': "Full Draft — {}".format(s.title),
+                              'story': s,
+                              'scenes': scenes,
+                              'stories': stories,
+                              'request': request,
+                             })
+
+@login_required
+def story_organize(request, story_slug):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story and scenes
+    s = Story.objects.get(slug=story_slug)
+    scenes = s.active_scenes().order_by('order')
+
+    return render_to_response('organize.html', {
+                              'title': "Organize — {}".format(s.title),
+                              'story': s,
+                              'key': settings.SECRET_KEY,
+                              'scenes': scenes,
+                              'stories': stories,
+                              'request': request,
+                             })
+
+@login_required
 def scene(request, story_slug, scene_id, revision_id=None):
     # Boilerplate
     stories = Story.objects.filter(status='active')
@@ -71,21 +106,4 @@ def scene_edit(request, story_slug, scene_id):
                                              'stories': stories,
                                              'request': request,
                                             })
-
-@login_required
-def story_full(request, story_slug):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
-    # Get story and scenes
-    s = Story.objects.get(slug=story_slug)
-    scenes = s.active_scenes().order_by('order')
-
-    return render_to_response('full_draft.html', {
-                              'story': s,
-                              'scenes': scenes,
-                              'stories': stories,
-                              'request': request,
-                             })
-
 

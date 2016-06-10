@@ -12,9 +12,15 @@
 	<link rel="shortcut icon" href="{% static 'favicon.ico' %}?v=1">
 	<link rel="shortcut icon" href="{% static 'favicon.png' %}?v=1">
 
+	<script type="text/javascript" charset="utf-8">
+		var config = {};
+        config.apiKey = "{{ key }}";
+	</script>
+
 	<script src="{% static 'js/lib/jquery-2.1.1.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/jquery.autosize.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/jquery-ui.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/lib/Sortable.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/mousetrap.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/mousetrap-global-bind.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/storybook.js' %}" type="text/javascript" charset="utf-8"></script>
@@ -41,6 +47,7 @@
 					<a href="{% url 'story_full' story.slug %}">Full Draft</a>
 					<a href="">Inbox</a>
 					<a href="">Notebook</a>
+					<a href="{% url 'story_organize' story.slug %}">Organize</a></li>
 				</div>
 			{% endif %}
 
@@ -52,7 +59,7 @@
 
 			<div class="group">
 				<a href="{% url 'home' %}">Home</a></li>
-				<a href="">Organize</a></li>
+				<a href="">Organize Stories</a></li>
 				<a href="{% url 'logout' %}">Logout</a>
 			</div>
 		</nav>

@@ -11,19 +11,6 @@ import json
 from .models import Story, Scene, Revision
 from .utils import process_payload
 
-def api_reorder_scenes(request, story_slug):
-    """ Reorder scenes in a story (called by AJAX) """
-
-    if request.is_ajax() and request.method == 'POST':
-        order = json.loads(request.body.decode())['order']
-
-        scenes = Scene.objects.filter(pk__in=order.keys())
-        for scene in scenes:
-            scene.order = order[unicode(scene.pk)]
-            scene.save()
-
-        return JsonResponse(json.dumps({ "status": "success" }), safe=False)
-
 def api_save_scene(request, story_slug, scene_id):
     """ Add revision to a scene """
 
@@ -118,6 +105,9 @@ def api_add_story(request):
     else:
         return JsonResponse(json.dumps({'status': 'error', 'error': "Couldn't create a new story."}), safe=False)
 
+
+## New
+
 @login_required
 def api_process_payload(request):
     """ Processes a payload. """
@@ -151,3 +141,22 @@ def api_process_payload(request):
     else:
         # Return JSON response
         return JsonResponse(response)
+
+def api_reorder_scenes(request, story_slug):
+    """ Reorder scenes in a story (called by AJAX) """
+
+    if request.method == 'POST':
+        key = request.POST.get('key', '')
+
+    # Make sure we have the secret key
+    if key != settings.SECRET_KEY:
+        return JsonResponse({})
+
+    id_list = [int(x) for x in request.POST.get('ids', '').split(',') if x != '']
+
+    for index, scene_id in enumerate(id_list):
+        scene = Scene.objects.get(id=scene_id, story__slug=story_slug)
+        scene.order = index + 1
+        scene.save()
+
+    return JsonResponse(json.dumps({ "status": "success" }), safe=False)

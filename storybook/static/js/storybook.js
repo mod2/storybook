@@ -65,4 +65,50 @@ $(document).ready(function() {
 	// --------------------------------------------------
 
 	Mousetrap.bind('g m', _toggleMenu);
+
+
+	// Sorting scenes (organize page)
+	// --------------------------------------------------
+
+	if ($(".scenes.sortable").length) {
+		var sceneList = $(".scenes.sortable")[0];
+		var sortable = new Sortable(sceneList, {
+			draggable: ".scene",
+			handle: ".handle",
+			onUpdate: function(e) {
+				var scene = $(e.scene);
+				var sceneParent = $(".scenes");
+				var scenes = sceneParent.find(".scene");
+				var order = [];
+
+				for (var i=0; i<scenes.length; i++) {
+					var s = $(scenes[i]);
+					order.push(parseInt(s.attr("data-id")));
+				}
+
+				var url = sceneParent.data("sort-uri");
+
+				var data = {
+					ids: order.join(','),
+					key: config.apiKey,
+				};
+
+				$.ajax({
+					url: url,
+					method: 'POST',
+					data: data,
+					success: function(data) {
+						// Renumber the scenes
+
+						for (var i=0; i<scenes.length; i++) {
+							$(scenes[i]).find(".num").html(i + 1);
+						}
+					},
+					error: function(data) {
+						console.log("Error! :(", data);
+					},
+				});
+			},
+		});
+	}
 });
