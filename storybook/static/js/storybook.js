@@ -71,6 +71,10 @@ $(document).ready(function() {
 	// --------------------------------------------------
 	
 	Mousetrap.bind('a', _showTray);
+	$("header[role=banner] .add").on("click", function() {
+		_toggleTray();
+		return false;
+	});
 
 	var field = document.querySelector('#tray textarea');
 	Mousetrap(field).bind('esc', _hideTray);
