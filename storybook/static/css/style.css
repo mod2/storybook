@@ -202,6 +202,7 @@ header[role=banner] {
     .dashboard .story a:hover {
       color: #6baf60; }
     .dashboard .story a h2 {
+      font-size: 1.3em;
       font-weight: normal;
       margin: 0; }
     .dashboard .story a .info {
@@ -335,10 +336,12 @@ header[role=banner] {
     height: 100%; }
     .scene-edit .text textarea {
       -webkit-flex: 1;
+      -webkit-overflow-scrolling: touch;
       border: none;
       flex: 1;
       font-size: 1.2em;
       line-height: 1.45em;
+      overflow-y: scroll;
       padding: 1em 25px 4em;
       resize: none; }
       .scene-edit .text textarea:focus {
@@ -346,6 +349,7 @@ header[role=banner] {
   .scene-edit footer {
     background: #fff;
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
+    font-size: 1.2em;
     z-index: 69000; }
     .scene-edit footer .controls {
       -webkit-align-items: center;
@@ -429,13 +433,17 @@ html.edit {
 .characters {
   margin-top: 1em; }
   .characters .character h2 {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: normal;
     margin: 0; }
   .characters .character a {
-    color: #6baf60; }
+    color: #6baf60;
+    text-decoration: none; }
+    .characters .character a:hover {
+      color: #444; }
   .characters .character ul.scenes {
-    margin: 0; }
+    margin: 0;
+    margin-top: .25em; }
   .characters .character + .character {
     border-top: solid 1px #ddd;
     margin-top: 1.5em;

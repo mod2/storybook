@@ -267,6 +267,7 @@ header[role=banner] {
 			}
 
 			h2 {
+				font-size: 1.3em;
 				font-weight: normal;
 				margin: 0;
 			}
@@ -480,10 +481,12 @@ header[role=banner] {
 
 		textarea {
 			-webkit-flex: 1;
+			-webkit-overflow-scrolling: touch;
 			border: none;
 			flex: 1;
 			font-size: 1.2em;
 			line-height: 1.45em;
+			overflow-y: scroll;
 			padding: 1em 25px 4em;
 			resize: none;
 			
@@ -496,6 +499,7 @@ header[role=banner] {
 	footer {
 		background: #fff;
 		box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
+		font-size: 1.2em;
 		z-index: 69000;
 
 		.controls {
@@ -635,17 +639,23 @@ html.edit {
 
 	.character {
 		h2 {
-			font-size: 1.4em;
+			font-size: 1.3em;
 			font-weight: normal;
 			margin: 0;
 		}
 
 		a {
 			color: $darkgreen;
+			text-decoration: none;
+
+			&:hover {
+				color: $grayhover;
+			}
 		}
 
 		ul.scenes {
 			margin: 0;
+			margin-top: .25em;
 		}
 
 		& + .character {
