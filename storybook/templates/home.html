@@ -12,6 +12,7 @@
 	</div>
 	{% endfor %}
 
+	{% if inactive_stories.count %}
 	<section class="inactive">
 		<h3 class="container">Inactive Stories</h3>
 
@@ -24,5 +25,6 @@
 		</div>
 		{% endfor %}
 	</section>
+	{% endif %}
 </section>
 {% endblock content %}

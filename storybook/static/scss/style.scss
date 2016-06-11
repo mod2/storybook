@@ -167,7 +167,7 @@ header[role=banner] {
 		display: flex;
 
 		a {
-			color: $green;
+			color: $darkgreen;
 			display: block;
 			font-size: 1.2em;
 			padding: 0.8em 0;
@@ -665,3 +665,5 @@ html.edit {
 		}
 	}
 }
+
+@import '_login.scss';

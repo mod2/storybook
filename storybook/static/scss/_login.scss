@@ -1,0 +1,51 @@
+/* Login page */
+
+#login-form {
+	margin-top: 1em;
+
+	h1 {
+		font-weight: 400;
+	}
+
+	form.login {
+		margin-top: 1em;
+		padding-bottom: 1em;
+
+		.group {
+			label {
+				color: #888;
+				display: block;
+				margin-bottom: .2em;
+			}
+
+			section {
+				margin-bottom: 1em;
+
+				input[type=text] {
+					font-size: 1.3em;
+					padding: 3px 5px;
+				}
+
+				input[type=password] {
+					font-size: 1.3em;
+					padding: 3px 5px;
+				}
+			}
+		}
+
+		input.button {
+			background: $darkgreen;
+			border: none;
+			border-radius: 5px;
+			color: #fff;
+			cursor: pointer;
+			font-size: 1em;
+			padding: 4px 10px 6px;
+			-webkit-appearance: none;
+
+			&:hover {
+				background: #444;
+			}
+		}
+	}
+}
