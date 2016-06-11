@@ -224,10 +224,12 @@ header[role=banner] {
 	display: none;
 
 	textarea {
+		-webkit-overflow-scrolling: touch;
 		border: none;
 		font-size: 1.4em;
 		height: 250px;
 		line-height: 1.35em;
+		overflow-y: scroll;
 		padding: 1em 0;
 		resize: none;
 		width: 100%;

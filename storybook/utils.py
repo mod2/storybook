@@ -32,13 +32,12 @@ def get_or_create_story(story_slug):
             story.order = 0 # put at beginning
 
             # Reorder the other stories
-            for story in Story.objects.all():
-                pass
+            for s in Story.objects.all():
+                s.order = s.order + 1
 
             story.save()
         except Exception as e:
             print("Couldn't create story", e)
-            pass
 
     return story
 

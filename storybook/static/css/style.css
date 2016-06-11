@@ -174,10 +174,12 @@ header[role=banner] {
   border-bottom: solid 2px #aad1a3;
   display: none; }
   #tray textarea {
+    -webkit-overflow-scrolling: touch;
     border: none;
     font-size: 1.4em;
     height: 250px;
     line-height: 1.35em;
+    overflow-y: scroll;
     padding: 1em 0;
     resize: none;
     width: 100%; }
