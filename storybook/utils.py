@@ -43,6 +43,36 @@ def get_or_create_story(story_slug):
     return story
 
 
+def get_or_create_character(name, story, scene):
+    character = None
+
+    # Try to get the character
+    try:
+        character = Character.objects.get(name=name, story=story)
+
+        # Add to this scene
+        character.scenes.add(scene)
+        character.save()
+    except Exception as e:
+        pass
+
+    # Not found, so create it
+    if character is None:
+        try:
+            character = Character()
+            character.name = name
+            character.story = story
+            character.save()
+            character.color = character.get_random_color()
+            character.scenes.add(scene)
+            character.save()
+        except Exception as e:
+            print("Couldn't create character", e)
+            pass
+
+    return character
+
+
 def process_scenes(payload):
     """ Takes a payload and returns a list of scenes. """
 
@@ -131,12 +161,7 @@ def process_payload(payload):
 
             if 'characters' in scene:
                 for name in scene['characters']:
-                    c = Character()
-                    c.name = name
-                    c.story = story
-                    c.save()
-                    c.scenes.add(s)
-                    c.save()
+                    c = get_or_create_character(name, story, s)
 
             # Create the revision
             r = Revision()

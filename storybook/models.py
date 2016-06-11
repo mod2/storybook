@@ -71,11 +71,7 @@ class Scene(models.Model):
     # revisions (from Revision.scene)
 
     def __unicode__(self):
-        if self.title != "":
-            title = self.title
-        else:
-            title = "Scene {} (untitled)".format(order + 1)
-
+        title = "{} scene {} ({})".format(self.story.title, self.order, self.title)
         return title
 
     def __str__(self):
@@ -193,25 +189,25 @@ class Fragment(models.Model):
 
 class Character(models.Model):
     name = models.CharField(max_length=300)
-    color = models.CharField(max_length=50, default='#000')
+    color = models.CharField(max_length=50, default='#000', null=True, blank=True)
     story = models.ForeignKey(Story, related_name='characters')
     scenes = models.ManyToManyField(Scene, related_name='characters')
 
-    def __init__(self):
+    def get_random_color(self):
+        import math
         import random
         import colorsys
 
         # Choose a random hue
         hue = random.random()
-        r, g, b = colorsys.hsv_to_rgb(hue, 0.61, 0.49)
+        r, g, b = colorsys.hsv_to_rgb(hue, 0.76, 0.79)
 
         # Convert to hex
         r = int(math.ceil(r * 255))
         g = int(math.ceil(g * 255))
         b = int(math.ceil(b * 255))
 
-        self.color = "#{:02x}{:02x}{:02x}".format(r, g, b)
-        self.save()
+        return "#{:02x}{:02x}{:02x}".format(r, g, b)
 
     def __unicode__(self):
         return self.name

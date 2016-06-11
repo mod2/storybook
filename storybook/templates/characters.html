@@ -9,7 +9,7 @@
 	<div class="text container">
 		{% for char in characters %}
 		<div class="character" data-id="{{ char.id }}">
-			<h2>{{ char.name }}</h2>
+			<h2 style="color: {{ char.color }}">{{ char.name }}</h2>
 
 			<ul class="scenes">
 				{% for scene in char.scenes.all %}

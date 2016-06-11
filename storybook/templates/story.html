@@ -21,7 +21,7 @@
 				<span class="num">{{ scene.order }}</span>
 				<div class="info">
 					<h3>{{ scene.title_rendered|safe }}</h3>
-					<div class="meta"><span>{{ scene.word_count }}</span> word{% if scene.word_count != 1 %}s{% endif %} &mdash; {{ scene.status }}</div>
+					<div class="meta"><span>{{ scene.word_count }}</span> word{% if scene.word_count != 1 %}s{% endif %} &mdash; {{ scene.status }}{% if scene.characters.count %} &mdash; {% for c in scene.characters.all %}{% if forloop.counter > 1 %}, {% endif %}<span style="color: {{ c.color }}">{{ c.name }}</span>{% endfor %}{% endif %}</div>
 				</div>
 			</a>
 		</div>
