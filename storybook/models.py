@@ -197,6 +197,22 @@ class Character(models.Model):
     story = models.ForeignKey(Story, related_name='characters')
     scenes = models.ManyToManyField(Scene, related_name='characters')
 
+    def __init__(self):
+        import random
+        import colorsys
+
+        # Choose a random hue
+        hue = random.random()
+        r, g, b = colorsys.hsv_to_rgb(hue, 0.61, 0.49)
+
+        # Convert to hex
+        r = int(math.ceil(r * 255))
+        g = int(math.ceil(g * 255))
+        b = int(math.ceil(b * 255))
+
+        self.color = "#{:02x}{:02x}{:02x}".format(r, g, b)
+        self.save()
+
     def __unicode__(self):
         return self.name
 
