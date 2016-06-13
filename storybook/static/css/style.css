@@ -254,10 +254,16 @@ header[role=banner] {
       font-weight: 400;
       margin: 0; }
     .story-detail .scenes .scene .info .meta {
+      color: #333;
+      font-size: .9em;
+      line-height: 1.4em;
+      margin-top: 5px; }
+    .story-detail .scenes .scene .info .synopsis {
       color: #888;
       font-size: .9em;
       font-style: italic;
-      margin-top: 3px; }
+      line-height: 1.4em;
+      margin-top: .5em; }
   .story-detail .scenes .scene + .scene > a {
     border-top: solid 1px #ddd; }
 .story-detail .scenes.sortable .handle {

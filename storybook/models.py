@@ -200,7 +200,7 @@ class Character(models.Model):
 
         # Choose a random hue
         hue = random.random()
-        r, g, b = colorsys.hsv_to_rgb(hue, 0.76, 0.79)
+        r, g, b = colorsys.hsv_to_rgb(hue, 0.47, 0.68)
 
         # Convert to hex
         r = int(math.ceil(r * 255))
