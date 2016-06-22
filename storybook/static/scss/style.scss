@@ -455,6 +455,13 @@ header[role=banner] {
 		hr + p {
 			text-indent: 0;
 		}
+
+		.comment {
+			color: #999;
+			font-style: italic;
+			margin: 2em 0;
+			padding: 0 1em 0 1.25em;
+		}
 	}
 
 	.fragment + .fragment {
@@ -611,6 +618,13 @@ html.edit {
 
 	.scene + .scene {
 		margin-top: 3em;
+	}
+
+	.comment {
+		color: #999;
+		font-style: italic;
+		margin: 2em 0;
+		padding: 0 1em 0 1.25em;
 	}
 
 	.placeholder {

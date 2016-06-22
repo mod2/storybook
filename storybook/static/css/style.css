@@ -321,6 +321,11 @@ header[role=banner] {
     text-indent: 1.25em; }
   .scene-detail .text hr + p {
     text-indent: 0; }
+  .scene-detail .text .comment {
+    color: #999;
+    font-style: italic;
+    margin: 2em 0;
+    padding: 0 1em 0 1.25em; }
 .scene-detail .fragment + .fragment {
   border-top: solid 1px #ddd;
   margin-top: 2em;
@@ -418,6 +423,11 @@ html.edit {
     text-indent: 1.25em; }
   .full-draft .scene + .scene {
     margin-top: 3em; }
+  .full-draft .comment {
+    color: #999;
+    font-style: italic;
+    margin: 2em 0;
+    padding: 0 1em 0 1.25em; }
   .full-draft .placeholder {
     color: #666;
     font-style: italic; }

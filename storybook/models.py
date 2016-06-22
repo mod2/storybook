@@ -87,7 +87,13 @@ class Scene(models.Model):
         latest_revision = self.latest_revision()
 
         if latest_revision:
+            # Get rid of extra space
             text = latest_revision.text.strip()
+
+            # Remove comments
+            text = re.sub(r"\/\/(.+?)(\n|$)", "", text)
+
+            # Remove newlines
             text = text.replace("\n", " ").replace("  ", " ").strip()
 
             words = re.split(r"\s+", text)
@@ -115,9 +121,14 @@ class Scene(models.Model):
 
     def html(self):
         text = self.text()
+
+        # Treat horizontal rules kindly
         text = text.replace('---', '%%%HR%%%')
 
         text = mistune.markdown(smartypants.smartypants(text))
+
+        # Wrap comments
+        text = re.sub(r"<p>\/\/(.+?)<\/p>", r"<div class='comment'>\1</div>", text)
 
         text = text.replace('<p>%%%HR%%%</p>', '<hr/>')
 
