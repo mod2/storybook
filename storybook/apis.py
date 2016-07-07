@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.shortcuts import render_to_response #, get_object_or_404, redirect
 import json
@@ -91,7 +92,7 @@ def api_add_story(request):
 
 ## New
 
-@login_required
+@csrf_exempt
 def api_process_payload(request):
     """ Processes a payload. """
 
