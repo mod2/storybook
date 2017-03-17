@@ -32,6 +32,9 @@ class Story(models.Model):
     def __unicode__(self):
         return self.title
 
+    def version(self):
+        return str(self.drafts.count()).zfill(4)
+
     def active_scenes(self):
         return self.scenes.exclude(status='discarded')
 

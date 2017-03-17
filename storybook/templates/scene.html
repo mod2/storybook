@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load humanize %}
 
 {% block pageheader %}
 <h1 class="container"><a href="{% url 'story' story.slug %}">{{ story.title }}</a></h1>
@@ -10,7 +11,7 @@
 		<div class="container">
 			<a class="edit button" href="{% url 'scene_edit' story.slug scene.id %}">Edit</a>
 
-			<div class="num">Scene {{ scene.order }} &mdash; {{ scene.word_count }} words</div>
+			<div class="num">Scene {{ scene.order }} &mdash; {{ scene.word_count|intcomma }} word{{ scene.word_count|pluralize }}</div>
 			<div class="title">{{ scene.title }}</div>
 
 			{% if scene.synopsis %}

@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load humanize %}
 
 {% block pageheader %}
 <h1 class="container">{{ story.title }}</h1>
@@ -6,13 +7,15 @@
 
 {% block content %}
 <section class="story-detail" data-edit-uri="{% url 'story_organize' story.slug %}">
-	{% if story.description %}
 	<div class="summary">
 		<div class="container">
-			{{ story.description_rendered|safe }}
+			<a class="edit button" href="">Edit Story</a>
+
+			<div class="num">{{ story.word_count|intcomma }} word{{ story.word_count|pluralize }}</div>
+			<div>v{{ story.version }}</div>
+			<div>{{ story.last_modified }}</div>
 		</div>
 	</div>
-	{% endif %}
 
 	<div class="scenes">
 		{% for scene in scenes %}
@@ -21,10 +24,7 @@
 				<span class="num">{{ scene.order }}</span>
 				<div class="info">
 					<h3>{{ scene.title_rendered|safe }}</h3>
-					<div class="meta"><span>{{ scene.word_count }}</span> word{% if scene.word_count != 1 %}s{% endif %} &mdash; {{ scene.status }}{% if scene.characters.count %} &mdash; {% for c in scene.characters.all %}{% if forloop.counter > 1 %}, {% endif %}<span style="color: {{ c.color }}">{{ c.name }}</span>{% endfor %}{% endif %}</div>
-					{% if scene.synopsis %}
-					<div class="synopsis">{{ scene.synopsis_rendered|safe }}</div>
-					{% endif %}
+					<div class="meta"><span>{{ scene.word_count|intcomma }}</span> word{{ scene.word_count|pluralize }}</div>
 				</div>
 			</a>
 		</div>
