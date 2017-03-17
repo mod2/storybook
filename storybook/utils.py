@@ -2,7 +2,7 @@ from django.conf import settings
 
 import json
 
-from .models import Story, Scene, Revision, Fragment, Character
+from .models import Story, Scene, Fragment
 
 
 def get_or_create_story(story_slug):
@@ -41,39 +41,10 @@ def get_or_create_story(story_slug):
 
     return story
 
-
-def get_or_create_character(name, story, scene):
-    character = None
-
-    # Try to get the character
-    try:
-        character = Character.objects.get(name=name, story=story)
-
-        # Add to this scene
-        character.scenes.add(scene)
-        character.save()
-    except Exception as e:
-        pass
-
-    # Not found, so create it
-    if character is None:
-        try:
-            character = Character()
-            character.name = name
-            character.story = story
-            character.save()
-            character.color = character.get_random_color()
-            character.scenes.add(scene)
-            character.save()
-        except Exception as e:
-            print("Couldn't create character", e)
-            pass
-
-    return character
-
-
 def process_scenes(payload):
-    """ Takes a payload and returns a list of scenes. """
+    """
+    Takes a payload and returns a list of scenes.
+    """
 
     response = {
         'scenes': [],
@@ -104,12 +75,6 @@ def process_scenes(payload):
                     'fragments': [],
                 })
                 current_scene = response['scenes'][-1]
-            elif keyword == 'synopsis':
-                # Add synopsis to current scene
-                current_scene['synopsis'] = parameters
-            elif keyword == 'characters':
-                # Add character list to current scene
-                current_scene['characters'] = [x.strip() for x in parameters.split(',')]
         else:
             if current_scene:
                 current_scene['fragments'].append(line)
@@ -118,9 +83,10 @@ def process_scenes(payload):
 
     return response
 
-
 def process_payload(payload):
-    """ Takes a payload and parses it out. """
+    """
+    Takes a payload and parses it out.
+    """
     status = 'success'
     message = ''
 
@@ -143,7 +109,7 @@ def process_payload(payload):
     if 'fragments' in response:
         f = Fragment()
         f.story = story
-        f.text = '\n'.join(response['fragments']).strip()
+        f.scene_text = '\n'.join(response['fragments']).strip()
         f.save()
 
     # Now go through any scenes
@@ -153,20 +119,9 @@ def process_payload(payload):
             s = Scene()
             s.story = story
             s.title = scene['title']
-            if 'synopsis' in scene:
-                s.synopsis = scene['synopsis']
             s.order = 500 + index
+            s.scene_text = '\n'.join(scene['fragments']).strip()
             s.save()
-
-            if 'characters' in scene:
-                for name in scene['characters']:
-                    c = get_or_create_character(name, story, s)
-
-            # Create the revision
-            r = Revision()
-            r.text = '\n'.join(scene['fragments']).strip()
-            r.scene = s
-            r.save()
         except Exception as e:
             status = 'error'
             message = e
@@ -177,5 +132,3 @@ def process_payload(payload):
         scene.save()
 
     return status, message
-
-

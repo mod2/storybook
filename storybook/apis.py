@@ -9,44 +9,23 @@ from django.http import JsonResponse
 from django.shortcuts import render_to_response #, get_object_or_404, redirect
 import json
 
-from .models import Story, Scene, Revision
+from .models import Story, Scene
 from .utils import process_payload
 
-def api_update_revision(request, story_slug, scene_id, revision_id):
-    """ Update revision for a scene """
-
-    if request.is_ajax() and request.method == 'POST':
-        text = json.loads(request.body.decode())['text']
-
-        if text.strip() == '':
-            return ''
-
-        # Get the scene
-        scene = Scene.objects.get(id=scene_id)
-
-        # Get the revision
-        revision = Revision.objects.get(id=revision_id)
-
-        # Update the revision
-        revision.text = text.strip()
-        revision.save()
-
-        return JsonResponse(json.dumps({ "status": "success", "id": revision.id }), safe=False)
-
 def api_update_scene(request, story_slug, scene_id):
-    """ Update scene metadata """
+    """
+    Update scene metadata.
+    """
 
     if request.is_ajax() and request.method == 'POST':
         data = json.loads(request.body.decode())
         title = data['title'].strip()
-        synopsis = data['synopsis'].strip()
 
         # Get the scene
         scene = Scene.objects.get(id=scene_id)
 
         # Update title/synopsis
         scene.title = title
-        scene.synopsis = synopsis
         scene.save()
 
         return JsonResponse(json.dumps({ "status": "success" }), safe=False)
@@ -61,7 +40,9 @@ def api_update_scene(request, story_slug, scene_id):
         return JsonResponse(json.dumps({ "status": "success" }), safe=False)
 
 def api_add_scene(request, story_slug):
-    """ Add a new scene """
+    """
+    Add a new scene.
+    """
 
     if request.is_ajax() and request.method == 'POST':
         # Get the story
@@ -71,14 +52,15 @@ def api_add_scene(request, story_slug):
         scene = Scene()
         scene.story = story
         scene.title = "Untitled"
-        scene.synopsis = ""
         scene.order = len(story.scenes.filter(status='active')) + 1
         scene.save()
 
         return JsonResponse(json.dumps({ "status": "success", "id": scene.id }), safe=False)
 
 def api_add_story(request):
-    """ Add a new story. """
+    """
+    Add a new story.
+    """
 
     if request.is_ajax() and request.method == 'POST':
         data = json.loads(request.body.decode())
@@ -94,7 +76,9 @@ def api_add_story(request):
 
 @csrf_exempt
 def api_process_payload(request):
-    """ Processes a payload. """
+    """
+    Processes a payload.
+    """
 
     if request.method == 'GET':
         payload = request.GET.get('payload', '').strip()
@@ -127,7 +111,9 @@ def api_process_payload(request):
         return JsonResponse(response)
 
 def api_reorder_scenes(request, story_slug):
-    """ Reorder scenes in a story (called by AJAX) """
+    """
+    Reorder scenes in a story (called by AJAX).
+    """
 
     if request.method == 'POST':
         key = request.POST.get('key', '')
@@ -143,10 +129,12 @@ def api_reorder_scenes(request, story_slug):
         scene.order = index + 1
         scene.save()
 
-    return JsonResponse(json.dumps({ "status": "success" }), safe=False)
+    return JsonResponse({ "status": "success" })
 
 def api_save_scene(request, story_slug, scene_id):
-    """ Add revision to a scene. """
+    """
+    Add revision to a scene.
+    """
 
     if request.method == 'POST':
         key = request.POST.get('key', '')
@@ -158,12 +146,11 @@ def api_save_scene(request, story_slug, scene_id):
     text = request.POST.get('text', '')
 
     # Get the scene
-    scene = Scene.objects.get(id=scene_id)
+    scene = Scene.objects.get(story__slug=story_slug, id=scene_id)
+    scene.text = text.strip()
+    scene.save()
 
-    # Create the revision
-    revision = Revision()
-    revision.scene = scene
-    revision.text = text.strip()
-    revision.save()
+    # Create the draft
+    scene
 
-    return JsonResponse(json.dumps({ "status": "success", "id": revision.id }), safe=False)
+    return JsonResponse({ "status": "success"})

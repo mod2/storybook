@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Story, Scene, Revision, Draft, Fragment, Character
+from .models import Story, Scene, Draft, Fragment
 
 @admin.register(Story)
 class StoryAdmin(admin.ModelAdmin):
@@ -10,12 +10,7 @@ class StoryAdmin(admin.ModelAdmin):
 
 @admin.register(Scene)
 class SceneAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'order', 'created', 'last_modified', 'story')
-
-
-@admin.register(Revision)
-class RevisionAdmin(admin.ModelAdmin):
-    list_display = ('scene', 'created')
+    list_display = ('title', 'order', 'created', 'last_modified', 'story')
 
 
 @admin.register(Draft)
@@ -27,22 +22,3 @@ class DraftAdmin(admin.ModelAdmin):
 class FragmentAdmin(admin.ModelAdmin):
     list_display = ('story', 'created')
 
-
-class CharacterAdminForm(forms.ModelForm):
-    class Meta:
-        model = Character
-        fields = [ 'name', 'color', 'story', 'scenes', ]
-
-    def __init__(self, *args, **kwargs):
-        super(CharacterAdminForm, self).__init__(*args, **kwargs)
-
-        story = Story.objects.get(id=self.initial['story'])
-
-        self.fields['scenes'].queryset = Scene.objects.filter(story=story)
-
-
-@admin.register(Character)
-class CharacterAdmin(admin.ModelAdmin):
-    form = CharacterAdminForm
-    list_display = ('name', 'color', 'story')
-    filter_horizontal = ('scenes',)

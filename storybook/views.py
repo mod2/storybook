@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import render_to_response #, get_object_or_404, redirect
 import json
 
-from .models import Story, Scene, Revision
+from .models import Story, Scene
 
 @login_required
 def home(request):
@@ -28,7 +28,7 @@ def story(request, story_slug):
     # Get story
     s = Story.objects.get(slug=story_slug)
 
-    scenes = s.scenes.exclude(status='discarded').order_by('order')
+    scenes = s.scenes.order_by('order')
 
     return render_to_response('story.html', {'title': s.title,
                                              'story': s,
@@ -46,7 +46,7 @@ def story_full(request, story_slug):
 
     # Get story and scenes
     s = Story.objects.get(slug=story_slug)
-    scenes = s.active_scenes().order_by('order')
+    scenes = s.scenes.all().order_by('order')
 
     return render_to_response('full_draft.html', {
                               'title': "Full Draft — {}".format(s.title),
@@ -64,7 +64,7 @@ def story_organize(request, story_slug):
 
     # Get story and scenes
     s = Story.objects.get(slug=story_slug)
-    scenes = s.active_scenes().order_by('order')
+    scenes = s.scenes.all().order_by('order')
 
     return render_to_response('organize.html', {
                               'title': "Organize — {}".format(s.title),
@@ -110,7 +110,7 @@ def story_characters(request, story_slug):
                               'request': request,
                              })
 @login_required
-def scene(request, story_slug, scene_id, revision_id=None):
+def scene(request, story_slug, scene_id):
     # Boilerplate
     stories = Story.objects.filter(status='active')
 

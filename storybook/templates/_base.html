@@ -35,7 +35,6 @@
 				{# We're on a story, so show story-specific stuff first #}
 				<div class="group story">
 					<a class="story-home" href="{% url 'story' story.slug %}">Story home</a>
-					<a class="characters" href="{% url 'story_characters' story.slug %}">Characters</a>
 					<a class="full-story" href="{% url 'story_full' story.slug %}">Full draft</a>
 					<a class="fragments" href="{% url 'story_fragments' story.slug %}">Fragments</a>
 					<a href="">Notebook</a>

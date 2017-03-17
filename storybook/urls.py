@@ -11,14 +11,12 @@ urlpatterns = [
     url(r'^logout/', auth_views.logout, { 'template_name': 'logout.html', 'next_page': '/login/' }, name='logout'),
 
     # Story
-    url(r'^story/(?P<story_slug>[^\/]+)/characters/$', sb_views.story_characters, name='story_characters'),
     url(r'^story/(?P<story_slug>[^\/]+)/full/$', sb_views.story_full, name='story_full'),
     url(r'^story/(?P<story_slug>[^\/]+)/fragments/$', sb_views.story_fragments, name='story_fragments'),
     url(r'^story/(?P<story_slug>[^\/]+)/organize/$', sb_views.story_organize, name='story_organize'),
     url(r'^story/(?P<story_slug>[^\/]+)/$', sb_views.story, name='story'),
 
-    # Scenes/revisions
-    url(r'^story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/revision/(?P<revision_id>[^\/]+)/$', sb_views.scene, name='scene'),
+    # Scenes
     url(r'^story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/edit/$', sb_views.scene_edit, name='scene_edit'),
     url(r'^story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/$', sb_views.scene, name='scene'),
 
