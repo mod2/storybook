@@ -60,8 +60,15 @@ def process_scenes(payload):
         line = line.strip()
 
         if len(line) >= 1 and line[0:2] == '::':
-            # Story title (get everything after ::story)
-            response['story'] = ' '.join(line[2:].split(' ')[1:]).strip()
+            # Story slug (get everything after ::)
+            response['story'] = line[2:].strip()
+        elif len(line) >= 3 and line[0:2] == '##':
+            # New scene
+            response['scenes'].append({
+                'title': line[2:].strip(),
+                'fragments': [],
+            })
+            current_scene = response['scenes'][-1]
         elif len(line) >= 1 and line[0] == ':':
             # Metadata 
             bits = line[1:].split(' ')
@@ -109,7 +116,7 @@ def process_payload(payload):
     if 'fragments' in response:
         f = Fragment()
         f.story = story
-        f.scene_text = '\n'.join(response['fragments']).strip()
+        f.text = '\n'.join(response['fragments']).strip()
         f.save()
 
     # Now go through any scenes
@@ -120,7 +127,7 @@ def process_payload(payload):
             s.story = story
             s.title = scene['title']
             s.order = 500 + index
-            s.scene_text = '\n'.join(scene['fragments']).strip()
+            s.text = '\n'.join(scene['fragments']).strip()
             s.save()
         except Exception as e:
             status = 'error'

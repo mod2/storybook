@@ -34,6 +34,7 @@ def story(request, story_slug):
                                              'story': s,
                                              'key': settings.SECRET_KEY,
                                              'fragments': s.fragments.all(),
+                                             'drafts': s.drafts.all(),
                                              'scenes': scenes,
                                              'stories': stories,
                                              'request': request,
@@ -88,24 +89,6 @@ def story_fragments(request, story_slug):
                               'story': s,
                               'key': settings.SECRET_KEY,
                               'fragments': s.fragments.all(),
-                              'stories': stories,
-                              'request': request,
-                             })
-@login_required
-def story_characters(request, story_slug):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
-    # Get story and scenes
-    s = Story.objects.get(slug=story_slug)
-
-    characters = s.characters.all()
-
-    return render_to_response('characters.html', {
-                              'title': "Characters — {}".format(s.title),
-                              'story': s,
-                              'key': settings.SECRET_KEY,
-                              'characters': characters,
                               'stories': stories,
                               'request': request,
                              })

@@ -138,6 +138,9 @@ class Draft(models.Model):
     def __unicode__(self):
         return self.story_text
 
+    class Meta:
+        ordering = ['created']
+
 
 class Fragment(models.Model):
     text = models.TextField(null=True, blank=True)

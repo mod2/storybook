@@ -32,10 +32,20 @@
 	</div>
 
 	<div class="fragments">
+        <h2>Fragments</h2>
+
 		{% for frag in fragments %}
 		<div class="fragment" data-id="{{ frag.id }}">
 			{{ frag.html|truncatewords_html:"100"|safe }}
 		</div>
+		{% endfor %} 
+	</div>
+
+	<div class="fragments">
+        <h2>Drafts</h2>
+
+		{% for d in drafts %}
+        <a href="">v{{ forloop.counter1 }} ({{ d.created }})</a>
 		{% endfor %} 
 	</div>
 </section>
