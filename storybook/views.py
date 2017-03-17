@@ -33,6 +33,7 @@ def story(request, story_slug):
     return render_to_response('story.html', {'title': s.title,
                                              'story': s,
                                              'key': settings.SECRET_KEY,
+                                             'fragments': s.fragments.all(),
                                              'scenes': scenes,
                                              'stories': stories,
                                              'request': request,

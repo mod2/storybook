@@ -30,5 +30,13 @@
 		</div>
 		{% endfor %} 
 	</div>
+
+	<div class="fragments">
+		{% for frag in fragments %}
+		<div class="fragment" data-id="{{ frag.id }}">
+			{{ frag.html|safe }}
+		</div>
+		{% endfor %} 
+	</div>
 </section>
 {% endblock content %}

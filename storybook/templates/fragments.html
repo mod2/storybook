@@ -7,7 +7,7 @@
 {% block content %}
 <section class="scene-detail">
 	<div class="text container">
-		{% for frag in fragments %}
+	{% for frag in fragments %}
 		<div class="fragment" data-id="{{ frag.id }}">
 			{{ frag.html|safe }}
 		</div>
