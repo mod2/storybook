@@ -22,8 +22,8 @@ class Story(models.Model):
     description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUSES,
                               default=STATUSES[0][0])
-    created = models.DateTimeField(default=timezone.now())
-    last_modified = models.DateTimeField(default=timezone.now())
+    created = models.DateTimeField(default=timezone.now)
+    last_modified = models.DateTimeField(default=timezone.now)
     order = models.PositiveSmallIntegerField(default=50)
 
     def __str__(self):
@@ -63,8 +63,8 @@ class Scene(models.Model):
     synopsis = models.TextField(null=True, blank=True)
     order = models.PositiveSmallIntegerField(default=1)
 
-    created = models.DateTimeField(default=timezone.now())
-    last_modified = models.DateTimeField(default=timezone.now())
+    created = models.DateTimeField(default=timezone.now)
+    last_modified = models.DateTimeField(default=timezone.now)
 
     story = models.ForeignKey(Story, related_name='scenes')
 
@@ -156,7 +156,7 @@ class Scene(models.Model):
 class Revision(models.Model):
     text = models.TextField(null=True, blank=True)
     scene = models.ForeignKey(Scene, related_name='revisions')
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=timezone.now)
 
     def __unicode__(self):
         return "{}".format(self.created)
@@ -171,7 +171,7 @@ class Revision(models.Model):
 class Draft(models.Model):
     story = models.ForeignKey(Story, related_name='drafts')
     json = models.TextField()
-    created = models.DateTimeField(default=timezone.now())
+    created = models.DateTimeField(default=timezone.now)
 
     def __unicode__(self):
         return "Draft on {}".format(self.created, len(self.json))
@@ -179,7 +179,7 @@ class Draft(models.Model):
 
 class Fragment(models.Model):
     text = models.TextField(null=True, blank=True)
-    created = models.DateTimeField(default=timezone.now())
+    created = models.DateTimeField(default=timezone.now)
     story = models.ForeignKey(Story, related_name='fragments')
 
     def __unicode__(self):
