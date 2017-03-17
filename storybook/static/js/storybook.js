@@ -132,7 +132,7 @@ $(document).ready(function() {
 		};
 
 		if ($("#tray").data("story-slug")) {
-			data['payload'] = "::story " + $("#tray").data("story-slug") + "\n\n" + data['payload'];
+			data['payload'] = "::" + $("#tray").data("story-slug") + "\n\n" + data['payload'];
 		}
 
 		$.ajax({

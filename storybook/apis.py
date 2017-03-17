@@ -151,8 +151,48 @@ def api_save_scene(request, story_slug, scene_id):
 
     # Get the scene
     scene = Scene.objects.get(story__slug=story_slug, id=scene_id)
-    scene.text = text.strip()
-    scene.save()
+
+    if '\n## ' or ':scene' in text:
+        # There's a ##, so split on the scene
+
+        # First normalize to ##
+        text = text.replace(':scene', '\n##')
+
+        # Split on ##
+        data = text.split('\n## ')
+
+        # Save [0] to the scene
+        scene.text = data[0].strip()
+        scene.save()
+
+        d_len = len(data)
+        if d_len > 1:
+            # New scene(s), so first reorder following scenes
+            for index, scn in enumerate(Scene.objects.filter(story__slug=story_slug, order__gt=scene.order)):
+                # Move them d_len forward in the order list
+                scn.order = scn.order + d_len - 1
+                scn.save()
+
+            # Now go through and make each new scene
+            for i, d in enumerate(data[1:]):
+                scene_data = data[i+1]
+
+                # strip out title vs. text
+                lines = scene_data.split('\n\n')
+                scene_title = lines[0].strip()
+                scene_text = '\n\n'.join(lines[1:]).strip()
+
+                # create a new scene object
+                new_scene = Scene()
+                new_scene.title = scene_title
+                new_scene.story = scene.story
+                new_scene.order = scene.order + i + 1
+                new_scene.text = scene_text
+                new_scene.save()
+    else:
+        # No new scenes
+        scene.text = text.strip()
+        scene.save()
 
     # Make new draft
     story = Story.objects.get(slug=story_slug)
