@@ -34,7 +34,7 @@
 	<div class="fragments">
 		{% for frag in fragments %}
 		<div class="fragment" data-id="{{ frag.id }}">
-			{{ frag.html|safe }}
+			{{ frag.html|truncatewords_html:"100"|safe }}
 		</div>
 		{% endfor %} 
 	</div>
