@@ -42,11 +42,6 @@ class Story(models.Model):
 
         return word_count
 
-    def make_new_draft(self):
-        draft = Draft()
-        draft.story = self
-        draft.story_text = utils.get_full_draft(story)
-        draft.save()
 
     class Meta:
         verbose_name_plural = "stories"

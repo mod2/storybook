@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response #, get_object_or_404, redirect
 import json
 
 from .models import Story, Scene
-from .utils import process_payload
+from .utils import process_payload, make_new_draft
 
 def api_update_scene(request, story_slug, scene_id):
     """
@@ -129,6 +129,10 @@ def api_reorder_scenes(request, story_slug):
         scene.order = index + 1
         scene.save()
 
+    # Make new draft
+    story = Story.objects.get(slug=story_slug)
+    make_new_draft(story)
+
     return JsonResponse({ "status": "success" })
 
 def api_save_scene(request, story_slug, scene_id):
@@ -150,7 +154,8 @@ def api_save_scene(request, story_slug, scene_id):
     scene.text = text.strip()
     scene.save()
 
-    # Create the draft
-    scene
+    # Make new draft
+    story = Story.objects.get(slug=story_slug)
+    make_new_draft(story)
 
     return JsonResponse({ "status": "success"})

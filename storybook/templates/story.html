@@ -44,9 +44,11 @@
 	<div class="fragments">
         <h2>Drafts</h2>
 
+        <ul>
 		{% for d in drafts %}
-        <a href="">v{{ forloop.counter1 }} ({{ d.created }})</a>
+            <li><a href="">v{{ forloop.counter|stringformat:"04d" }} ({{ d.created }})</a></li>
 		{% endfor %} 
+        </ul>
 	</div>
 </section>
 {% endblock content %}

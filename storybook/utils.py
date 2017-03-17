@@ -1,8 +1,9 @@
 from django.conf import settings
 
+import datetime
 import json
 
-from .models import Story, Scene, Fragment
+from .models import Story, Scene, Fragment, Draft
 
 
 def get_or_create_story(story_slug):
@@ -138,4 +139,41 @@ def process_payload(payload):
         scene.order = index + 1
         scene.save()
 
+    # Save a new draft
+    story.make_new_draft()
+
     return status, message
+
+
+def get_full_draft(story):
+    """
+    Gets a full plain-text draft of the given story.
+    """
+    scenes = story.scenes.all().order_by('order')
+
+    # Story title
+    response = '# {} -- v{} -- {}\n'.format(story.title, str(story.drafts.count()).zfill(4), datetime.date.today().strftime("%Y-%m-%d"))
+
+    for scene in scenes:
+        if scene.title or scene.text:
+            if scene.title:
+                response += '\n## {}\n'.format(scene.title)
+            else:
+                response += '\n## Untitled Scene\n'
+
+            response += '\n'
+
+            if scene.text:
+                response += '{}\n\n'.format(scene.text)
+
+    return response.strip()
+
+
+def make_new_draft(story):
+    """
+    Makes a new draft for a given story.
+    """
+    draft = Draft()
+    draft.story = story
+    draft.story_text = get_full_draft(story)
+    draft.save()
