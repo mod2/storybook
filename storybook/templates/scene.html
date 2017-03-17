@@ -2,28 +2,40 @@
 {% load humanize %}
 
 {% block pageheader %}
-<h1 class="container"><a href="{% url 'story' story.slug %}">{{ story.title }}</a></h1>
+<h1 class="container"><a href="{% url 'story' story.slug %}">::{{ story.slug }}</a></h1>
 {% endblock pageheader %}
 
 {% block content %}
-<section class="scene-detail" data-edit-uri="{% url 'scene_edit' story.slug scene.id %}" {% if nav.next %}data-next-uri="{% url 'scene' story.slug nav.next.id %}"{% endif %} {% if nav.prev %}data-prev-uri="{% url 'scene' story.slug nav.prev.id %}"{% endif %}>
-	<div class="summary">
-		<div class="container">
-			<a class="edit button" href="{% url 'scene_edit' story.slug scene.id %}">Edit</a>
+<section class="scene-detail controls-content" data-edit-uri="{% url 'scene_edit' story.slug scene.id %}" {% if nav.next %}data-next-uri="{% url 'scene' story.slug nav.next.id %}"{% endif %} {% if nav.prev %}data-prev-uri="{% url 'scene' story.slug nav.prev.id %}"{% endif %}>
+	<div class="content">
+		<div class="summary">
+			<div class="container">
+				<div class="num">Scene {{ scene.order }} &mdash; {{ scene.word_count|intcomma }} word{{ scene.word_count|pluralize }}</div>
+				<div class="title">{{ scene.title }}</div>
 
-			<div class="num">Scene {{ scene.order }} &mdash; {{ scene.word_count|intcomma }} word{{ scene.word_count|pluralize }}</div>
-			<div class="title">{{ scene.title }}</div>
+				{% if nav.prev %}
+				<a class="prev-scene" href="{% url 'scene' story.slug nav.prev.id %}">Previous scene</a>
+				{% endif %}
+				{% if nav.next %}
+				<a class="next-scene" href="{% url 'scene' story.slug nav.next.id %}">Next scene</a>
+				{% endif %}
 
-			{% if scene.synopsis %}
-			<div class="synopsis">{{ scene.synopsis_rendered|safe }}</div>
-			{% endif %}
+				<a href="{% url 'admin:storybook_scene_change' scene.id %}" target="_blank">Scene admin</a>
+			</div>
+		</div>
+
+		<div class="text">
+			<div class="container">
+				{{ scene.html|safe }}
+			</div>
 		</div>
 	</div>
 
-	<div class="text">
-		<div class="container">
-			{{ scene.html|safe }}
+	<footer class="controls">
+		<div class="controls">
+			<a class="cancel" href="{% url 'story' story.slug %}">Story</a>
+			<a class="button save" href="{% url 'scene_edit' story.slug scene.id %}">Edit Scene</a>
 		</div>
-	</div>
+	</footer>
 </section>
 {% endblock content %}

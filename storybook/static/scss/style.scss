@@ -481,20 +481,29 @@ header[role=banner] {
 }
 
 
-/* Scene edit */
+/* Control bar setup */
 /* -------------------------------------------------- */
 
-.scene-edit {
+.controls-content {
 	-webkit-display: flex;
 	-webkit-flex-direction: column;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 
-	.text {
+	.content {
 		-webkit-display: flex;
+		-webkit-flex-direction: column;
 		display: flex;
+		flex-direction: column;
 		height: 100%;
+
+		.text {
+			-webkit-display: flex;
+			display: flex;
+			height: 100%;
+			width: 100%;
+		}
 
 		textarea {
 			-webkit-flex: 1;
@@ -513,7 +522,8 @@ header[role=banner] {
 		}
 	}
 
-	footer {
+	// Footer controls
+	footer.controls {
 		background: #fff;
 		box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
 		font-size: 1.2em;
@@ -541,7 +551,7 @@ header[role=banner] {
 }
 
 @media screen and (min-width: 600px) {
-	.scene-edit {
+	.controls-content {
 		.text textarea {
 			font-size: 1.3em;
 			line-height: 1.45em;
@@ -550,7 +560,7 @@ header[role=banner] {
 			padding: 50px 50px 100px;
 		}
 
-		footer .controls {
+		footer.controls .controls {
 			margin: 0px auto;
 			max-width: 600px;
 			padding-left: 50px;
@@ -560,13 +570,13 @@ header[role=banner] {
 }
 
 @media screen and (min-width: 650px) {
-	.scene-edit {
+	.controls-content {
 		.text textarea {
 			padding-left: 0;
 			padding-right: 0;
 		}
 
-		footer .controls {
+		footer.controls .controls {
 			padding-left: 0;
 			padding-right: 0;
 		}
@@ -574,7 +584,7 @@ header[role=banner] {
 }
 
 @media screen and (min-width: 800px) {
-	.scene-edit {
+	.controls-content {
 		.text textarea {
 			font-size: 1.4em;
 			line-height: 1.45em;

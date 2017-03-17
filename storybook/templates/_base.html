@@ -1,5 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
+
 <html {% block htmlclass %}{% endblock htmlclass %}>
 <head>
 	<title>{% if title %}{{ title }} — {% endif %}Storybook</title>
@@ -30,23 +31,6 @@
 	<div class="wrapper">
 		{% block menu %}
 		<nav role="menu">
-			{% if scene %}
-				<div class="group scene">
-				{# On a scene page #}
-				{% if nav.next %}
-				<a class="next-scene" href="{% url 'scene' story.slug nav.next.id %}">Next scene</a>
-				{% endif %}
-				{% if nav.prev %}
-				<a class="prev-scene" href="{% url 'scene' story.slug nav.prev.id %}">Previous scene</a>
-				{% endif %}
-				<a href="{% url 'admin:storybook_scene_change' scene.id %}" target="_blank">Scene admin</a>
-				<a href="{% url 'scene' story.slug scene.id %}">Latest revision</a>
-				{% for rev in scene.revisions.all %}
-				<a class="revision" href="{% url 'scene' story.slug scene.id rev.id %}">{{ rev.created|date:"P Y-m-d" }}</a>
-				{% endfor %}
-				</div>
-			{% endif %}
-
 			{% if story %}
 				{# We're on a story, so show story-specific stuff first #}
 				<div class="group story">
