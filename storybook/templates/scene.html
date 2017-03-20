@@ -2,7 +2,7 @@
 {% load humanize %}
 
 {% block pageheader %}
-<h1 class="container"><a href="{% url 'story' story.slug %}">::{{ story.slug }}</a></h1>
+<h1 class="container">::<a href="{% url 'story' story.slug %}">{{ story.slug }}</a></h1>
 <div class="summary container">
 	<span class="version">v{{ story.version }}</span>
 	&mdash;

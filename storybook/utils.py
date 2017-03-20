@@ -42,6 +42,7 @@ def get_or_create_story(story_slug):
 
     return story
 
+
 def process_scenes(payload):
     """
     Takes a payload and returns a list of scenes.
@@ -90,6 +91,7 @@ def process_scenes(payload):
                 response['fragments'].append(line)
 
     return response
+
 
 def process_payload(payload):
     """
@@ -163,7 +165,7 @@ def get_full_draft(story):
 
             response += '\n'
 
-            if scene.text:
+            if scene.text is not None:
                 response += '{}\n\n'.format(scene.text)
 
     return response.strip()

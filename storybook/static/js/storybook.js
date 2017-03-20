@@ -242,7 +242,7 @@ $(document).ready(function() {
 		return false;
 	}
 
-	$(".scene-edit .save.button").on("click", function() {
+	$("html.edit .save.button").on("click", function() {
 		_saveSceneEdit();
 		return false;
 	});

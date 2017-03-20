@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.shortcuts import render_to_response #, get_object_or_404, redirect
+from django.utils import timezone
 import json
 
 from .models import Story, Scene
@@ -194,8 +195,10 @@ def api_save_scene(request, story_slug, scene_id):
         scene.text = text.strip()
         scene.save()
 
-    # Make new draft
+    # Make new draft and update last_modified
     story = Story.objects.get(slug=story_slug)
     make_new_draft(story)
+    story.last_modified = timezone.now()
+    story.save()
 
     return JsonResponse({ "status": "success"})

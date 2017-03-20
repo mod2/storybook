@@ -216,10 +216,15 @@ header[role=banner] {
 	}
 
 	& > h1.container {
+        color: #999;
 		font-size: 1.4em;
 		font-weight: 400;
 		margin-bottom: .7em;
 		margin-top: 0;
+
+        span {
+            color: #111;
+        }
 
 		a {
 			color: #111;

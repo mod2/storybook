@@ -169,10 +169,13 @@ header[role=banner] {
       header[role=banner] > .container h1 a {
         color: #6baf60; }
   header[role=banner] > h1.container {
+    color: #999;
     font-size: 1.4em;
     font-weight: 400;
     margin-bottom: .7em;
     margin-top: 0; }
+    header[role=banner] > h1.container span {
+      color: #111; }
     header[role=banner] > h1.container a {
       color: #111;
       font-size: 1em;
