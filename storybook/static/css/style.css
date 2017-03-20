@@ -278,6 +278,8 @@ header[role=banner] {
 
 .story-detail .scenes {
   margin-top: .5em; }
+.story-detail .scenes.sortable .scene:first-child > a {
+  border-top: none; }
 .story-detail .scenes.sortable .handle {
   -webkit-align-items: center;
   -webkit-display: flex;

@@ -244,7 +244,9 @@ $(document).ready(function() {
 
 	function _cancelSceneEdit() {
 		var url = $(".scene-edit").data("scene-uri");
-		window.location.href = url;
+        if (url) {
+            window.location.href = url;
+        }
 	}
 
 	function _saveSceneEdit() {
@@ -293,12 +295,14 @@ $(document).ready(function() {
 		moveCaretToEnd($(".story-edit .text textarea")[0]);
 	}
 
-	function _cancelStory() {
+	function _cancelStoryEdit() {
 		var url = $(".story-edit").data("story-uri");
-		window.location.href = url;
+        if (url) {
+            window.location.href = url;
+        }
 	}
 
-	function _saveStory() {
+	function _saveStoryEdit() {
 		var url = $(".story-edit").data("uri");
 
 		var text = $(".story-edit .text textarea").val().trim();
@@ -325,13 +329,13 @@ $(document).ready(function() {
 	}
 
 	$("html.edit .save-story.button").on("click", function() {
-		_saveStory();
+		_saveStoryEdit();
 		return false;
 	});
 
 	var field = document.querySelector('.story-edit .text textarea');
-	Mousetrap(field).bind('esc', _cancelStory);
-	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveStory);
+	Mousetrap(field).bind('esc', _cancelStoryEdit);
+	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveStoryEdit);
 
 
 	// Story detail

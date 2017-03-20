@@ -384,6 +384,10 @@ header[role=banner] {
 	}
 
 	.scenes.sortable {
+        .scene:first-child > a {
+            border-top: none;
+        }
+
 		.handle {
 			-webkit-align-items: center;
 			-webkit-display: flex;
