@@ -152,7 +152,7 @@ def get_full_draft(story):
     scenes = story.scenes.all().order_by('order')
 
     # Story title
-    response = '# {} -- v{} -- {}\n'.format(story.title, str(story.drafts.count()).zfill(4), datetime.date.today().strftime("%Y-%m-%d"))
+    response = '# {} -- v{} -- {}\n'.format(story.title, str(story.drafts.count()).zfill(3), datetime.date.today().strftime("%Y-%m-%d"))
 
     for scene in scenes:
         if scene.title or scene.text:

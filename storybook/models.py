@@ -32,7 +32,7 @@ class Story(models.Model):
         return self.title
 
     def version(self):
-        return str(self.drafts.count()).zfill(4)
+        return str(self.drafts.count()).zfill(3)
 
     def word_count(self):
         word_count = 0
