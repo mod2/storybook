@@ -202,6 +202,35 @@ def api_save_scene(request, story_slug, scene_id):
 
     return JsonResponse({ "status": "success"})
 
+def api_save_story(request, story_slug):
+    """
+    Save a full story.
+    """
+
+    try:
+        if request.method == 'POST':
+            key = request.POST.get('key', '')
+
+        # Make sure we have the secret key
+        if key != settings.SECRET_KEY:
+            return JsonResponse({})
+
+        text = request.POST.get('text', '')
+
+        story = Story.objects.get(slug=story_slug)
+
+        # Strip # story name off text
+        # Wipe out all scenes
+        # process_payload on text
+        # Create new scene for each scene in text
+
+        story.last_modified = timezone.now()
+        story.save()
+
+        return JsonResponse({"status": "success"})
+    except Exception as e:
+        return JsonResponse({"status": "error"}, status_code=500)
+
 def api_save_draft(request, story_slug):
     """
     Saves a new draft of a story.

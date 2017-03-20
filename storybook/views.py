@@ -9,6 +9,7 @@ from django.shortcuts import render_to_response #, get_object_or_404, redirect
 import json
 
 from .models import Story, Scene
+from .utils import get_full_draft
 
 @login_required
 def home(request):
@@ -134,4 +135,23 @@ def scene_edit(request, story_slug, scene_id):
                                              'stories': stories,
                                              'request': request,
                                             })
+
+@login_required
+def story_edit(request, story_slug):
+    # Boilerplate
+    stories = Story.objects.filter(status='active')
+
+    # Get story
+    s = Story.objects.get(slug=story_slug)
+
+    # Get the text
+    story_text = get_full_draft(s)
+
+    return render_to_response('story_edit.html', {'title': 'Edit Story — {}'.format(s.title),
+                                                  'key': settings.SECRET_KEY,
+                                                  'story': s,
+                                                  'text': story_text,
+                                                  'stories': stories,
+                                                  'request': request,
+                                                 })
 
