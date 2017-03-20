@@ -383,10 +383,12 @@ header[role=banner] {
     flex-direction: column;
     height: 100%; }
     #frame .content .text {
+      /*
       -webkit-display: flex;
       display: flex;
       height: 100%;
       padding-bottom: 3em;
+      */
       width: 100%; }
     #frame .content textarea {
       -webkit-flex: 1;
