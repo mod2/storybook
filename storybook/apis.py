@@ -195,9 +195,8 @@ def api_save_scene(request, story_slug, scene_id):
         scene.text = text.strip()
         scene.save()
 
-    # Make new draft and update last_modified
+    # Update last_modified on the story
     story = Story.objects.get(slug=story_slug)
-    make_new_draft(story)
     story.last_modified = timezone.now()
     story.save()
 
