@@ -548,12 +548,7 @@ header[role=banner] {
 		height: 100%;
 
 		.text {
-			/*
-			-webkit-display: flex;
-			display: flex;
 			height: 100%;
-			padding-bottom: 3em;
-			*/
 			width: 100%;
 		}
 
@@ -568,6 +563,7 @@ header[role=banner] {
 			overflow-y: scroll;
 			padding: 1em 25px 4em;
 			resize: none;
+			width: 100%;
 			
 			&:focus {
 				outline: none;
