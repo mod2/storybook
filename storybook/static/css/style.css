@@ -417,6 +417,7 @@ footer#footer {
         color: #777; }
     footer#footer .controls .button {
       background: none;
+      margin-left: 2em;
       padding: 3px 0px 5px; }
       footer#footer .controls .button:hover {
         color: #777; }
