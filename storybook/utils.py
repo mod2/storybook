@@ -166,7 +166,7 @@ def get_full_draft(story):
             response += '\n'
 
             if scene.text is not None:
-                response += '{}\n\n'.format(scene.text)
+                response += '{}\n\n'.format(scene.text.encode('utf-8'))
 
     return response.strip()
 
