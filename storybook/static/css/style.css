@@ -394,7 +394,7 @@ header[role=banner] {
       height: 100%;
       line-height: 1.45em;
       overflow-y: scroll;
-      padding: 1em 25px 4em;
+      padding: 1em 2px 4em;
       resize: none;
       width: 100%; }
       #frame .content textarea:focus {
@@ -432,7 +432,7 @@ footer#footer {
     line-height: 1.45em;
     margin: 0px auto;
     max-width: 600px;
-    padding: 50px 50px 100px; }
+    padding: 50px 2px 100px; }
 
   #footer .controls {
     margin: 0px auto;
@@ -440,10 +440,6 @@ footer#footer {
     padding-left: 50px;
     padding-right: 50px; } }
 @media screen and (min-width: 650px) {
-  #frame .text textarea {
-    padding-left: 0;
-    padding-right: 0; }
-
   #footer .controls {
     padding-left: 0;
     padding-right: 0; } }
