@@ -6,11 +6,15 @@
 {% block content %}
 <section class="dashboard">
 	{% for story in stories %}
-	<div class="story">
+	<div class="story container">
 		<a href="{% url 'story' story.slug %}" class="container">
 			<h2>{{ story.title }}</h2>
             <div class="info">{{ story.word_count|intcomma }} word{{ story.word_count|pluralize }} &mdash; {{ story.scenes.count }} scene{{ story.scenes.count|pluralize }}</div>
 		</a>
+	</div>
+	{% empty %}
+	<div class="story container">
+		<h2>No stories yet</h2>
 	</div>
 	{% endfor %}
 
@@ -19,7 +23,7 @@
 		<h3 class="container">Inactive Stories</h3>
 
 		{% for story in inactive_stories %}
-		<div class="story">
+		<div class="story container">
 			<a href="{% url 'story' story.slug %}" class="container">
 				<h2>{{ story.title }}</h2>
                 <div class="info">{{ story.word_count|intcomma }} word{{ story.word_count|pluralize }} &mdash; {{ story.scenes.count }} scene{{ story.scenes.count|pluralize }}</div>

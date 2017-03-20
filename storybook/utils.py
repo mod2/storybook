@@ -84,7 +84,7 @@ def process_scenes(payload):
                     'fragments': [],
                 })
                 current_scene = response['scenes'][-1]
-        else:
+        elif line.strip() != '':
             if current_scene:
                 current_scene['fragments'].append(line)
             else:
@@ -117,10 +117,12 @@ def process_payload(payload):
     
     # If we haven't specified a scene, we've just got a fragment
     if 'fragments' in response:
-        f = Fragment()
-        f.story = story
-        f.text = '\n'.join(response['fragments']).strip()
-        f.save()
+        f_text = '\n'.join(response['fragments']).strip()
+        if f_text != '':
+            f = Fragment()
+            f.story = story
+            f.text = f_text
+            f.save()
 
     # Now go through any scenes
     for index, scene in enumerate(scenes):

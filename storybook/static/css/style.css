@@ -303,7 +303,7 @@ header[role=banner] {
 /* -------------------------------------------------- */
 .story-lists {
   border-top: solid 1px #ddd;
-  margin-top: 2em;
+  padding-bottom: 2em;
   padding-top: 2em; }
   .story-lists h2 {
     font-size: 1.2em;
