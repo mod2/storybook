@@ -372,9 +372,10 @@ header[role=banner] {
   -webkit-flex: 1;
   -webkit-overflow-scrolling: touch;
   flex: 1;
+  height: 100%;
   overflow-y: scroll; }
   #frame #content {
-    padding-bottom: 8em; }
+    padding-bottom: 5em; }
   #frame .content {
     -webkit-display: flex;
     -webkit-flex-direction: column;
@@ -385,6 +386,7 @@ header[role=banner] {
       -webkit-display: flex;
       display: flex;
       height: 100%;
+      padding-bottom: 3em;
       width: 100%; }
     #frame .content textarea {
       -webkit-flex: 1;
@@ -392,6 +394,7 @@ header[role=banner] {
       border: none;
       flex: 1;
       font-size: 1.2em;
+      height: 100%;
       line-height: 1.45em;
       overflow-y: scroll;
       padding: 1em 25px 4em;
