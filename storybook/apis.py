@@ -5,13 +5,13 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render_to_response #, get_object_or_404, redirect
 from django.utils import timezone
 import json
 
 from .models import Story, Scene
-from .utils import process_payload, make_new_draft
+from .utils import process_payload, make_new_draft, get_full_draft
 
 def api_update_scene(request, story_slug, scene_id):
     """
@@ -251,3 +251,23 @@ def api_save_draft(request, story_slug):
         return JsonResponse({ "status": "success"})
     except Exception as e:
         return JsonResponse({ "status": "error"}, status_code=500)
+def api_get_draft(request, story_slug):
+    """
+    Gets a draft of a story.
+    """
+
+    try:
+        if request.method == 'GET':
+            key = request.GET.get('key', '')
+
+        # Make sure we have the secret key
+        if key != settings.SECRET_KEY:
+            return JsonResponse({})
+
+        story = Story.objects.get(slug=story_slug)
+        text = get_full_draft(story)
+
+        return HttpResponse(text)
+    except Exception as e:
+        return HttpResponse("error: {}".format(e), status_code=500)
+

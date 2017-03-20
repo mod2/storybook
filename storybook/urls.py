@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^api/story/(?P<story_slug>[^\/]+)/reorder-scenes/$', sb_apis.api_reorder_scenes, name='api_reorder_scenes'),
     url(r'^api/story/(?P<story_slug>[^\/]+)/save-story/$', sb_apis.api_save_story, name='api_save_story'),
     url(r'^api/story/(?P<story_slug>[^\/]+)/save-draft/$', sb_apis.api_save_draft, name='api_save_draft'),
+    url(r'^api/story/(?P<story_slug>[^\/]+)/get-draft/$', sb_apis.api_get_draft, name='api_get_draft'),
     url(r'^api/story/(?P<story_slug>[^\/]+)/(?P<scene_id>[^\/]+)/$', sb_apis.api_save_scene, name='api_save_scene'),
 
     # Home
