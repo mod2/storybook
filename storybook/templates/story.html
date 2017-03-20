@@ -42,6 +42,8 @@
 			<li class="fragment" data-id="{{ frag.id }}">
 				{{ frag.html|truncatewords_html:"100"|safe }}
 			</li>
+        {% empty %}
+            <li class="fragment">No fragments</li>
 		{% endfor %} 
 		</ul>
 	</div>
@@ -52,6 +54,8 @@
         <ul>
 		{% for d in drafts %}
             <li><a href="">v{{ forloop.counter|stringformat:"03d" }} ({{ d.created|date:"Y-m-d H:i:s" }})</a></li>
+        {% empty %}
+            <li class="draft">No drafts</li>
 		{% endfor %} 
         </ul>
 	</div>

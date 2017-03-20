@@ -141,9 +141,6 @@ def process_payload(payload):
         scene.order = index + 1
         scene.save()
 
-    # Save a new draft
-    story.make_new_draft()
-
     return status, message
 
 
