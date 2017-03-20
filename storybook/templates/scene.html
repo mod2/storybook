@@ -30,12 +30,12 @@
 			</div>
 		</div>
 	</div>
-
-	<footer class="controls">
-		<div class="controls">
-			<a class="cancel" href="{% url 'story' story.slug %}">Story</a>
-			<a class="button save" href="{% url 'scene_edit' story.slug scene.id %}">Edit Scene</a>
-		</div>
-	</footer>
 </section>
 {% endblock content %}
+
+{% block footercontent %}
+	<div class="controls">
+		<a class="cancel" href="{% url 'story' story.slug %}">Story</a>
+		<a class="button save" href="{% url 'scene_edit' story.slug scene.id %}">Edit Scene</a>
+	</div>
+{% endblock footercontent %}

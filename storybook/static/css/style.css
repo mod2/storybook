@@ -28,15 +28,18 @@
   box-sizing: border-box;
   font-family: Charter, Georgia, Times New Roman; }
 
+html {
+  height: 100%; }
+
 body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  padding-bottom: 100px; }
+  padding: 0; }
 
 .container {
   margin: 0px auto;
   max-width: 625px;
-  width: 85%; }
+  padding: 0 22px; }
 
 .button {
   background: #0099cc;
@@ -45,7 +48,7 @@ body {
   padding: 3px 15px 5px;
   text-decoration: none; }
   .button:hover {
-    background: #444; }
+    background: #777; }
 
 hr {
   background: #ccc;
@@ -54,6 +57,15 @@ hr {
   margin: 2em auto;
   text-align: center;
   width: 80%; }
+
+.links {
+  color: #bbb;
+  padding: .5em 0 0; }
+  .links a {
+    color: #0099cc;
+    text-decoration: none; }
+    .links a:hover {
+      color: #777; }
 
 /* Navigation */
 /* -------------------------------------------------- */
@@ -106,7 +118,7 @@ nav[role=menu] {
     line-height: 1.7em;
     text-decoration: none; }
     nav[role=menu] a:hover {
-      color: #444; }
+      color: #777; }
 
 body.active-nav nav[role=menu] {
   -webkit-transform: translate3d(0, 0, 0);
@@ -116,8 +128,6 @@ body.active-nav nav[role=menu] {
 body.active-nav #page {
   -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.2, 0.3, 0.25, 0.9);
   transition: transform 0.15s cubic-bezier(0.2, 0.3, 0.25, 0.9);
-  /*-webkit-transform: translate3d(250px, 0, 0);
-  transform: translate3d(250px, 0, 0);*/
   position: fixed;
   width: 100%;
   height: 100%; }
@@ -142,10 +152,10 @@ header[role=banner] {
       color: #6baf60;
       display: block;
       font-size: 1.2em;
-      padding: 0.8em 0;
+      padding: 0.8em 0 0.6em;
       text-decoration: none; }
       header[role=banner] > .container a:hover {
-        color: #444; }
+        color: #777; }
     header[role=banner] > .container .left {
       -webkit-flex: 1;
       flex: 1; }
@@ -158,15 +168,24 @@ header[role=banner] {
       header[role=banner] > .container h1 a {
         color: #6baf60; }
   header[role=banner] > h1.container {
+    font-size: 1.4em;
+    font-weight: 400;
     margin-bottom: .7em;
-    margin-top: 0;
-    font-weight: 400; }
+    margin-top: 0; }
     header[role=banner] > h1.container a {
       color: #111;
       font-size: 1em;
       padding: 0; }
       header[role=banner] > h1.container a:hover {
         color: #6baf60; }
+  header[role=banner] > .summary.container {
+    color: #888;
+    display: block;
+    font-size: .9em;
+    font-style: italic;
+    line-height: 1.3em;
+    margin-bottom: 1em;
+    margin-top: -.5em; }
 
 /* Tray */
 /* -------------------------------------------------- */
@@ -225,21 +244,17 @@ header[role=banner] {
 
 /* Story detail */
 /* -------------------------------------------------- */
-.story-detail .summary {
-  border-bottom: solid 1px #ddd;
-  color: #444;
-  font-style: italic;
-  line-height: 1.4em;
-  padding: 1em 0 1.5em; }
 .story-detail .scenes {
   margin-top: .5em; }
   .story-detail .scenes .scene > a {
     -webkit-display: flex;
     -webkit-align-items: flex-start;
     align-items: flex-start;
+    border-top: solid 1px #ddd;
     color: #111;
     display: flex;
-    padding: 1em 0;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
     text-decoration: none; }
     .story-detail .scenes .scene > a:hover {
       color: #6baf60; }
@@ -254,18 +269,16 @@ header[role=banner] {
       font-weight: 400;
       margin: 0; }
     .story-detail .scenes .scene .info .meta {
-      color: #333;
-      font-size: .9em;
-      line-height: 1.4em;
-      margin-top: 5px; }
+      color: #999;
+      font-size: .7em;
+      line-height: 1.3em;
+      margin-top: 1px; }
     .story-detail .scenes .scene .info .synopsis {
       color: #888;
       font-size: .9em;
       font-style: italic;
       line-height: 1.4em;
       margin-top: .5em; }
-  .story-detail .scenes .scene + .scene > a {
-    border-top: solid 1px #ddd; }
 .story-detail .scenes.sortable .handle {
   -webkit-align-items: center;
   -webkit-display: flex;
@@ -287,6 +300,25 @@ header[role=banner] {
   .story-detail .scene {
     font-size: 1.1em;
     line-height: 1.45em; } }
+/* Fragments/drafts */
+/* -------------------------------------------------- */
+.story-lists {
+  border-top: solid 1px #ddd;
+  margin-top: 2em;
+  padding-top: 2em; }
+  .story-lists h2 {
+    font-size: 1.2em;
+    font-weight: 400; }
+  .story-lists li {
+    line-height: 1.1em; }
+    .story-lists li + li {
+      margin-top: .5em; }
+  .story-lists a {
+    color: #0099cc;
+    text-decoration: none; }
+    .story-lists a:hover {
+      color: #777; }
+
 /* Scene detail */
 /* -------------------------------------------------- */
 .scene-detail .summary {
@@ -337,24 +369,34 @@ header[role=banner] {
     line-height: 1.45em; } }
 /* Control bar setup */
 /* -------------------------------------------------- */
-.controls-content {
+.wrapper {
+  height: 100%; }
+
+#page {
   -webkit-display: flex;
   -webkit-flex-direction: column;
   display: flex;
   flex-direction: column;
   height: 100%; }
-  .controls-content .content {
+
+#frame {
+  -webkit-flex: 1;
+  flex: 1;
+  overflow-y: scroll; }
+  #frame #content {
+    padding-bottom: 5em; }
+  #frame .content {
     -webkit-display: flex;
     -webkit-flex-direction: column;
     display: flex;
     flex-direction: column;
     height: 100%; }
-    .controls-content .content .text {
+    #frame .content .text {
       -webkit-display: flex;
       display: flex;
       height: 100%;
       width: 100%; }
-    .controls-content .content textarea {
+    #frame .content textarea {
       -webkit-flex: 1;
       -webkit-overflow-scrolling: touch;
       border: none;
@@ -364,48 +406,57 @@ header[role=banner] {
       overflow-y: scroll;
       padding: 1em 25px 4em;
       resize: none; }
-      .controls-content .content textarea:focus {
+      #frame .content textarea:focus {
         outline: none; }
-  .controls-content footer.controls {
-    background: #fff;
-    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
-    font-size: 1.2em;
-    z-index: 69000; }
-    .controls-content footer.controls .controls {
-      -webkit-align-items: center;
-      -webkit-display: flex;
-      align-items: center;
-      display: flex;
-      padding: .5em 25px; }
-      .controls-content footer.controls .controls a.cancel {
-        -webkit-flex: 1;
-        flex: 1;
-        color: #aad1a3;
-        text-decoration: none; }
-        .controls-content footer.controls .controls a.cancel:hover {
-          color: #444; }
+
+footer#footer {
+  background: #0c0707;
+  box-shadow: 0 -1px 50px 25px #fff;
+  font-size: 1.2em;
+  z-index: 69000; }
+  footer#footer .controls {
+    -webkit-align-items: center;
+    -webkit-display: flex;
+    align-items: center;
+    display: flex;
+    padding-bottom: .5em;
+    padding-top: .5em; }
+    footer#footer .controls a.cancel {
+      -webkit-flex: 1;
+      flex: 1;
+      color: #94a191;
+      text-decoration: none; }
+      footer#footer .controls a.cancel:hover {
+        color: #777; }
+    footer#footer .controls .button {
+      background: none;
+      padding: 3px 0px 5px; }
+      footer#footer .controls .button:hover {
+        color: #777; }
 
 @media screen and (min-width: 600px) {
-  .controls-content .text textarea {
+  #frame .text textarea {
     font-size: 1.3em;
     line-height: 1.45em;
     margin: 0px auto;
     max-width: 600px;
     padding: 50px 50px 100px; }
-  .controls-content footer.controls .controls {
+
+  #footer .controls {
     margin: 0px auto;
     max-width: 600px;
     padding-left: 50px;
     padding-right: 50px; } }
 @media screen and (min-width: 650px) {
-  .controls-content .text textarea {
+  #frame .text textarea {
     padding-left: 0;
     padding-right: 0; }
-  .controls-content footer.controls .controls {
+
+  #footer .controls {
     padding-left: 0;
     padding-right: 0; } }
 @media screen and (min-width: 800px) {
-  .controls-content .text textarea {
+  #frame .text textarea {
     font-size: 1.4em;
     line-height: 1.45em; } }
 html.edit {
@@ -465,7 +516,7 @@ html.edit {
     color: #6baf60;
     text-decoration: none; }
     .characters .character a:hover {
-      color: #444; }
+      color: #777; }
   .characters .character ul.scenes {
     margin: 0;
     margin-top: .25em; }

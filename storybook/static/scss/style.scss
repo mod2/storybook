@@ -2,7 +2,7 @@
 
 $green: hsl(111, 33%, 73%);
 $darkgreen: darken($green, 20%);
-$grayhover: #444;
+$grayhover: #777;
 $brown: #b68f76;
 $menublue: hsl(195, 100%, 40%);
 $blue: hsl(195, 100%, 40%);
@@ -13,16 +13,20 @@ $blue: hsl(195, 100%, 40%);
 	font-family: Charter, Georgia, Times New Roman;
 }
 
+html {
+	height: 100%;
+}
+
 body {
+	height: 100%;
 	margin: 0;
 	padding: 0;
-	padding-bottom: 100px;
 }
 
 .container {
 	margin: 0px auto;
 	max-width: 625px;
-	width: 85%;
+	padding: 0 22px;
 }
 
 .button {
@@ -44,6 +48,20 @@ hr {
 	margin: 2em auto;
 	text-align: center;
 	width: 80%;
+}
+
+.links {
+	color: #bbb;
+	padding: .5em 0 0;
+
+	a {
+		color: $blue;
+		text-decoration: none;
+
+		&:hover {
+			color: $grayhover;
+		}
+	}
 }
 
 
@@ -136,8 +154,6 @@ body.active-nav {
 	#page {
 		-webkit-transition: -webkit-transform .15s cubic-bezier(0.2, 0.3, 0.25, 0.9);
 		transition: transform .15s cubic-bezier(0.2, 0.3, 0.25, 0.9);
-		/*-webkit-transform: translate3d(250px, 0, 0);
-		transform: translate3d(250px, 0, 0);*/
 		position: fixed;
 		width: 100%;
 		height: 100%;
@@ -170,7 +186,7 @@ header[role=banner] {
 			color: $darkgreen;
 			display: block;
 			font-size: 1.2em;
-			padding: 0.8em 0;
+			padding: 0.8em 0 0.6em;
 			text-decoration: none;
 
 			&:hover {
@@ -199,9 +215,10 @@ header[role=banner] {
 	}
 
 	& > h1.container {
+		font-size: 1.4em;
+		font-weight: 400;
 		margin-bottom: .7em;
 		margin-top: 0;
-		font-weight: 400;
 
 		a {
 			color: #111;
@@ -212,6 +229,16 @@ header[role=banner] {
 				color: $darkgreen;
 			}
 		}
+	}
+
+	& > .summary.container {
+		color: #888;
+		display: block;
+		font-size: .9em;
+		font-style: italic;
+		line-height: 1.3em;
+		margin-bottom: 1em;
+		margin-top: -.5em;
 	}
 }
 
@@ -305,14 +332,6 @@ header[role=banner] {
 /* -------------------------------------------------- */
 
 .story-detail {
-	.summary {
-		border-bottom: solid 1px #ddd;
-		color: #444;
-		font-style: italic;
-		line-height: 1.4em;
-		padding: 1em 0 1.5em;
-	}
-
 	.scenes {
 		margin-top: .5em;
 
@@ -321,9 +340,11 @@ header[role=banner] {
 				-webkit-display: flex;
 				-webkit-align-items: flex-start;
 				align-items: flex-start;
+				border-top: solid 1px #ddd;
 				color: #111;
 				display: flex;
-				padding: 1em 0;
+				padding-bottom: 0.7em;
+				padding-top: 0.7em;
 				text-decoration: none;
 
 				&:hover {
@@ -347,10 +368,10 @@ header[role=banner] {
 				}
 
 				.meta {
-					color: #333;
-					font-size: .9em;
-					line-height: 1.4em;
-					margin-top: 5px;
+					color: #999;
+					font-size: .7em;
+					line-height: 1.3em;
+					margin-top: 1px;
 				}
 
 				.synopsis {
@@ -360,10 +381,6 @@ header[role=banner] {
 					line-height: 1.4em;
 					margin-top: .5em;
 				}
-			}
-
-			& + .scene > a {
-				border-top: solid 1px #ddd;
 			}
 		}
 	}
@@ -398,6 +415,38 @@ header[role=banner] {
 		.scene {
 			font-size: 1.1em;
 			line-height: 1.45em;
+		}
+	}
+}
+
+
+/* Fragments/drafts */
+/* -------------------------------------------------- */
+
+.story-lists {
+	border-top: solid 1px #ddd;
+	margin-top: 2em;
+	padding-top: 2em;
+
+	h2 {
+		font-size: 1.2em;
+		font-weight: 400;
+	}
+
+	li {
+		line-height: 1.1em;
+
+		& + li {
+			margin-top: .5em;
+		}
+	}
+
+	a {
+		color: $blue;
+		text-decoration: none;
+
+		&:hover {
+			color: $grayhover;
 		}
 	}
 }
@@ -484,12 +533,26 @@ header[role=banner] {
 /* Control bar setup */
 /* -------------------------------------------------- */
 
-.controls-content {
+.wrapper {
+	height: 100%;
+}
+
+#page {
 	-webkit-display: flex;
 	-webkit-flex-direction: column;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+}
+
+#frame {
+	-webkit-flex: 1;
+	flex: 1;
+	overflow-y: scroll;
+
+	#content {
+		padding-bottom: 5em;
+	}
 
 	.content {
 		-webkit-display: flex;
@@ -521,37 +584,47 @@ header[role=banner] {
 			}
 		}
 	}
+}
 
-	// Footer controls
-	footer.controls {
-		background: #fff;
-		box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
-		font-size: 1.2em;
-		z-index: 69000;
+// Footer controls
+footer#footer {
+	background: #0c0707;
+	box-shadow: 0 -1px 50px 25px #fff;
+	font-size: 1.2em;
+	z-index: 69000;
 
-		.controls {
-			-webkit-align-items: center;
-			-webkit-display: flex;
-			align-items: center;
-			display: flex;
-			padding: .5em 25px;
+	.controls {
+		-webkit-align-items: center;
+		-webkit-display: flex;
+		align-items: center;
+		display: flex;
+		padding-bottom: .5em;
+		padding-top: .5em;
 
-			a.cancel {
-				-webkit-flex: 1;
-				flex: 1;
-				color: $green;
-				text-decoration: none;
+		a.cancel {
+			-webkit-flex: 1;
+			flex: 1;
+			color: hsl(109, 8%, 60%);
+			text-decoration: none;
 
-				&:hover {
-					color: $grayhover;
-				}
+			&:hover {
+				color: $grayhover;
+			}
+		}
+
+		.button {
+			background: none;
+			padding: 3px 0px 5px;
+
+			&:hover {
+				color: $grayhover;
 			}
 		}
 	}
 }
 
 @media screen and (min-width: 600px) {
-	.controls-content {
+	#frame {
 		.text textarea {
 			font-size: 1.3em;
 			line-height: 1.45em;
@@ -559,32 +632,32 @@ header[role=banner] {
 			max-width: 600px;
 			padding: 50px 50px 100px;
 		}
+	}
 
-		footer.controls .controls {
-			margin: 0px auto;
-			max-width: 600px;
-			padding-left: 50px;
-			padding-right: 50px;
-		}
+	#footer .controls {
+		margin: 0px auto;
+		max-width: 600px;
+		padding-left: 50px;
+		padding-right: 50px;
 	}
 }
 
 @media screen and (min-width: 650px) {
-	.controls-content {
+	#frame {
 		.text textarea {
 			padding-left: 0;
 			padding-right: 0;
 		}
+	}
 
-		footer.controls .controls {
-			padding-left: 0;
-			padding-right: 0;
-		}
+	#footer .controls {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
 @media screen and (min-width: 800px) {
-	.controls-content {
+	#frame {
 		.text textarea {
 			font-size: 1.4em;
 			line-height: 1.45em;

@@ -37,7 +37,6 @@
 					<a class="story-home" href="{% url 'story' story.slug %}">Story home</a>
 					<a class="full-story" href="{% url 'story_full' story.slug %}">Full draft</a>
 					<a class="fragments" href="{% url 'story_fragments' story.slug %}">Fragments</a>
-					<a href="">Notebook</a>
 					<a href="{% url 'story_organize' story.slug %}">Organize</a></li>
 					<a href="{% url 'admin:storybook_story_change' story.id %}" target="_blank">Story admin</a>
 				</div>
@@ -51,7 +50,6 @@
 
 			<div class="group">
 				<a class="home" href="{% url 'home' %}">Home</a></li>
-				<a href="">Organize stories</a></li>
 				<a href="{% url 'admin:index' %}" target="_blank">Admin</a>
 				<a href="{% url 'logout' %}">Logout</a>
 			</div>
@@ -62,6 +60,9 @@
 			<div class="mask"></div>
 
 			{% block page %}
+			<section id="frame">
+				{% block frame %}
+
 				{% block header %}
 				<header role="banner">
 					<div class="container">
@@ -91,6 +92,13 @@
 				<main id="content">
 					{% block content %}{% endblock content %}
 				</main>
+
+				{% endblock frame %}
+			</section>
+
+			{% block footer %}
+			<footer id="footer">{% block footercontent %}{% endblock footercontent %}</footer>
+			{% endblock footer %}
 			{% endblock page %}
 		</section>
 	</div>
