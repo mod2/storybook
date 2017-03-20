@@ -245,41 +245,36 @@ header[role=banner] {
 
 /* Story detail */
 /* -------------------------------------------------- */
+.scene > a {
+  -webkit-display: flex;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  border-top: solid 1px #ddd;
+  color: #111;
+  display: flex;
+  padding-bottom: 0.7em;
+  padding-top: 0.7em;
+  text-decoration: none; }
+  .scene > a:hover {
+    color: #6baf60; }
+.scene .num {
+  color: #b68f76;
+  font-size: 1.1em;
+  line-height: 1.4em;
+  width: 2.3em; }
+.scene .info {
+  flex: 1; }
+  .scene .info h3 {
+    font-weight: 400;
+    margin: 0; }
+  .scene .info .meta {
+    color: #999;
+    font-size: .8em;
+    line-height: 1.3em;
+    margin-top: 2px; }
+
 .story-detail .scenes {
   margin-top: .5em; }
-  .story-detail .scenes .scene > a {
-    -webkit-display: flex;
-    -webkit-align-items: flex-start;
-    align-items: flex-start;
-    border-top: solid 1px #ddd;
-    color: #111;
-    display: flex;
-    padding-bottom: 0.7em;
-    padding-top: 0.7em;
-    text-decoration: none; }
-    .story-detail .scenes .scene > a:hover {
-      color: #6baf60; }
-  .story-detail .scenes .scene .num {
-    color: #b68f76;
-    font-size: 1.1em;
-    line-height: 1.4em;
-    width: 2em; }
-  .story-detail .scenes .scene .info {
-    flex: 1; }
-    .story-detail .scenes .scene .info h3 {
-      font-weight: 400;
-      margin: 0; }
-    .story-detail .scenes .scene .info .meta {
-      color: #999;
-      font-size: .8em;
-      line-height: 1.3em;
-      margin-top: 2px; }
-    .story-detail .scenes .scene .info .synopsis {
-      color: #888;
-      font-size: .9em;
-      font-style: italic;
-      line-height: 1.4em;
-      margin-top: .5em; }
 .story-detail .scenes.sortable .handle {
   -webkit-align-items: center;
   -webkit-display: flex;
@@ -326,20 +321,11 @@ header[role=banner] {
   color: #444;
   line-height: 1.4em;
   padding: .7em 0 .7em; }
-  .scene-detail .summary .num {
-    color: #b68f76;
-    font-style: normal;
-    margin-bottom: 5px; }
-  .scene-detail .summary .title {
-    color: #111;
-    font-size: 1.1em;
-    font-style: italic;
-    line-height: 1.3em; }
-  .scene-detail .summary .edit {
-    float: right;
-    font-style: normal;
-    margin-bottom: 15px;
-    margin-left: 15px; }
+  .scene-detail .summary .scene {
+    -webkit-display: flex;
+    border-bottom: solid 1px #ddd;
+    display: flex;
+    padding-bottom: 0.6em; }
 .scene-detail .text {
   font-size: 1.2em;
   line-height: 1.45em;
@@ -409,7 +395,7 @@ header[role=banner] {
 
 footer#footer {
   background: #0c0707;
-  box-shadow: 0 -1px 50px 25px #fff;
+  box-shadow: 0 -1px 70px 45px #fff;
   font-size: 1.2em;
   z-index: 69000; }
   footer#footer .controls {
@@ -457,15 +443,10 @@ footer#footer {
   #frame .text textarea {
     font-size: 1.4em;
     line-height: 1.45em; } }
-html.edit {
+/* Scene edit */
+/* -------------------------------------------------- */
+.scene-edit {
   height: 100%; }
-  html.edit body {
-    height: 100%;
-    padding-bottom: 0; }
-  html.edit .wrapper {
-    height: 100%; }
-  html.edit #page {
-    height: 100%; }
 
 /* Full draft */
 /* -------------------------------------------------- */

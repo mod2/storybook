@@ -31,9 +31,12 @@
 
 	<div class="content">
 		<div class="summary">
-			<div class="container">
-				<div class="num">Scene {{ scene.order }} &mdash; {{ scene.word_count|intcomma }} word{{ scene.word_count|pluralize }}</div>
-				<div class="title">## {{ scene.title_rendered|safe }}</div>
+			<div class="scene container">
+				<span class="num">{{ scene.order }}</span>
+				<div class="info">
+					<h3>{{ scene.title_rendered|safe }}</h3>
+					<div class="meta"><span>{{ scene.word_count|intcomma }}</span> word{{ scene.word_count|pluralize }}</div>
+				</div>
 			</div>
 		</div>
 

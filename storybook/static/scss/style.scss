@@ -332,58 +332,50 @@ header[role=banner] {
 /* Story detail */
 /* -------------------------------------------------- */
 
+.scene {
+	& > a {
+		-webkit-display: flex;
+		-webkit-align-items: flex-start;
+		align-items: flex-start;
+		border-top: solid 1px #ddd;
+		color: #111;
+		display: flex;
+		padding-bottom: 0.7em;
+		padding-top: 0.7em;
+		text-decoration: none;
+
+		&:hover {
+			color: $darkgreen;
+		}
+	}
+
+	.num {
+		color: $brown;
+		font-size: 1.1em;
+		line-height: 1.4em;
+		width: 2.3em;
+	}
+
+	.info {
+		flex: 1;
+
+		h3 {
+			font-weight: 400;
+			margin: 0;
+		}
+
+		.meta {
+			color: #999;
+			font-size: .8em;
+			line-height: 1.3em;
+			margin-top: 2px;
+		}
+	}
+}
+
 .story-detail {
 	.scenes {
 		margin-top: .5em;
-
-		.scene {
-			& > a {
-				-webkit-display: flex;
-				-webkit-align-items: flex-start;
-				align-items: flex-start;
-				border-top: solid 1px #ddd;
-				color: #111;
-				display: flex;
-				padding-bottom: 0.7em;
-				padding-top: 0.7em;
-				text-decoration: none;
-
-				&:hover {
-					color: $darkgreen;
-				}
-			}
-
-			.num {
-				color: $brown;
-				font-size: 1.1em;
-				line-height: 1.4em;
-				width: 2em;
-			}
-
-			.info {
-				flex: 1;
-
-				h3 {
-					font-weight: 400;
-					margin: 0;
-				}
-
-				.meta {
-					color: #999;
-					font-size: .8em;
-					line-height: 1.3em;
-					margin-top: 2px;
-				}
-
-				.synopsis {
-					color: #888;
-					font-size: .9em;
-					font-style: italic;
-					line-height: 1.4em;
-					margin-top: .5em;
-				}
-			}
-		}
 	}
 
 	.scenes.sortable {
@@ -462,24 +454,11 @@ header[role=banner] {
 		line-height: 1.4em;
 		padding: .7em 0 .7em;
 
-		.num {
-			color: $brown;
-			font-style: normal;
-			margin-bottom: 5px;
-		}
-
-		.title {
-			color: #111;
-			font-size: 1.1em;
-			font-style: italic;
-			line-height: 1.3em;
-		}
-
-		.edit {
-			float: right;
-			font-style: normal;
-			margin-bottom: 15px;
-			margin-left: 15px;
+		.scene {
+			-webkit-display: flex;
+			border-bottom: solid 1px #ddd;
+			display: flex;
+			padding-bottom: 0.6em;
 		}
 	}
 
@@ -585,7 +564,7 @@ header[role=banner] {
 // Footer controls
 footer#footer {
 	background: #0c0707;
-	box-shadow: 0 -1px 50px 25px #fff;
+	box-shadow: 0 -1px 70px 45px #fff;
 	font-size: 1.2em;
 	z-index: 69000;
 
@@ -661,22 +640,14 @@ footer#footer {
 	}
 }
 
-html.edit {
+
+/* Scene edit */
+/* -------------------------------------------------- */
+
+.scene-edit {
 	height: 100%;
-
-	body {
-		height: 100%;
-		padding-bottom: 0;
-	}
-
-	.wrapper {
-		height: 100%;
-	}
-
-	#page {
-		height: 100%;
-	}
 }
+
 
 
 /* Full draft */

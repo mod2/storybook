@@ -3,19 +3,19 @@
 
 {% block htmlclass %} class='edit'{% endblock htmlclass %}
 
-{% block page %}
-<section class="controls-content scene-edit" data-uri="{% url 'api_save_scene' story.slug scene.id %}" data-scene-uri="{% url 'scene' story.slug scene.id %}">
+{% block frame %}
+<section class="scene-edit" data-uri="{% url 'api_save_scene' story.slug scene.id %}" data-scene-uri="{% url 'scene' story.slug scene.id %}">
 	<div class="content">
 		<div class="text">
 			<textarea>{{ scene.text }}</textarea>
 		</div>
 	</div>
-
-	<footer class="controls">
-		<div class="controls">
-			<a class="cancel" href="{% url 'scene' story.slug scene.id %}">Cancel</a>
-			<a class="button save" href="">Save</a>
-		</div>
-	</footer>
 </section>
-{% endblock page %}
+{% endblock frame %}
+
+{% block footercontent %}
+<div class="controls container">
+	<a class="cancel" href="{% url 'scene' story.slug scene.id %}">Cancel</a>
+	<a class="button save" href="">Save Scene</a>
+</div>
+{% endblock footercontent %}
