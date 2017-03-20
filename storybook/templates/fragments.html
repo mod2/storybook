@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 
 {% block pageheader %}
-<h1 class="container"><a href="{% url 'story' story.slug %}">{{ story.title }}</a>&nbsp;(fragments)</h1>
+<h1 class="container">::<a href="{% url 'story' story.slug %}">{{ story.slug }}</a>&nbsp;(fragments)</h1>
 {% endblock pageheader %}
 
 {% block content %}

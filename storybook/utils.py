@@ -62,8 +62,9 @@ def process_scenes(payload):
         line = line.strip()
 
         if len(line) >= 1 and line[0:2] == '::':
-            # Story slug (get everything after ::)
-            response['story'] = line[2:].strip()
+            # Story slug (get everything after :: up to the next space)
+            # and ignore everything after that
+            response['story'] = line[2:].split(' ')[0].strip()
         elif len(line) >= 3 and line[0:2] == '##':
             # New scene
             response['scenes'].append({
@@ -84,7 +85,7 @@ def process_scenes(payload):
                     'fragments': [],
                 })
                 current_scene = response['scenes'][-1]
-        elif line.strip() != '':
+        else:
             if current_scene:
                 current_scene['fragments'].append(line)
             else:
@@ -153,7 +154,7 @@ def get_full_draft(story):
     scenes = story.scenes.all().order_by('order')
 
     # Story title
-    response = '# {} -- v{} -- {}\n'.format(story.title, str(story.drafts.count()).zfill(3), datetime.date.today().strftime("%Y-%m-%d"))
+    response = '::{} -- v{} -- {}\n'.format(story.slug, str(story.drafts.count()).zfill(3), datetime.date.today().strftime("%Y-%m-%d"))
 
     for scene in scenes:
         if scene.title or scene.text:

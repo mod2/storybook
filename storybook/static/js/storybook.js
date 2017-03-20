@@ -273,7 +273,7 @@ $(document).ready(function() {
 		return false;
 	}
 
-	$("html.edit .save.button").on("click", function() {
+	$("html.edit .save-scene.button").on("click", function() {
 		_saveSceneEdit();
 		return false;
 	});
@@ -281,6 +281,57 @@ $(document).ready(function() {
 	var field = document.querySelector('.scene-edit .text textarea');
 	Mousetrap(field).bind('esc', _cancelSceneEdit);
 	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveSceneEdit);
+
+
+	// Story save text
+	// --------------------------------------------------
+
+	// Focus on page load
+	if ($(".story-edit").length) {
+		$(".story-edit .text textarea").focus();
+
+		moveCaretToEnd($(".story-edit .text textarea")[0]);
+	}
+
+	function _cancelStory() {
+		var url = $(".story-edit").data("story-uri");
+		window.location.href = url;
+	}
+
+	function _saveStory() {
+		var url = $(".story-edit").data("uri");
+
+		var text = $(".story-edit .text textarea").val().trim();
+
+		var data = {
+			text: text,
+			key: config.apiKey,
+		};
+
+		$.ajax({
+			url: url,
+			method: 'POST',
+			data: data,
+			success: function(data) {
+				var url = $(".story-edit").data("story-uri");
+				window.location.href = url;
+			},
+			error: function(data) {
+				console.log("Error! :(", data);
+			},
+		});
+
+		return false;
+	}
+
+	$("html.edit .save-story.button").on("click", function() {
+		_saveStory();
+		return false;
+	});
+
+	var field = document.querySelector('.story-edit .text textarea');
+	Mousetrap(field).bind('esc', _cancelStory);
+	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveStory);
 
 
 	// Story detail

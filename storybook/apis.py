@@ -217,13 +217,16 @@ def api_save_story(request, story_slug):
 
         text = request.POST.get('text', '')
 
+        # Get the story object
         story = Story.objects.get(slug=story_slug)
 
-        # Strip # story name off text
         # Wipe out all scenes
-        # process_payload on text
-        # Create new scene for each scene in text
+        story.scenes.all().delete()
 
+        # process_payload on text
+        status, message = process_payload(text)
+
+        # Update last_modified and save
         story.last_modified = timezone.now()
         story.save()
 
