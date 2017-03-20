@@ -52,7 +52,7 @@
 {% block footercontent %}
 <div class="controls container">
 	<a class="cancel" href="{% url 'story' story.slug %}">Story</a>
-	<a class="button save-draft" href="">Save Draft</a>
+    <a class="button save-draft" href="{% url 'api_save_draft' story.slug %}">Save Draft</a>
 	<a class="button save" href="{% url 'scene_edit' story.slug scene.id %}">Edit Scene</a>
 </div>
 {% endblock footercontent %}

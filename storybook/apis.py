@@ -202,3 +202,24 @@ def api_save_scene(request, story_slug, scene_id):
     story.save()
 
     return JsonResponse({ "status": "success"})
+
+def api_save_draft(request, story_slug):
+    """
+    Saves a new draft of a story.
+    """
+
+    try:
+        if request.method == 'POST':
+            key = request.POST.get('key', '')
+
+        # Make sure we have the secret key
+        if key != settings.SECRET_KEY:
+            return JsonResponse({})
+
+        # Make new draft and update last_modified
+        story = Story.objects.get(slug=story_slug)
+        make_new_draft(story)
+
+        return JsonResponse({ "status": "success"})
+    except Exception as e:
+        return JsonResponse({ "status": "error"}, status_code=500)

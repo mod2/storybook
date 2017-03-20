@@ -201,6 +201,37 @@ $(document).ready(function() {
 	}
 
 
+	// Story save draft
+	// --------------------------------------------------
+
+	function _saveStoryDraft() {
+		var url = $(".save-draft").attr("href");
+
+		var data = {
+			key: config.apiKey,
+		};
+
+		$.ajax({
+			url: url,
+			method: 'POST',
+			data: data,
+			success: function(data) {
+                alert("New draft saved.");
+			},
+			error: function(data) {
+				console.log("Error! :(", data);
+			},
+		});
+
+		return false;
+	}
+
+	$(".save-draft.button").on("click", function() {
+		_saveStoryDraft();
+		return false;
+	});
+
+
 	// Scene save text
 	// --------------------------------------------------
 
