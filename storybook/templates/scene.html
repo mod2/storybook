@@ -3,24 +3,37 @@
 
 {% block pageheader %}
 <h1 class="container"><a href="{% url 'story' story.slug %}">::{{ story.slug }}</a></h1>
+<div class="summary container">
+	<span class="version">v{{ story.version }}</span>
+	&mdash;
+	<span class="wordcount">{{ story.word_count|intcomma }} word{{ story.word_count|pluralize }}</span>
+	&mdash;
+	<span class="date">{{ story.last_modified|date:"Y-m-d" }}</span>
+</div>
 {% endblock pageheader %}
 
 {% block content %}
 <section class="scene-detail controls-content" data-edit-uri="{% url 'scene_edit' story.slug scene.id %}" {% if nav.next %}data-next-uri="{% url 'scene' story.slug nav.next.id %}"{% endif %} {% if nav.prev %}data-prev-uri="{% url 'scene' story.slug nav.prev.id %}"{% endif %}>
+	<div class="links">
+		<div class="container">
+			{% if nav.prev %}
+			<a class="prev-scene" href="{% url 'scene' story.slug nav.prev.id %}">previous scene</a>
+			{% endif %}
+			{% if nav.next %}
+				{% if nav.prev %} &mdash; {% endif %}
+			<a class="next-scene" href="{% url 'scene' story.slug nav.next.id %}">next scene</a>
+			{% endif %}
+
+			{% if nav.prev or nav.next %} &mdash; {% endif %}
+			<a href="{% url 'admin:storybook_scene_change' scene.id %}" target="_blank">scene admin</a>
+		</div>
+	</div>
+
 	<div class="content">
 		<div class="summary">
 			<div class="container">
 				<div class="num">Scene {{ scene.order }} &mdash; {{ scene.word_count|intcomma }} word{{ scene.word_count|pluralize }}</div>
-				<div class="title">{{ scene.title }}</div>
-
-				{% if nav.prev %}
-				<a class="prev-scene" href="{% url 'scene' story.slug nav.prev.id %}">Previous scene</a>
-				{% endif %}
-				{% if nav.next %}
-				<a class="next-scene" href="{% url 'scene' story.slug nav.next.id %}">Next scene</a>
-				{% endif %}
-
-				<a href="{% url 'admin:storybook_scene_change' scene.id %}" target="_blank">Scene admin</a>
+				<div class="title">## {{ scene.title_rendered|safe }}</div>
 			</div>
 		</div>
 
@@ -34,8 +47,8 @@
 {% endblock content %}
 
 {% block footercontent %}
-	<div class="controls">
-		<a class="cancel" href="{% url 'story' story.slug %}">Story</a>
-		<a class="button save" href="{% url 'scene_edit' story.slug scene.id %}">Edit Scene</a>
-	</div>
+<div class="controls container">
+	<a class="cancel" href="{% url 'story' story.slug %}">Story</a>
+	<a class="button save" href="{% url 'scene_edit' story.slug scene.id %}">Edit Scene</a>
+</div>
 {% endblock footercontent %}

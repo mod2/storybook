@@ -39,7 +39,8 @@ body {
 .container {
   margin: 0px auto;
   max-width: 625px;
-  padding: 0 22px; }
+  padding: 0 22px;
+  width: 100%; }
 
 .button {
   background: #0099cc;
@@ -270,9 +271,9 @@ header[role=banner] {
       margin: 0; }
     .story-detail .scenes .scene .info .meta {
       color: #999;
-      font-size: .7em;
+      font-size: .8em;
       line-height: 1.3em;
-      margin-top: 1px; }
+      margin-top: 2px; }
     .story-detail .scenes .scene .info .synopsis {
       color: #888;
       font-size: .9em;
@@ -322,22 +323,18 @@ header[role=banner] {
 /* Scene detail */
 /* -------------------------------------------------- */
 .scene-detail .summary {
-  border-bottom: solid 1px #ddd;
   color: #444;
-  font-style: italic;
   line-height: 1.4em;
-  padding: 1em 0 1.5em; }
+  padding: .7em 0 .7em; }
   .scene-detail .summary .num {
     color: #b68f76;
     font-style: normal;
     margin-bottom: 5px; }
   .scene-detail .summary .title {
     color: #111;
-    font-size: 1.2em;
-    font-style: normal;
+    font-size: 1.1em;
+    font-style: italic;
     line-height: 1.3em; }
-  .scene-detail .summary .synopsis {
-    margin-top: 1em; }
   .scene-detail .summary .edit {
     float: right;
     font-style: normal;
@@ -346,7 +343,8 @@ header[role=banner] {
 .scene-detail .text {
   font-size: 1.2em;
   line-height: 1.45em;
-  padding: 1.4em 0; }
+  padding-bottom: 1.4em;
+  padding-top: .7em; }
   .scene-detail .text p {
     margin: 0; }
   .scene-detail .text p + p {

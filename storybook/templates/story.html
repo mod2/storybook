@@ -10,7 +10,6 @@
 	&mdash;
 	<span class="date">{{ story.last_modified|date:"Y-m-d" }}</span>
 </div>
-
 {% endblock pageheader %}
 
 {% block content %}
@@ -60,8 +59,8 @@
 {% endblock content %}
 
 {% block footercontent %}
-	<div class="controls container">
-		<a class="cancel" href="{% url 'home' %}">Home</a>
-		<a class="button save" href="{% url 'scene_edit' story.slug 0 %}">Edit Story</a>
-	</div>
+<div class="controls container">
+	<a class="cancel" href="{% url 'home' %}">Home</a>
+	<a class="button save" href="{% url 'scene_edit' story.slug 0 %}">Edit Story</a>
+</div>
 {% endblock footercontent %}

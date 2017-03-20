@@ -27,6 +27,7 @@ body {
 	margin: 0px auto;
 	max-width: 625px;
 	padding: 0 22px;
+	width: 100%;
 }
 
 .button {
@@ -369,9 +370,9 @@ header[role=banner] {
 
 				.meta {
 					color: #999;
-					font-size: .7em;
+					font-size: .8em;
 					line-height: 1.3em;
-					margin-top: 1px;
+					margin-top: 2px;
 				}
 
 				.synopsis {
@@ -457,11 +458,9 @@ header[role=banner] {
 
 .scene-detail {
 	.summary {
-		border-bottom: solid 1px #ddd;
 		color: #444;
-		font-style: italic;
 		line-height: 1.4em;
-		padding: 1em 0 1.5em;
+		padding: .7em 0 .7em;
 
 		.num {
 			color: $brown;
@@ -471,13 +470,9 @@ header[role=banner] {
 
 		.title {
 			color: #111;
-			font-size: 1.2em;
-			font-style: normal;
+			font-size: 1.1em;
+			font-style: italic;
 			line-height: 1.3em;
-		}
-
-		.synopsis {
-			margin-top: 1em;
 		}
 
 		.edit {
@@ -491,7 +486,8 @@ header[role=banner] {
 	.text {
 		font-size: 1.2em;
 		line-height: 1.45em;
-		padding: 1.4em 0;
+		padding-bottom: 1.4em;
+		padding-top: .7em;
 		
 		p {
 			margin: 0;
