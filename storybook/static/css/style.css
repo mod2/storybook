@@ -374,7 +374,7 @@ header[role=banner] {
   flex: 1;
   overflow-y: scroll; }
   #frame #content {
-    padding-bottom: 5em; }
+    padding-bottom: 8em; }
   #frame .content {
     -webkit-display: flex;
     -webkit-flex-direction: column;
