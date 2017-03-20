@@ -531,6 +531,7 @@ header[role=banner] {
 
 #frame {
 	-webkit-flex: 1;
+	-webkit-overflow-scrolling: touch;
 	flex: 1;
 	overflow-y: scroll;
 
