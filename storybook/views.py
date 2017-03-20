@@ -127,7 +127,7 @@ def scene_edit(request, story_slug, scene_id):
     # Get scene
     scene = Scene.objects.get(id=scene_id, story__slug=story_slug)
 
-    return render_to_response('editscene.html', {'title': 'Edit Scene {} — {}'.format(scene.order, s.title),
+    return render_to_response('scene_edit.html', {'title': 'Edit Scene {} — {}'.format(scene.order, s.title),
                                              'scene': scene,
                                              'key': settings.SECRET_KEY,
                                              'story': s,
