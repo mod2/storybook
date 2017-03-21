@@ -2,15 +2,9 @@
 
 {% block htmlclass %} class='edit'{% endblock htmlclass %}
 
-{% block frame %}
-<section class="story-edit" data-uri="{% url 'api_save_story' story.slug %}" data-story-uri="{% url 'story' story.slug %}">
-	<div class="content">
-		<div class="text">
-			<textarea>{{ text }}</textarea>
-		</div>
-	</div>
-</section>
-{% endblock frame %}
+{% block framewrapper %}
+<textarea id="frame" class="story-edit" data-uri="{% url 'api_save_story' story.slug %}" data-story-uri="{% url 'story' story.slug %}">{{ text }}</textarea>
+{% endblock framewrapper %}
 
 {% block footercontent %}
 <div class="controls container">

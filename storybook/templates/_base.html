@@ -60,6 +60,8 @@
 			<div class="mask"></div>
 
 			{% block page %}
+
+			{% block framewrapper %}
 			<section id="frame">
 				{% block frame %}
 
@@ -95,10 +97,12 @@
 
 				{% endblock frame %}
 			</section>
+			{% endblock framewrapper %}
 
 			{% block footer %}
 			<footer id="footer">{% block footercontent %}{% endblock footercontent %}</footer>
 			{% endblock footer %}
+
 			{% endblock page %}
 		</section>
 	</div>

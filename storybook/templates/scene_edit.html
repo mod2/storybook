@@ -1,17 +1,10 @@
 {% extends '_base.html' %}
 
-
 {% block htmlclass %} class='edit'{% endblock htmlclass %}
 
-{% block frame %}
-<section class="scene-edit" data-uri="{% url 'api_save_scene' story.slug scene.id %}" data-scene-uri="{% url 'scene' story.slug scene.id %}">
-	<div class="content">
-		<div class="text container">
-			<textarea>{{ scene.text }}</textarea>
-		</div>
-	</div>
-</section>
-{% endblock frame %}
+{% block framewrapper %}
+<textarea id="frame" class="scene-edit" data-uri="{% url 'api_save_scene' story.slug scene.id %}" data-scene-uri="{% url 'scene' story.slug scene.id %}">{{ scene.text }}</textarea>
+{% endblock framewrapper %}
 
 {% block footercontent %}
 <div class="controls container">
