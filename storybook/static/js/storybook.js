@@ -409,6 +409,10 @@ $(document).ready(function() {
 		// Intercept all anchor clicks and keep fullscreen if in origin
 		$(document).on("click", "a", function(e) {
 			e.preventDefault();
+
+			// Save the last URL for persistence
+			localStorage["lasturl"] = $(this).attr("href");
+
 			window.location.href = $(this).attr("href");
 		});
 	}
