@@ -346,6 +346,10 @@ $(document).ready(function() {
 			window.location.href = $(".story-detail").data("edit-uri");
 		});
 
+		Mousetrap.bind('o', function() {
+			window.location.href = $(".story-detail").data("organize-uri");
+		});
+
 		Mousetrap.bind('g h', function() {
 			window.location.href = $("nav[role=menu] .home").attr("href");
 		});
