@@ -39,7 +39,7 @@ body {
 .container {
   margin: 0px auto;
   max-width: 625px;
-  padding: 0 22px;
+  padding: 0 20px;
   width: 100%; }
 
 .button {
@@ -402,7 +402,7 @@ header[role=banner] {
 
 footer#footer {
   background: #0c0707;
-  box-shadow: 0 -1px 70px 45px #fff;
+  /*box-shadow: 0 -1px 70px 45px #fff; */
   font-size: 1.2em;
   z-index: 69000; }
   footer#footer .controls {
@@ -410,19 +410,20 @@ footer#footer {
     -webkit-display: flex;
     align-items: center;
     display: flex;
-    padding-bottom: .5em;
-    padding-top: .5em; }
+    padding-bottom: 7px;
+    padding-top: 7px; }
     footer#footer .controls a.cancel {
       -webkit-flex: 1;
       flex: 1;
       color: #94a191;
+      padding-bottom: 3px;
       text-decoration: none; }
       footer#footer .controls a.cancel:hover {
         color: #777; }
     footer#footer .controls .button {
       background: none;
       margin-left: 2em;
-      padding: 3px 0px 5px; }
+      padding: 0px 0px 3px; }
       footer#footer .controls .button:hover {
         color: #777; }
 
