@@ -400,6 +400,33 @@ $(document).ready(function() {
 			window.location.href = $("nav[role=menu] .story-home").attr("href");
 		});
 	}
+
+
+	// Standalone mode
+	// --------------------------------------------------
+	
+	var startUrlEl = document.querySelector("meta[name=msapplication-starturl]");
+	if (navigator.standalone === true) {
+		var lastUrl = localStorage["navigate"];
+		history.pushState({ launched: (!!lastUrl == false && history.length === 1) },
+			undefined,
+			lastUrl || "");
+		localStorage.removeItem("navigate");
+
+		// Intercept all anchor clicks and keep fullscreen if in origin
+		$(document).on("click", function(e) {
+			if (e.target.tagName === 'A') {
+				var href = e.target.getAttribute("href");
+				var linkedUrl = new URL(e.target.href);
+				if (linkedUrl.origin === location.origin) {
+					e.preventDefault();
+					location.href = href;
+				} else {
+					localStorage["navigate"] = location.href;
+				}
+			}
+		});
+	}
 });
 
 function moveCaretToEnd(el) {
