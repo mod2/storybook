@@ -237,9 +237,9 @@ $(document).ready(function() {
 
 	// Focus on page load
 	if ($(".scene-edit").length) {
-		$("textarea#frame").focus();
+		$("textarea#frame.scene-edit").focus();
 
-		moveCaretToEnd($("textarea#frame")[0]);
+		moveCaretToEnd($("textarea#frame.scene-edit")[0]);
 	}
 
 	function _cancelSceneEdit() {
@@ -252,7 +252,7 @@ $(document).ready(function() {
 	function _saveSceneEdit() {
 		var url = $(".scene-edit").data("uri");
 
-		var text = $("textarea#frame").val().trim();
+		var text = $("textarea#frame.scene-edit").val().trim();
 
 		var data = {
 			text: text,
@@ -280,7 +280,7 @@ $(document).ready(function() {
 		return false;
 	});
 
-	var field = document.querySelector('textarea#frame');
+	var field = document.querySelector('textarea#frame.scene-edit');
 	Mousetrap(field).bind('esc', _cancelSceneEdit);
 	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveSceneEdit);
 
@@ -290,9 +290,9 @@ $(document).ready(function() {
 
 	// Focus on page load
 	if ($(".story-edit").length) {
-		$("textarea#frame").focus();
+		$("textarea#frame.story-edit").focus();
 
-		moveCaretToEnd($("textarea#frame")[0]);
+		moveCaretToEnd($("textarea#frame.story-edit")[0]);
 	}
 
 	function _cancelStoryEdit() {
@@ -305,7 +305,7 @@ $(document).ready(function() {
 	function _saveStoryEdit() {
 		var url = $(".story-edit").data("uri");
 
-		var text = $("textarea#frame").val().trim();
+		var text = $("textarea#frame.story-edit").val().trim();
 
 		var data = {
 			text: text,
@@ -333,7 +333,7 @@ $(document).ready(function() {
 		return false;
 	});
 
-	var field = document.querySelector('textarea#frame');
+	var field = document.querySelector('textarea#frame.story-edit');
 	Mousetrap(field).bind('esc', _cancelStoryEdit);
 	Mousetrap(field).bind(['mod+enter', 'shift+enter'], _saveStoryEdit);
 
