@@ -1,3 +1,7 @@
+if (localStorage["lasturl"]) {
+	window.location.href = localStorage["lasturl"];
+}
+
 // CSRF stuff
 
 function getCookie(name) {
