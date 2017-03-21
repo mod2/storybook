@@ -407,7 +407,7 @@ $(document).ready(function() {
 	
 	if (("standalone" in window.navigator) && window.navigator.standalone) {
 		// Intercept all anchor clicks and keep fullscreen if in origin
-		$(document).on("a", "click", function(e) {
+		$(document).on("click", "a", function(e) {
 			e.preventDefault();
 			window.location.href = $(this).attr("href");
 		});
