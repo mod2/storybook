@@ -1,5 +1,5 @@
-if (localStorage["lasturl"] && localStorage["lasturl"] != window.location.href) {
-	window.location.href = localStorage["lasturl"];
+if (localStorage["lasturl"] && localStorage["lasturl"] != window.location.pathname) {
+	window.location.pathname = localStorage["lasturl"];
 }
 
 // CSRF stuff
