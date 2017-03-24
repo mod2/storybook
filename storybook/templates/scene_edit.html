@@ -3,7 +3,7 @@
 {% block htmlclass %} class='edit'{% endblock htmlclass %}
 
 {% block framewrapper %}
-<textarea id="frame" class="scene-edit" data-uri="{% url 'api_save_scene' story.slug scene.id %}" data-scene-uri="{% url 'scene' story.slug scene.id %}">{{ scene.text }}</textarea>
+<textarea id="frame" class="scene-edit" data-uri="{% url 'api_save_scene' story.slug scene.id %}" data-scene-uri="{% url 'story' story.slug %}">{{ scene.edit_text }}</textarea>
 {% endblock framewrapper %}
 
 {% block footercontent %}

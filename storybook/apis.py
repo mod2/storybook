@@ -153,6 +153,17 @@ def api_save_scene(request, story_slug, scene_id):
     # Get the scene
     scene = Scene.objects.get(story__slug=story_slug, id=scene_id)
 
+    # First update the title if it's there and strip out
+    if text[0:2] == '##':
+        lines = text.split('\n')
+
+        # Update the title (strip off ##)
+        title = lines[0].strip()
+        scene.title = title[2:].strip()
+        
+        # Strip off the title
+        text = '\n'.join(lines[1:]).strip()
+
     if '\n## ' or ':scene' in text:
         # There's a ##, so split on the scene
 

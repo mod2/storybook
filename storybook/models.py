@@ -91,6 +91,9 @@ class Scene(models.Model):
     def title_rendered(self):
         return smartypants.smartypants(self.title)
 
+    def edit_text(self):
+        return '## {}\n\n{}'.format(self.title, self.text)
+
     def make_html(self, text):
         # Treat horizontal rules kindly
         html = text.replace('---', '%%%HR%%%')
