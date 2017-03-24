@@ -23,6 +23,9 @@
 	<div class="scenes">
 		{% for scene in scenes %}
 		<div class="scene" data-id="{{ scene.id }}">
+            {% if scene.chapter_title %}
+            <h2 class="chapter container">{{ scene.chapter_title }}</h2>
+            {% endif %}
 			<a href="{% url 'scene_edit' story.slug scene.id %}" class="container">
 				<span class="num">{{ scene.order }}</span>
 				<div class="info">

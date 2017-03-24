@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from autoslug import AutoSlugField
 
+import re
 import smartypants
 
 class Story(models.Model):
@@ -66,8 +67,24 @@ class Scene(models.Model):
     def __str__(self):
         return self.__unicode__()
 
+
+    def chapter_marker(self):
+        # If title starts with Chapter X, return that
+        m = re.match(r"^(Chapter \d+):\s+(.*)$", self.title)
+        if m:
+            return m.groups()
+        else:
+            return (None, self.title)
+
+    def chapter_title(self):
+        c = self.chapter_marker()
+        return c[0]
+
     def title_rendered(self):
-        return smartypants.smartypants(self.title)
+        # Strip out chapter marker if it's there
+        chapter, title = self.chapter_marker()
+
+        return smartypants.smartypants(title)
 
     def edit_text(self):
         return '## {}\n\n{}'.format(self.title, self.text)
