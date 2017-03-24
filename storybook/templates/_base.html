@@ -7,10 +7,12 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<!--
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	-->
 
-	<link href="{% static 'css/style.css' %}?v1" type="text/css" rel="stylesheet">
+	<link href="{% static 'css/style.css' %}?v2" type="text/css" rel="stylesheet">
 
 	<link rel="shortcut icon" href="{% static 'favicon.png' %}?v4">
 	<link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}?v4">
@@ -27,7 +29,7 @@
 	<script src="{% static 'js/lib/Sortable.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/mousetrap.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/lib/mousetrap-global-bind.min.js' %}" type="text/javascript" charset="utf-8"></script>
-	<script src="{% static 'js/storybook.js' %}?v2" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/storybook.js' %}?v3" type="text/javascript" charset="utf-8"></script>
 </head>
 <body data-storage-id="{% if story.slug %}{{ story.slug }}{% endif %}{% if scene %}-{{ scene.id }}{% endif %}">
 	<div class="wrapper">
