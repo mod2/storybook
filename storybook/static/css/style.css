@@ -432,6 +432,10 @@ footer#footer {
     font-weight: 200; }
   footer#footer.local-storage {
     background: #576c41; }
+    footer#footer.local-storage .controls a.cancel:hover {
+      color: #c8ff61; }
+    footer#footer.local-storage .controls .button:hover {
+      color: #c8ff61; }
   footer#footer .controls {
     -webkit-align-items: center;
     -webkit-display: flex;
@@ -443,7 +447,7 @@ footer#footer {
       -webkit-flex: 1;
       flex: 1;
       color: #adbca9;
-      padding-bottom: 3px;
+      padding-bottom: 4px;
       text-decoration: none; }
       footer#footer .controls a.cancel:hover {
         color: #777; }

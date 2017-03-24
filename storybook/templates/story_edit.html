@@ -7,8 +7,9 @@
 {% endblock framewrapper %}
 
 {% block footercontent %}
-<div class="controls container">
+<div class="controls container story-edit">
 	<a class="cancel" href="{% url 'story' story.slug %}">&lsaquo; Story</a>
+    <a class="button clear-storage" href="">&times;</a>
 	<a class="button save-story" href="">Save Story</a>
 </div>
 {% endblock footercontent %}

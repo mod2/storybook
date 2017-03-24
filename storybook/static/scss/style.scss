@@ -618,6 +618,16 @@ footer#footer {
 
 	&.local-storage {
 		background: hsl(90, 25%, 34%);
+
+        .controls {
+            a.cancel:hover {
+                color: hsl(81, 100%, 69%);
+            }
+
+            .button:hover {
+                color: hsl(81, 100%, 69%);
+            }
+        }
 	}
 
 	.controls {
@@ -632,7 +642,7 @@ footer#footer {
 			-webkit-flex: 1;
 			flex: 1;
 			color: hsl(109, 12%, 70%);
-			padding-bottom: 3px;
+			padding-bottom: 4px;
 			text-decoration: none;
 
 			&:hover {

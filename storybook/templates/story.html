@@ -23,7 +23,7 @@
 	<div class="scenes">
 		{% for scene in scenes %}
 		<div class="scene" data-id="{{ scene.id }}">
-			<a href="{% url 'scene' story.slug scene.id %}" class="container">
+			<a href="{% url 'scene_edit' story.slug scene.id %}" class="container">
 				<span class="num">{{ scene.order }}</span>
 				<div class="info">
 					<h3>{{ scene.title_rendered|safe }}</h3>

@@ -283,6 +283,15 @@ $(document).ready(function() {
 		$("footer#footer").addClass("local-storage");
 	});
 
+    $("footer.local-storage .controls.scene-edit a.button.clear-storage").on("click", function() {
+        localStorage[sceneStorageId] = "";
+        delete localStorage[sceneStorageId];
+
+        window.location.reload();
+
+        return false;
+    });
+
 	// Focus on page load
 	if ($(".scene-edit").length) {
 		$("textarea#frame.scene-edit").focus();
@@ -347,6 +356,15 @@ $(document).ready(function() {
 
 		$("footer#footer").addClass("local-storage");
 	});
+
+    $("footer.local-storage .controls.story-edit a.button.clear-storage").on("click", function() {
+        localStorage[storyStorageId] = "";
+        delete localStorage[storyStorageId];
+
+        window.location.reload();
+
+        return false;
+    });
 
 	// Focus on page load
 	if ($(".story-edit").length) {
