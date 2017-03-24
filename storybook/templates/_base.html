@@ -29,7 +29,7 @@
 	<script src="{% static 'js/lib/mousetrap-global-bind.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/storybook.js' %}?v2" type="text/javascript" charset="utf-8"></script>
 </head>
-<body>
+<body data-storage-id="{% if story.slug %}{{ story.slug }}{% endif %}{% if scene %}-{{ scene.id }}{% endif %}">
 	<div class="wrapper">
 		{% block menu %}
 		<nav role="menu">
