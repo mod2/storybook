@@ -425,9 +425,11 @@ textarea#frame {
     line-height: 1.45em; } }
 footer#footer {
   background: #0c0707;
-  /*box-shadow: 0 -1px 70px 45px #fff; */
-  font-size: 1.2em;
+  font-size: 1.1em;
   z-index: 69000; }
+  footer#footer * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 200; }
   footer#footer.local-storage {
     background: #576c41; }
   footer#footer .controls {
@@ -440,7 +442,7 @@ footer#footer {
     footer#footer .controls a.cancel {
       -webkit-flex: 1;
       flex: 1;
-      color: #94a191;
+      color: #adbca9;
       padding-bottom: 3px;
       text-decoration: none; }
       footer#footer .controls a.cancel:hover {

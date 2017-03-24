@@ -608,9 +608,13 @@ textarea#frame {
 // Footer controls
 footer#footer {
 	background: #0c0707;
-	/*box-shadow: 0 -1px 70px 45px #fff; */
-	font-size: 1.2em;
+	font-size: 1.1em;
 	z-index: 69000;
+
+	* {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+		font-weight: 200;
+	}
 
 	&.local-storage {
 		background: hsl(90, 25%, 34%);
@@ -627,7 +631,7 @@ footer#footer {
 		a.cancel {
 			-webkit-flex: 1;
 			flex: 1;
-			color: hsl(109, 8%, 60%);
+			color: hsl(109, 12%, 70%);
 			padding-bottom: 3px;
 			text-decoration: none;
 
