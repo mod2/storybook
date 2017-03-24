@@ -2,6 +2,9 @@ from django.conf import settings
 
 import datetime
 import json
+import mistune
+import re
+import smartypants
 
 from .models import Story, Scene, Fragment, Draft
 
@@ -134,7 +137,8 @@ def process_payload(payload):
             s.title = scene['title']
             s.order = 500 + index
             s.text = '\n'.join(scene['fragments']).strip()
-            s.html = s.make_html(s.text)
+            s.html = make_html(s.text)
+            s.word_count = word_count(s.text)
             s.save()
         except Exception as e:
             status = 'error'
@@ -180,3 +184,45 @@ def make_new_draft(story):
     draft.story = story
     draft.story_text = get_full_draft(story)
     draft.save()
+
+
+def make_html(text):
+    """
+    Renders a string to HTML.
+    """
+    # Treat horizontal rules kindly
+    html = text.replace('---', '%%%HR%%%')
+
+    html = mistune.markdown(smartypants.smartypants(html))
+
+    # Wrap comments
+    html = re.sub(r"<p>\/\/(.+?)<\/p>", r"<div class='comment'>\1</div>", html)
+
+    html = html.replace('<p>%%%HR%%%</p>', '<hr/>')
+
+    return html
+
+
+def word_count(text):
+    """
+    Returns word count for a string.
+    """
+    if text is None or text == '':
+        return 0
+
+    # Get rid of extra space
+    t = text.strip()
+
+    # Remove comments
+    t = re.sub(r"\/\/(.+?)(\n|$)", "", t)
+
+    # Remove newlines
+    t = t.replace("\n", " ").replace("  ", " ").strip()
+
+    # Split by spaces
+    words = re.split(r"\s+", t)
+
+    if len(words) == 1 and words[0] == '':
+        return 0
+    else:
+        return len(words)

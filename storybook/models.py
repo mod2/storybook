@@ -4,10 +4,7 @@ from django.db import models
 from django.utils import timezone
 from autoslug import AutoSlugField
 
-import mistune
-import re
 import smartypants
-
 
 class Story(models.Model):
     STATUSES = (
@@ -38,7 +35,7 @@ class Story(models.Model):
         word_count = 0
 
         for scene in self.scenes.all():
-            word_count += scene.word_count()
+            word_count += scene.word_count
 
         return word_count
 
@@ -52,6 +49,8 @@ class Scene(models.Model):
     title = models.TextField(null=True, blank=True)
     text = models.TextField(null=True, blank=True)
     html = models.TextField(null=True, blank=True)
+
+    word_count = models.PositiveIntegerField(default=0)
 
     order = models.PositiveSmallIntegerField(default=1)
 
@@ -67,45 +66,11 @@ class Scene(models.Model):
     def __str__(self):
         return self.__unicode__()
 
-    def word_count(self):
-        if self.text is None or self.text == '':
-            return 0
-
-        # Get rid of extra space
-        t = self.text.strip()
-
-        # Remove comments
-        t = re.sub(r"\/\/(.+?)(\n|$)", "", t)
-
-        # Remove newlines
-        t = t.replace("\n", " ").replace("  ", " ").strip()
-
-        # Split by spaces
-        words = re.split(r"\s+", t)
-
-        if len(words) == 1 and words[0] == '':
-            return 0
-        else:
-            return len(words)
-
     def title_rendered(self):
         return smartypants.smartypants(self.title)
 
     def edit_text(self):
         return '## {}\n\n{}'.format(self.title, self.text)
-
-    def make_html(self, text):
-        # Treat horizontal rules kindly
-        html = text.replace('---', '%%%HR%%%')
-
-        html = mistune.markdown(smartypants.smartypants(html))
-
-        # Wrap comments
-        html = re.sub(r"<p>\/\/(.+?)<\/p>", r"<div class='comment'>\1</div>", html)
-
-        html = html.replace('<p>%%%HR%%%</p>', '<hr/>')
-
-        return html
 
     def get_neighbor(self, side):
         objects = Scene.objects.filter(story=self.story).exclude(pk=self.pk)

@@ -11,7 +11,13 @@ from django.utils import timezone
 import json
 
 from .models import Story, Scene
-from .utils import process_payload, make_new_draft, get_full_draft
+from .utils import (
+    get_full_draft,
+    make_html,
+    make_new_draft,
+    process_payload,
+    word_count,
+)
 
 def api_update_scene(request, story_slug, scene_id):
     """
@@ -175,7 +181,8 @@ def api_save_scene(request, story_slug, scene_id):
 
         # Save [0] to the scene
         scene.text = data[0].strip()
-        scene.html = scene.make_html(scene.text)
+        scene.html = make_html(scene.text)
+        scene.word_count = word_count(scene.text)
         scene.last_modified = timezone.now()
         scene.save()
 
@@ -202,12 +209,14 @@ def api_save_scene(request, story_slug, scene_id):
                 new_scene.story = scene.story
                 new_scene.order = scene.order + i + 1
                 new_scene.text = scene_text
-                new_scene.html = scene.make_html(new_scene.text)
+                new_scene.html = make_html(new_scene.text)
+                new_scene.word_count = word_count(new_scene.text)
                 new_scene.save()
     else:
         # No new scenes
         scene.text = text.strip()
-        scene.html = scene.make_html(scene.text)
+        scene.html = make_html(scene.text)
+        scene.word_count = word_count(scene.text)
         scene.last_modified = timezone.now()
         scene.save()
 
