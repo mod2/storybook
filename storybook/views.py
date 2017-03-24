@@ -23,9 +23,6 @@ def home(request):
 
 @login_required
 def story(request, story_slug):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
     # Get story
     s = Story.objects.get(slug=story_slug)
 
@@ -37,15 +34,11 @@ def story(request, story_slug):
                                              'fragments': s.fragments.all(),
                                              'drafts': s.drafts.all(),
                                              'scenes': scenes,
-                                             'stories': stories,
                                              'request': request,
                                             })
 
 @login_required
 def story_full(request, story_slug):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
     # Get story and scenes
     s = Story.objects.get(slug=story_slug)
     scenes = s.scenes.all().order_by('order')
@@ -55,15 +48,11 @@ def story_full(request, story_slug):
                               'key': settings.SECRET_KEY,
                               'story': s,
                               'scenes': scenes,
-                              'stories': stories,
                               'request': request,
                              })
 
 @login_required
 def story_organize(request, story_slug):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
     # Get story and scenes
     s = Story.objects.get(slug=story_slug)
     scenes = s.scenes.all().order_by('order')
@@ -73,15 +62,11 @@ def story_organize(request, story_slug):
                               'story': s,
                               'key': settings.SECRET_KEY,
                               'scenes': scenes,
-                              'stories': stories,
                               'request': request,
                              })
 
 @login_required
 def story_fragments(request, story_slug):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
     # Get story and scenes
     s = Story.objects.get(slug=story_slug)
 
@@ -90,14 +75,10 @@ def story_fragments(request, story_slug):
                               'story': s,
                               'key': settings.SECRET_KEY,
                               'fragments': s.fragments.all(),
-                              'stories': stories,
                               'request': request,
                              })
 @login_required
 def scene(request, story_slug, scene_id):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
     # Get story
     s = Story.objects.get(slug=story_slug)
 
@@ -112,16 +93,12 @@ def scene(request, story_slug, scene_id):
                                              'scene': scene,
                                              'story': s,
                                              'key': settings.SECRET_KEY,
-                                             'stories': stories,
                                              'nav': nav,
                                              'request': request,
                                             })
 
 @login_required
 def scene_edit(request, story_slug, scene_id):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
     # Get story
     s = Story.objects.get(slug=story_slug)
 
@@ -132,15 +109,11 @@ def scene_edit(request, story_slug, scene_id):
                                              'scene': scene,
                                              'key': settings.SECRET_KEY,
                                              'story': s,
-                                             'stories': stories,
                                              'request': request,
                                             })
 
 @login_required
 def story_edit(request, story_slug):
-    # Boilerplate
-    stories = Story.objects.filter(status='active')
-
     # Get story
     s = Story.objects.get(slug=story_slug)
 
@@ -151,7 +124,6 @@ def story_edit(request, story_slug):
                                                   'key': settings.SECRET_KEY,
                                                   'story': s,
                                                   'text': story_text,
-                                                  'stories': stories,
                                                   'request': request,
                                                  })
 

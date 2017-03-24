@@ -29,7 +29,7 @@
 	<script src="{% static 'js/lib/mousetrap-global-bind.min.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script src="{% static 'js/storybook.js' %}?v2" type="text/javascript" charset="utf-8"></script>
 </head>
-<body>
+<body data-storage-id="{% if story.slug %}{{ story.slug }}{% endif %}{% if scene %}-{{ scene.id }}{% endif %}">
 	<div class="wrapper">
 		{% block menu %}
 		<nav role="menu">
@@ -43,12 +43,6 @@
 					<a href="{% url 'admin:storybook_story_change' story.id %}" target="_blank">Story admin</a>
 				</div>
 			{% endif %}
-
-			<div class="group stories">
-				{% for story in stories %}
-				<a href="{% url 'story' story.slug %}">{{ story.title }}</a></li>
-				{% endfor %}
-			</div>
 
 			<div class="group">
 				<a class="home" href="{% url 'home' %}">Home</a></li>
