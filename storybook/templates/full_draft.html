@@ -6,15 +6,21 @@
 
 {% block content %}
 <section class="full-draft">
-	{% for scene in scenes %}
+	{% for scene in scenes %}{% spaceless %}
 	<div class="scene container">
+		{% if scene.chapter_title %}
+		<h2 class="chapter">{{ scene.chapter_title }}</h2>
+		{% elif not forloop.first %}
+		<div class="divider">&#9632;</div>
+		{% endif %}
+
 		{% if scene.html != '' %}
 		{{ scene.html|safe }}
 		{% else %}
-		<div class="placeholder">&hellip; Scene {{ scene.order }}: {{ scene.title }} &hellip;{% if scene.synopsis %}<div class="synopsis">{{ scene.synopsis }}</div>{% endif %}</div>
+		<div class="placeholder">&hellip; Scene {{ scene.order }}: {{ scene.title }}</div>
 		{% endif %}
 	</div>
-	{% endfor %} 
+	{% endspaceless %}{% endfor %} 
 
 	<h5 class="end container">The End.</h5>
 </section>

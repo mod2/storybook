@@ -484,8 +484,16 @@ footer#footer {
     margin: 0; }
   .full-draft p + p {
     text-indent: 1.25em; }
-  .full-draft .scene + .scene {
-    margin-top: 3em; }
+  .full-draft .divider {
+    font-size: .6em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center; }
+  .full-draft .scene:first-child .chapter {
+    margin-top: 2em; }
+  .full-draft .chapter {
+    margin-top: 3em;
+    margin-bottom: 1em; }
   .full-draft .comment {
     color: #999;
     font-style: italic;

@@ -704,8 +704,22 @@ footer#footer {
 		text-indent: 1.25em;
 	}
 
-	.scene + .scene {
+	.divider {
+		font-size: .6em;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		text-align: center;
+	}
+
+	.scene:first-child {
+		.chapter {
+			margin-top: 2em;
+		}
+	}
+
+	.chapter {
 		margin-top: 3em;
+		margin-bottom: 1em;
 	}
 
 	.comment {
