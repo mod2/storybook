@@ -41,6 +41,20 @@ $.ajaxSetup({
 
 
 $(document).ready(function() {
+	// Load localStorage
+	// --------------------------------------------------
+	
+	if ("storybook-story-text" in localStorage && localStorage["storybook-story-text"] != "" && $("textarea#frame.story-edit").length > 0) {
+		$("textarea#frame.story-edit").val(localStorage["storybook-story-text"]);
+		$("footer#footer").addClass("local-storage");
+	}
+
+	if ("storybook-scene-text" in localStorage && localStorage["storybook-scene-text"] != "" && $("textarea#frame.scene-edit").length > 0) {
+		$("textarea#frame.scene-edit").val(localStorage["storybook-scene-text"]);
+		$("footer#footer").addClass("local-storage");
+	}
+
+
 	// Menu code
 	// --------------------------------------------------
 
@@ -91,9 +105,18 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$("#tray textarea").on("input", function(e) {
+		// Save tray contents to localStorage
+		localStorage["storybook-tray"] = $(this).val().trim();
+	});
+
 	function _showTray() {
 		// Display and focus on the tray
-		$("#tray textarea").val('');
+		if (localStorage["storybook-tray"] != "") {
+			$("#tray textarea").val(localStorage["storybook-tray"]);
+		} else {
+			$("#tray textarea").val('');
+		}
 
 		$("#tray").slideDown(75, function() {
 			$("#tray textarea").focus();
@@ -148,6 +171,10 @@ $(document).ready(function() {
 			success: function(data) {
 				// Hide the tray
 				_hideTray();
+
+				// Clear localStorage
+				localStorage["storybook-tray"] = "";
+				delete localStorage["storybook-tray"];
 
 				// Reload the page
 				window.location.reload();
@@ -241,11 +268,19 @@ $(document).ready(function() {
 	// Scene save text
 	// --------------------------------------------------
 
+	$("textarea#frame.scene-edit").on("input", function(e) {
+		// Save tray contents to localStorage
+		localStorage["storybook-scene-text"] = $(this).val().trim();
+
+		$("footer#footer").addClass("local-storage");
+	});
+
 	// Focus on page load
 	if ($(".scene-edit").length) {
 		$("textarea#frame.scene-edit").focus();
 
 		moveCaretToEnd($("textarea#frame.scene-edit")[0]);
+//		setSelectionRange($("textarea#frame.scene-edit")[0], 10, 10);
 	}
 
 	function _cancelSceneEdit() {
@@ -270,6 +305,10 @@ $(document).ready(function() {
 			method: 'POST',
 			data: data,
 			success: function(data) {
+				// Clear localStorage
+				localStorage["storybook-scene-text"] = "";
+				delete localStorage["storybook-scene-text"];
+
 				var url = $(".scene-edit").data("scene-uri");
 				window.location.href = url;
 			},
@@ -293,6 +332,13 @@ $(document).ready(function() {
 
 	// Story save text
 	// --------------------------------------------------
+
+	$("textarea#frame.story-edit").on("input", function(e) {
+		// Save tray contents to localStorage
+		localStorage["storybook-story-text"] = $(this).val().trim();
+
+		$("footer#footer").addClass("local-storage");
+	});
 
 	// Focus on page load
 	if ($(".story-edit").length) {
@@ -323,6 +369,10 @@ $(document).ready(function() {
 			method: 'POST',
 			data: data,
 			success: function(data) {
+				// Clear localStorage
+				localStorage["storybook-story-text"] = "";
+				delete localStorage["storybook-story-text"];
+
 				var url = $(".story-edit").data("story-uri");
 				window.location.href = url;
 			},
@@ -433,6 +483,22 @@ function moveCaretToEnd(el) {
 		el.focus();
 		var range = el.createTextRange();
 		range.collapse(false);
+		range.select();
+	}
+}
+
+// From http://stackoverflow.com/questions/17858174/set-cursor-to-specific-position-on-specific-line-in-a-textarea
+function setSelectionRange(input, selectionStart, selectionEnd) {
+	if (input.setSelectionRange) {
+		input.focus();
+		input.setSelectionRange(selectionStart, selectionEnd);
+	}
+	else if (input.createRange) {
+		var range = input.createRange();
+		range.collapse(true);
+		range.moveEnd('character', selectionEnd);
+		range.moveStart('character', selectionStart);
+		range.scrollIntoView();
 		range.select();
 	}
 }

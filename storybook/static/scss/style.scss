@@ -612,6 +612,10 @@ footer#footer {
 	font-size: 1.2em;
 	z-index: 69000;
 
+	&.local-storage {
+		background: hsl(90, 25%, 34%);
+	}
+
 	.controls {
 		-webkit-align-items: center;
 		-webkit-display: flex;

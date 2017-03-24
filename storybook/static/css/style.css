@@ -428,6 +428,8 @@ footer#footer {
   /*box-shadow: 0 -1px 70px 45px #fff; */
   font-size: 1.2em;
   z-index: 69000; }
+  footer#footer.local-storage {
+    background: #576c41; }
   footer#footer .controls {
     -webkit-align-items: center;
     -webkit-display: flex;
