@@ -44,12 +44,6 @@
 				</div>
 			{% endif %}
 
-			<div class="group stories">
-				{% for story in stories %}
-				<a href="{% url 'story' story.slug %}">{{ story.title }}</a></li>
-				{% endfor %}
-			</div>
-
 			<div class="group">
 				<a class="home" href="{% url 'home' %}">Home</a></li>
 				<a href="{% url 'admin:index' %}" target="_blank">Admin</a>
