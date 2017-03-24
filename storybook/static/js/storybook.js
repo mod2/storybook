@@ -287,7 +287,7 @@ $(document).ready(function() {
 	if ($(".scene-edit").length) {
 		$("textarea#frame.scene-edit").focus();
 
-		moveCaretToEnd($("textarea#frame.scene-edit")[0]);
+		moveCaretToBeginning($("textarea#frame.scene-edit")[0]);
 //		setSelectionRange($("textarea#frame.scene-edit")[0], 10, 10);
 	}
 
@@ -352,7 +352,7 @@ $(document).ready(function() {
 	if ($(".story-edit").length) {
 		$("textarea#frame.story-edit").focus();
 
-		moveCaretToEnd($("textarea#frame.story-edit")[0]);
+		moveCaretToBeginning($("textarea#frame.story-edit")[0]);
 	}
 
 	function _cancelStoryEdit() {
@@ -491,6 +491,19 @@ function moveCaretToEnd(el) {
 		el.focus();
 		var range = el.createTextRange();
 		range.collapse(false);
+		range.select();
+	}
+}
+
+function moveCaretToBeginning(el) {
+	if (typeof el.selectionStart == "number") {
+		el.selectionStart = el.selectionEnd = 0;
+	} else if (typeof el.createTextRange != "undefined") {
+		el.focus();
+		var range = el.createTextRange();
+		range.collapse(false);
+		range.moveEnd('character', 0);
+		range.moveStart('character', 0);
 		range.select();
 	}
 }
