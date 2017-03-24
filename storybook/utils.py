@@ -24,8 +24,8 @@ def get_or_create_story(story_slug):
             story = Story()
 
             if story_slug[0].islower():
-                # Slug, need to capitalize it
-                story.title = story_slug.capitalize()
+                # Slug, need to turn it into a title
+                story.title = story_slug.replace("-", " ").title()
             else:
                 # Title
                 story.title = story_slug
@@ -134,6 +134,7 @@ def process_payload(payload):
             s.title = scene['title']
             s.order = 500 + index
             s.text = '\n'.join(scene['fragments']).strip()
+            s.html = s.make_html(s.text)
             s.save()
         except Exception as e:
             status = 'error'

@@ -51,6 +51,7 @@ class Story(models.Model):
 class Scene(models.Model):
     title = models.TextField(null=True, blank=True)
     text = models.TextField(null=True, blank=True)
+    html = models.TextField(null=True, blank=True)
 
     order = models.PositiveSmallIntegerField(default=1)
 
@@ -90,12 +91,9 @@ class Scene(models.Model):
     def title_rendered(self):
         return smartypants.smartypants(self.title)
 
-    def html(self):
-        if self.text is None or self.text == '':
-            return ''
-
+    def make_html(self, text):
         # Treat horizontal rules kindly
-        html = self.text.replace('---', '%%%HR%%%')
+        html = text.replace('---', '%%%HR%%%')
 
         html = mistune.markdown(smartypants.smartypants(html))
 

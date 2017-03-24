@@ -164,6 +164,8 @@ def api_save_scene(request, story_slug, scene_id):
 
         # Save [0] to the scene
         scene.text = data[0].strip()
+        scene.html = scene.make_html(scene.text)
+        scene.last_modified = timezone.now()
         scene.save()
 
         d_len = len(data)
@@ -189,10 +191,13 @@ def api_save_scene(request, story_slug, scene_id):
                 new_scene.story = scene.story
                 new_scene.order = scene.order + i + 1
                 new_scene.text = scene_text
+                new_scene.html = scene.make_html(new_scene.text)
                 new_scene.save()
     else:
         # No new scenes
         scene.text = text.strip()
+        scene.html = scene.make_html(scene.text)
+        scene.last_modified = timezone.now()
         scene.save()
 
     # Update last_modified on the story

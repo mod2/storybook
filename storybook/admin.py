@@ -10,7 +10,7 @@ class StoryAdmin(admin.ModelAdmin):
 
 @admin.register(Scene)
 class SceneAdmin(admin.ModelAdmin):
-    list_display = ('title', 'order', 'created', 'last_modified', 'story')
+    list_display = ('title', 'story', 'word_count', 'created', 'last_modified', 'order')
 
 
 @admin.register(Draft)
