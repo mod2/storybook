@@ -1,6 +1,8 @@
+/*
 if (localStorage["lasturl"] && localStorage["lasturl"] != window.location.pathname) {
 	window.location.pathname = localStorage["lasturl"];
 }
+*/
 
 // CSRF stuff
 
@@ -409,6 +411,7 @@ $(document).ready(function() {
 	// Standalone mode
 	// --------------------------------------------------
 	
+	/*
 	if (("standalone" in window.navigator) && window.navigator.standalone) {
 		// Intercept all anchor clicks and keep fullscreen if in origin
 		$(document).on("click", "a", function(e) {
@@ -420,6 +423,7 @@ $(document).ready(function() {
 			window.location.href = $(this).attr("href");
 		});
 	}
+	*/
 });
 
 function moveCaretToEnd(el) {
