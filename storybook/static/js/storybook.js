@@ -41,16 +41,24 @@ $.ajaxSetup({
 
 
 $(document).ready(function() {
+	const storageId = $("body").data("storage-id");
+	const storyStorageId = "storybook-story-text-" + storageId;
+	const sceneStorageId = "storybook-scene-text-" + storageId;
+
 	// Load localStorage
 	// --------------------------------------------------
 	
-	if ("storybook-story-text" in localStorage && localStorage["storybook-story-text"] != "" && $("textarea#frame.story-edit").length > 0) {
-		$("textarea#frame.story-edit").val(localStorage["storybook-story-text"]);
+	if (storyStorageId in localStorage &&
+		localStorage[storyStorageId] != "" &&
+		$("textarea#frame.story-edit").length > 0) {
+		$("textarea#frame.story-edit").val(localStorage[storyStorageId]);
 		$("footer#footer").addClass("local-storage");
 	}
 
-	if ("storybook-scene-text" in localStorage && localStorage["storybook-scene-text"] != "" && $("textarea#frame.scene-edit").length > 0) {
-		$("textarea#frame.scene-edit").val(localStorage["storybook-scene-text"]);
+	if (sceneStorageId in localStorage &&
+		localStorage[sceneStorageId] != "" &&
+		$("textarea#frame.scene-edit").length > 0) {
+		$("textarea#frame.scene-edit").val(localStorage[sceneStorageId]);
 		$("footer#footer").addClass("local-storage");
 	}
 
@@ -270,7 +278,7 @@ $(document).ready(function() {
 
 	$("textarea#frame.scene-edit").on("input", function(e) {
 		// Save tray contents to localStorage
-		localStorage["storybook-scene-text"] = $(this).val().trim();
+		localStorage[sceneStorageId] = $(this).val().trim();
 
 		$("footer#footer").addClass("local-storage");
 	});
@@ -306,8 +314,8 @@ $(document).ready(function() {
 			data: data,
 			success: function(data) {
 				// Clear localStorage
-				localStorage["storybook-scene-text"] = "";
-				delete localStorage["storybook-scene-text"];
+				localStorage[sceneStorageId] = "";
+				delete localStorage[sceneStorageId];
 
 				var url = $(".scene-edit").data("scene-uri");
 				window.location.href = url;
@@ -335,7 +343,7 @@ $(document).ready(function() {
 
 	$("textarea#frame.story-edit").on("input", function(e) {
 		// Save tray contents to localStorage
-		localStorage["storybook-story-text"] = $(this).val().trim();
+		localStorage[storyStorageId] = $(this).val().trim();
 
 		$("footer#footer").addClass("local-storage");
 	});
@@ -370,8 +378,8 @@ $(document).ready(function() {
 			data: data,
 			success: function(data) {
 				// Clear localStorage
-				localStorage["storybook-story-text"] = "";
-				delete localStorage["storybook-story-text"];
+				localStorage[storyStorageId] = "";
+				delete localStorage[storyStorageId];
 
 				var url = $(".story-edit").data("story-uri");
 				window.location.href = url;
