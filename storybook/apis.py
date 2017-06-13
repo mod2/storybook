@@ -278,7 +278,7 @@ def api_save_draft(request, story_slug):
 
         return JsonResponse({ "status": "success"})
     except Exception as e:
-        return JsonResponse({ "status": "error"}, status_code=500)
+        return JsonResponse({ "status": "error", "error": e}, status=500)
 def api_get_draft(request, story_slug):
     """
     Gets a draft of a story.
