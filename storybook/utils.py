@@ -6,7 +6,7 @@ import mistune
 import re
 import smartypants
 
-from .models import Story, Scene, Fragment, Draft
+from .models import Story, Scene, Draft
 
 
 def get_or_create_story(story_slug):
@@ -53,9 +53,7 @@ def process_scenes(payload):
 
     response = {
         'scenes': [],
-        'fragments': [],
     }
-    current_fragment = []
     current_scene = None
 
     if payload == '':
@@ -68,31 +66,29 @@ def process_scenes(payload):
             # Story slug (get everything after :: up to the next space)
             # and ignore everything after that
             response['story'] = line[2:].split(' ')[0].strip()
-        elif len(line) >= 3 and line[0:2] == '##':
-            # New scene
-            response['scenes'].append({
-                'title': line[2:].strip(),
-                'fragments': [],
-            })
-            current_scene = response['scenes'][-1]
         elif len(line) >= 1 and line[0] == ':':
             # Metadata 
             bits = line[1:].split(' ')
             keyword = bits[0]
             parameters = ' '.join(bits[1:])
-
-            if keyword == 'scene':
-                # New scene
+        elif len(line) >= 3 and line[0:2] == '##':
+            # New scene (title)
+            response['scenes'].append({
+                'title': line[2:].strip(),
+                'lines': [],
+            })
+            current_scene = response['scenes'][-1]
+        else:
+            if not current_scene:
+                # Create a new untitled scene
                 response['scenes'].append({
-                    'title': parameters,
-                    'fragments': [],
+                    'title': 'Untitled Scene',
+                    'lines': [],
                 })
                 current_scene = response['scenes'][-1]
-        else:
-            if current_scene:
-                current_scene['fragments'].append(line)
-            else:
-                response['fragments'].append(line)
+
+            # Add the line to the current scene
+            current_scene['lines'].append(line)
 
     return response
 
@@ -118,15 +114,6 @@ def process_payload(payload):
         story = get_or_create_story(response['story'])
     else:
         story = get_or_create_story('Untitled')
-    
-    # If we haven't specified a scene, we've just got a fragment
-    if 'fragments' in response:
-        f_text = '\n'.join(response['fragments']).strip()
-        if f_text != '':
-            f = Fragment()
-            f.story = story
-            f.text = f_text
-            f.save()
 
     # Now go through any scenes
     for index, scene in enumerate(scenes):
@@ -136,7 +123,7 @@ def process_payload(payload):
             s.story = story
             s.title = scene['title']
             s.order = 500 + index
-            s.text = '\n'.join(scene['fragments']).strip()
+            s.text = '\n'.join(scene['lines']).strip()
             s.html = make_html(s.text)
             s.word_count = word_count(s.text)
             s.save()

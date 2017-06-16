@@ -12,7 +12,6 @@ urlpatterns = [
 
     # Story
     url(r'^story/(?P<story_slug>[^\/]+)/full/$', sb_views.story_full, name='story_full'),
-    url(r'^story/(?P<story_slug>[^\/]+)/fragments/$', sb_views.story_fragments, name='story_fragments'),
     url(r'^story/(?P<story_slug>[^\/]+)/organize/$', sb_views.story_organize, name='story_organize'),
     url(r'^story/(?P<story_slug>[^\/]+)/edit/$', sb_views.story_edit, name='story_edit'),
     url(r'^story/(?P<story_slug>[^\/]+)/$', sb_views.story, name='story'),

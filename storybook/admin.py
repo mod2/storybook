@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Story, Scene, Draft, Fragment
+from .models import Story, Scene, Draft
 
 @admin.register(Story)
 class StoryAdmin(admin.ModelAdmin):
@@ -17,8 +17,4 @@ class SceneAdmin(admin.ModelAdmin):
 class DraftAdmin(admin.ModelAdmin):
     list_display = ('story', 'created')
 
-
-@admin.register(Fragment)
-class FragmentAdmin(admin.ModelAdmin):
-    list_display = ('story', 'created')
 

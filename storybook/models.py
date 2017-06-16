@@ -120,24 +120,3 @@ class Draft(models.Model):
         ordering = ['created']
 
 
-class Fragment(models.Model):
-    text = models.TextField(null=True, blank=True)
-    created = models.DateTimeField(default=timezone.now)
-    story = models.ForeignKey(Story, related_name='fragments')
-
-    def __unicode__(self):
-        return "{}".format(self.created)
-
-    def html(self):
-        text = self.text
-        text = text.replace('---', '%%%HR%%%')
-
-        text = mistune.markdown(smartypants.smartypants(text))
-
-        text = text.replace('<p>%%%HR%%%</p>', '<hr/>')
-
-        return text
-    class Meta:
-        ordering = ['created']
-
-

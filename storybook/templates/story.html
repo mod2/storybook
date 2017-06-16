@@ -16,7 +16,7 @@
 <section class="story-detail" data-organize-uri="{% url 'story_organize' story.slug %}" data-edit-uri="{% url 'story_edit' story.slug %}">
 	<div class="links">
 		<div class="container">
-			<a href="#fragments">fragments</a> &mdash; <a href="#drafts">drafts</a>
+			<a href="#drafts">drafts</a>
 		</div>
 	</div>
 
@@ -35,20 +35,6 @@
 			</a>
 		</div>
 		{% endfor %} 
-	</div>
-
-	<div class="fragments story-lists container">
-        <h2 id="fragments">Fragments</h2>
-
-		<ul>
-		{% for frag in fragments %}
-			<li class="fragment" data-id="{{ frag.id }}">
-				{{ frag.html|truncatewords_html:"100"|safe }}
-			</li>
-        {% empty %}
-            <li class="fragment">No fragments</li>
-		{% endfor %} 
-		</ul>
 	</div>
 
 	<div class="drafts story-lists container">

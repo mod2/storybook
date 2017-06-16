@@ -40,7 +40,6 @@
 				<div class="group story">
 					<a class="story-home" href="{% url 'story' story.slug %}">Story home</a>
 					<a class="full-story" href="{% url 'story_full' story.slug %}">Full draft</a>
-					<a class="fragments" href="{% url 'story_fragments' story.slug %}">Fragments</a>
 					<a href="{% url 'story_organize' story.slug %}">Organize</a></li>
 					<a href="{% url 'admin:storybook_story_change' story.id %}" target="_blank">Story admin</a>
 				</div>
