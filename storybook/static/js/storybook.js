@@ -326,8 +326,11 @@ $(document).ready(function() {
 				localStorage[sceneStorageId] = "";
 				delete localStorage[sceneStorageId];
 
-				var url = $(".scene-edit").data("scene-uri");
-				window.location.href = url;
+				// Remove green color
+				$("footer#footer").removeClass("local-storage");
+
+				// Let user know it's saved
+				alert("Saved!");
 			},
 			error: function(data) {
 				console.log("Error! :(", data);
