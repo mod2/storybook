@@ -120,3 +120,20 @@ class Draft(models.Model):
         ordering = ['created']
 
 
+class Inbox(models.Model):
+    text = models.TextField()
+
+    def __unicode__(self):
+        return self.text
+
+
+class InboxEntry(models.Model):
+    inbox = models.ForeignKey(Inbox, related_name='entries')
+    text = models.TextField()
+    created = models.DateTimeField(default=timezone.now)
+
+    def __unicode__(self):
+        return self.text
+
+    class Meta:
+        ordering = ['created']
