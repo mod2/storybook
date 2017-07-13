@@ -142,10 +142,11 @@ def inbox(request):
 def inbox_full(request):
     # Get inbox
     inbox = Inbox.objects.get(id=1)
+    html = make_html(inbox.text)
 
     context = {
         'title': 'Inbox',
-        'inbox_html': inbox.html,
+        'inbox_html': html,
         'key': settings.SECRET_KEY,
         'request': request,
     }

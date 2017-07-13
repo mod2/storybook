@@ -151,7 +151,6 @@ def process_payload(payload):
             inbox = Inbox()
             inbox.text = text
 
-        inbox.html = make_html(inbox.text)
         inbox.save()
 
         # Create a new entry

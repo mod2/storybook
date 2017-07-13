@@ -122,7 +122,7 @@ class Draft(models.Model):
 
 class Inbox(models.Model):
     text = models.TextField()
-    html = models.TextField()
+    html = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
         return self.text
