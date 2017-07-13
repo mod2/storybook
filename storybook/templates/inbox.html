@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+{% load humanize %}
+
+{% block pageheader %}
+<h1 class="container">::<span>inbox</span></h1>
+{% endblock pageheader %}
+
+{% block content %}
+<section class="full-draft inbox">
+	<div class="links">
+		<div class="container">
+			<a href="{% url 'inbox_full' %}">full inbox</a>
+		</div>
+	</div>
+
+	<div class="scene container">
+		{{ inbox_html|safe }}
+	</div>
+</section>
+{% endblock content %}

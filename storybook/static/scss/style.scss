@@ -384,6 +384,17 @@ header[role=banner] {
         margin-bottom: .5em;
         margin-top: 1em;
     }
+
+	h2 {
+		color: #999;
+		font-size: 1.1em;
+		font-style: italic;
+		font-weight: normal;
+	}
+
+	p + h2 {
+		margin-top: 2em;
+	}
 }
 
 .story-detail {
@@ -684,6 +695,16 @@ footer#footer {
 
 .story-edit {
 	height: 100%;
+}
+
+
+/* Inbox */
+/* -------------------------------------------------- */
+
+.inbox {
+	.links {
+		margin-bottom: 2em;
+	}
 }
 
 

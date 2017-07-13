@@ -122,9 +122,18 @@ class Draft(models.Model):
 
 class Inbox(models.Model):
     text = models.TextField()
+    html = models.TextField()
 
     def __unicode__(self):
         return self.text
+
+    def get_excerpt(self):
+        excerpt = '&hellip; '
+        excerpt += ' '.join(self.text.split(' ')[-300:])
+        return excerpt
+
+    class Meta:
+        verbose_name_plural = "inboxes"
 
 
 class InboxEntry(models.Model):
@@ -137,3 +146,4 @@ class InboxEntry(models.Model):
 
     class Meta:
         ordering = ['created']
+        verbose_name_plural = "inbox entries"

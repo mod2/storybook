@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'^login/', auth_views.login, { 'template_name': 'login.html' }, name='login'),
     url(r'^logout/', auth_views.logout, { 'template_name': 'logout.html', 'next_page': '/login/' }, name='logout'),
 
+    url(r'^inbox/full/$', sb_views.inbox_full, name='inbox_full'),
+    url(r'^inbox/$', sb_views.inbox, name='inbox'),
+
     # Story
     url(r'^story/(?P<story_slug>[^\/]+)/full/$', sb_views.story_full, name='story_full'),
     url(r'^story/(?P<story_slug>[^\/]+)/organize/$', sb_views.story_organize, name='story_organize'),

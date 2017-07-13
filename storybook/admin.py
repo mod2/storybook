@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Story, Scene, Draft
+from .models import Story, Scene, Draft, Inbox, InboxEntry
 
 @admin.register(Story)
 class StoryAdmin(admin.ModelAdmin):
@@ -18,3 +18,11 @@ class DraftAdmin(admin.ModelAdmin):
     list_display = ('story', 'created')
 
 
+@admin.register(Inbox)
+class InboxAdmin(admin.ModelAdmin):
+    list_display = ('text',)
+
+
+@admin.register(InboxEntry)
+class InboxEntryAdmin(admin.ModelAdmin):
+    list_display = ('text', 'created',)

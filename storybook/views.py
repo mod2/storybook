@@ -4,12 +4,10 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.shortcuts import render_to_response #, get_object_or_404, redirect
-import json
+from django.shortcuts import render_to_response
 
-from .models import Story, Scene
-from .utils import get_full_draft
+from .models import Story, Scene, Inbox
+from .utils import get_full_draft, make_html
 
 @login_required
 def home(request):
@@ -20,6 +18,7 @@ def home(request):
                                             'key': settings.SECRET_KEY,
                                             'inactive_stories': inactive_stories,
                                             'request': request })
+
 
 @login_required
 def story(request, story_slug):
@@ -36,6 +35,7 @@ def story(request, story_slug):
                                              'request': request,
                                             })
 
+
 @login_required
 def story_full(request, story_slug):
     # Get story and scenes
@@ -50,6 +50,7 @@ def story_full(request, story_slug):
                               'request': request,
                              })
 
+
 @login_required
 def story_organize(request, story_slug):
     # Get story and scenes
@@ -63,6 +64,7 @@ def story_organize(request, story_slug):
                               'scenes': scenes,
                               'request': request,
                              })
+
 
 @login_required
 def scene(request, story_slug, scene_id):
@@ -84,6 +86,7 @@ def scene(request, story_slug, scene_id):
                                              'request': request,
                                             })
 
+
 @login_required
 def scene_edit(request, story_slug, scene_id):
     # Get story
@@ -98,6 +101,7 @@ def scene_edit(request, story_slug, scene_id):
                                              'story': s,
                                              'request': request,
                                             })
+
 
 @login_required
 def story_edit(request, story_slug):
@@ -114,3 +118,36 @@ def story_edit(request, story_slug):
                                                   'request': request,
                                                  })
 
+
+@login_required
+def inbox(request):
+    # Get inbox
+    inbox = Inbox.objects.get(id=1)
+
+    # Get truncated HTML
+    excerpt = inbox.get_excerpt()
+    html = make_html(excerpt)
+
+    context = {
+        'title': 'Inbox',
+        'inbox_html': html,
+        'key': settings.SECRET_KEY,
+        'request': request,
+    }
+
+    return render_to_response('inbox.html', context)
+
+
+@login_required
+def inbox_full(request):
+    # Get inbox
+    inbox = Inbox.objects.get(id=1)
+
+    context = {
+        'title': 'Inbox',
+        'inbox_html': inbox.html,
+        'key': settings.SECRET_KEY,
+        'request': request,
+    }
+
+    return render_to_response('inbox.html', context)

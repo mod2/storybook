@@ -6,7 +6,7 @@ import mistune
 import re
 import smartypants
 
-from .models import Story, Scene, Draft
+from .models import Story, Scene, Draft, Inbox, InboxEntry
 
 
 def get_or_create_story(story_slug):
@@ -112,29 +112,53 @@ def process_payload(payload):
     # Get the story first
     if 'story' in response:
         story = get_or_create_story(response['story'])
+
+        # Now go through any scenes
+        for index, scene in enumerate(scenes):
+            try:
+                # Create scene
+                s = Scene()
+                s.story = story
+                s.title = scene['title']
+                s.order = 500 + index
+                s.text = '\n'.join(scene['lines']).strip()
+                s.html = make_html(s.text)
+                s.word_count = word_count(s.text)
+                s.save()
+            except Exception as e:
+                status = 'error'
+                message = e
+
+        # Finally, reorder the scenes
+        for index, scene in enumerate(story.scenes.all()):
+            scene.order = index + 1
+            scene.save()
     else:
-        story = get_or_create_story('Untitled')
+        # No story, we're in inbox mode
+        text = ''
+        for scene in scenes:
+            if scene['title'] != 'Untitled Scene':
+                text += '## {}\n\n'.format(scene['title'])
+            text += '\n'.join(scene['lines']).strip()
+            text += '\n\n'
+        text = text.strip()
 
-    # Now go through any scenes
-    for index, scene in enumerate(scenes):
+        # Get or create inbox
         try:
-            # Create scene
-            s = Scene()
-            s.story = story
-            s.title = scene['title']
-            s.order = 500 + index
-            s.text = '\n'.join(scene['lines']).strip()
-            s.html = make_html(s.text)
-            s.word_count = word_count(s.text)
-            s.save()
-        except Exception as e:
-            status = 'error'
-            message = e
+            inbox = Inbox.objects.get(id=1)
+            inbox.text += '\n\n{}'.format(text)
+        except:
+            inbox = Inbox()
+            inbox.text = text
 
-    # Finally, reorder the scenes
-    for index, scene in enumerate(story.scenes.all()):
-        scene.order = index + 1
-        scene.save()
+        inbox.html = make_html(inbox.text)
+        inbox.save()
+
+        # Create a new entry
+        entry = InboxEntry()
+        entry.text = text
+        entry.inbox = inbox
+        entry.save()
 
     return status, message
 
