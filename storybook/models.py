@@ -132,6 +132,9 @@ class Inbox(models.Model):
         excerpt += ' '.join(self.text.split(' ')[-300:])
         return excerpt
 
+    def get_word_count(self):
+        return len(self.text.split(' '))
+
     class Meta:
         verbose_name_plural = "inboxes"
 

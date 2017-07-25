@@ -131,6 +131,7 @@ def inbox(request):
     context = {
         'title': 'Inbox',
         'inbox_html': html,
+        'wordcount': inbox.get_word_count(),
         'key': settings.SECRET_KEY,
         'request': request,
     }
